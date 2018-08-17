@@ -1,8 +1,8 @@
+import {CheckboxStyle} from './proto-checkbox-style.js';
 import {CheckboxBase} from './proto-checkbox-base.js';
-import './proto-checkbox-styles.js';
 
 const elementName = 'proto-checkbox';
-class ProtoCheckbox extends CheckboxBase(elementName) {
+class ProtoCheckbox extends CheckboxBase(elementName, CheckboxStyle) {
   static get version() {
     return '0.0.1';
   }
