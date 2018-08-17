@@ -1,6 +1,6 @@
 import {html, LitElement, BooleanAttribute} from '@polymer/lit-element';
-
-export const CheckboxBase = (elementName, style) => class ProtoCheckbox extends LitElement {
+import {ControlStateMixin} from '../control-state/control-state-mixin.js';
+export const CheckboxBase = (elementName, style) => class ProtoCheckbox extends ControlStateMixin(LitElement) {
 
   static get is() {
     return elementName;
@@ -50,6 +50,10 @@ export const CheckboxBase = (elementName, style) => class ProtoCheckbox extends 
   _inputChangeHandler(e) {
     const target = e.composedPath()[0];
     this.checked = target.checked;
+  }
+
+  get focusElement() {
+    return this.shadowRoot.querySelector('input');
   }
 }
 
