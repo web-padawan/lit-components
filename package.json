@@ -9,10 +9,10 @@
   "author": "Sergey Kulikov",
   "license": "MIT",
   "dependencies": {
-    "@material/mwc-base": "^0.1.0",
-    "@polymer/lit-element": "^0.5.1",
+    "@polymer/lit-element": "0.6.0-dev.3",
     "@polymer/polymer": "^3.0.0",
-    "@vaadin/vaadin-lumo-styles": "^1.0.0-pre.6",
-    "@webcomponents/webcomponentsjs": "^2.0.0"
+    "@vaadin/vaadin-lumo-styles": "^1.1.0",
+    "@webcomponents/webcomponentsjs": "^2.0.4",
+    "@webcomponents/shadycss": "^1.5.0"
   }
 }
