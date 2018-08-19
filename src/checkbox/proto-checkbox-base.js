@@ -53,7 +53,7 @@ export const CheckboxBase = (elementName, style) => class ProtoCheckbox extends 
   }
 
   get focusElement() {
-    return this.shadowRoot.querySelector('input');
+    return this.shadowRoot.querySelector('label');
   }
 }
 
