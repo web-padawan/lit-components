@@ -72,15 +72,21 @@
           expect(customElement.getAttribute('tabindex')).to.be.equal('0');
         });
 
-        it('setting tabIndex should update the attribute', () => {
+        it('setting tabIndex should update the attribute', async() => {
           customElement.tabIndex = 1;
+          await customElement.updateComplete;
           expect(customElement.getAttribute('tabindex')).to.be.equal('1');
         });
 
-        it('enabling the element should restore old tabindex', () => {
+        it('enabling the element should restore old tabindex', async() => {
           customElement.tabIndex = 1;
+          await customElement.updateComplete;
           customElement.disabled = true;
+          await customElement.updateComplete;
+          expect(customElement.getAttribute('tabindex')).to.not.be.ok;
+
           customElement.disabled = false;
+          await customElement.updateComplete;
           expect(customElement.getAttribute('tabindex')).to.be.equal('1');
         });
 
@@ -93,6 +99,7 @@
 
         it('setting disabled to true and then back to false should restore the previous value of tabindex', async() => {
           customElement.tabIndex = 2;
+          await customElement.updateComplete;
           customElement.disabled = true;
           await customElement.updateComplete;
           expect(customElement.getAttribute('tabindex')).to.not.be.ok;
@@ -100,24 +107,6 @@
           customElement.disabled = false;
           await customElement.updateComplete;
           expect(customElement.getAttribute('tabindex')).to.be.equal('2');
-        });
-
-        it('new tabindex value that was set while element is disabled should be applied once it becomes enabled', async() => {
-          customElement.tabIndex = 2;
-          customElement.disabled = true;
-          customElement.tabIndex = 3;
-          await customElement.updateComplete;
-          expect(customElement.getAttribute('tabindex')).to.not.be.ok;
-
-          customElement.disabled = false;
-          await customElement.updateComplete;
-          expect(customElement.getAttribute('tabindex')).to.be.equal('3');
-        });
-
-        it('should synchronize tabindex with tabIndex', async() => {
-          customElement.tabindex = 1;
-          await customElement.updateComplete;
-          expect(customElement.tabIndex).to.eql(1);
         });
       });
 
@@ -200,12 +189,12 @@
       });
 
       describe('disabled', () => {
-        beforeEach(() => {
+        beforeEach(async() => {
           customElement.disabled = true;
+          await customElement.updateComplete;
         });
 
-        it('should not have tabindex if disabled when ready', async() => {
-          await customElement.updateComplete;
+        it('should not have tabindex if disabled when first update completed', () => {
           expect(customElement.getAttribute('tabindex')).to.not.be.ok;
         });
 
@@ -217,15 +206,23 @@
         });
 
         it('should have aria-disabled attribute set to true when disabled', async() => {
-          customElement.disabled = true;
-          await customElement.updateComplete;
           expect(customElement.getAttribute('aria-disabled')).to.be.equal('true');
         });
 
-        it('should not have aria-disabled attribute when is not disabled', () => {
-          customElement.disabled = true;
+        it('should not have aria-disabled attribute when is not disabled', async() => {
           customElement.disabled = false;
+          await customElement.updateComplete;
           expect(customElement.getAttribute('aria-disabled')).to.not.be.ok;
+        });
+
+        it('should apply tabindex value, changed while element was disabled, once it is enabled', async() => {
+          customElement.tabIndex = 3;
+          await customElement.updateComplete;
+          expect(customElement.getAttribute('tabindex')).to.not.be.ok;
+
+          customElement.disabled = false;
+          await customElement.updateComplete;
+          expect(customElement.getAttribute('tabindex')).to.be.equal('3');
         });
       });
 

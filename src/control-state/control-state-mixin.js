@@ -15,25 +15,6 @@ export const ControlStateMixin = superClass => class extends superClass {
       },
 
       /**
-       * Internal property needed to listen to `tabindex` attribute changes.
-       *
-       * For changing the tabindex of this component use the native `tabIndex` property.
-       * @private
-       */
-      tabindex: {
-        type: {
-          fromAttribute: parseInt,
-          toAttribute: value => {
-            if (value === undefined) {
-              return null;
-            }
-            return isNaN(parseInt(value)) ? 0 : value.toString()
-          }
-        },
-        reflect: true,
-      },
-
-      /**
        * If true, the user cannot interact with this element.
        */
       disabled: {
@@ -51,6 +32,43 @@ export const ControlStateMixin = superClass => class extends superClass {
     };
   }
 
+  static _finalize() {
+    super._finalize();
+    // override native tabIndex for consistency
+    const name = 'tabIndex';
+    const key = `__${name}`;
+    Object.defineProperty(this.prototype, name, {
+      get() {
+        return this[key];
+      },
+      set(value) {
+        const old = this[key];
+        if (this.constructor._propertyShouldInvalidate(name, value, old)) {
+          // track old value when changing.
+          if (!this._changedProperties.has(name)) {
+            this._changedProperties.set(name, old);
+          }
+          this[key] = value;
+          this.invalidate();
+        }
+      },
+      configurable: true,
+      enumerable: true
+    });
+    this._classProperties.set(name, {
+      type: {
+        fromAttribute: parseInt,
+        toAttribute: value => {
+          if (value === undefined) {
+            return null;
+          }
+          return isNaN(parseInt(value)) ? 0 : value.toString()
+        }
+      },
+      reflect: true,
+    });
+  }
+
   constructor() {
     super();
     this._boundKeydownListener = this._bodyKeydownListener.bind(this);
@@ -64,7 +82,7 @@ export const ControlStateMixin = superClass => class extends superClass {
     super.connectedCallback();
 
     if (!this.hasAttribute('tabindex')) {
-      this.tabindex = 0;
+      this.tabIndex = 0;
     }
 
     document.body.addEventListener('keydown', this._boundKeydownListener, true);
@@ -88,7 +106,6 @@ export const ControlStateMixin = superClass => class extends superClass {
       this._setFocused(false);
     }
   }
-
 
   finishFirstUpdate() {
     this.addEventListener('focusin', e => {
@@ -136,11 +153,11 @@ export const ControlStateMixin = superClass => class extends superClass {
   }
 
   finishUpdate(props) {
+    if (props.has('tabIndex')) {
+      this._tabIndexChanged(this.tabIndex);
+    }
     if (props.has('disabled')) {
       this._disabledChanged(this.disabled);
-    }
-    if (props.has('tabindex')) {
-      this._tabindexChanged(this.tabindex);
     }
   }
 
@@ -213,28 +230,27 @@ export const ControlStateMixin = superClass => class extends superClass {
     this.focusElement.disabled = disabled;
     if (disabled) {
       this.blur();
-      this._previousTabIndex = this.tabindex;
-      this.tabindex = -1;
+      this._previousTabIndex = this.tabIndex;
+      this.tabIndex = -1;
       this.setAttribute('aria-disabled', 'true');
     } else {
-      if (typeof this._previousTabIndex !== 'undefined') {
-        this.tabindex = this._previousTabIndex;
+      if (this._previousTabIndex !== undefined) {
+        this.tabIndex = this._previousTabIndex;
       }
       this.removeAttribute('aria-disabled');
     }
   }
 
-  _tabindexChanged(tabindex) {
+  _tabIndexChanged(tabindex) {
     if (tabindex !== undefined) {
       this.focusElement.tabIndex = tabindex;
     }
-
     if (this.disabled && tabindex) {
       // If tabindex attribute was changed while checkbox was disabled
       if (tabindex !== -1) {
         this._previousTabIndex = tabindex;
       }
-      this.tabindex = tabindex = undefined;
+      this.tabIndex = undefined;
     }
   }
 };
