@@ -1,5 +1,3 @@
-import {BooleanAttribute} from '@polymer/lit-element';
-
 /**
  * @polymerMixin
  */
@@ -10,7 +8,15 @@ export const ControlStateMixin = superClass => class extends superClass {
        * Specify that this control should have input focus when the page loads.
        */
       autofocus: {
-        type: BooleanAttribute,
+        type: Boolean,
+        reflect: true
+      },
+
+      tabIndex: {
+        type: {
+          fromAttribute: Number,
+          toAttribute: value => value == null ? null : value.toString(),
+        },
         reflect: true
       },
 
@@ -18,55 +24,18 @@ export const ControlStateMixin = superClass => class extends superClass {
        * If true, the user cannot interact with this element.
        */
       disabled: {
-        type: BooleanAttribute,
+        type: Boolean,
         reflect: true
       },
 
       _previousTabIndex: {
-        attribute: false
+        shouldInvalidate: () => false
       },
 
       _isShiftTabbing: {
-        attribute: false
+        shouldInvalidate: () => false
       }
     };
-  }
-
-  static _finalize() {
-    super._finalize();
-    // override native tabIndex for consistency
-    const name = 'tabIndex';
-    const key = `__${name}`;
-    Object.defineProperty(this.prototype, name, {
-      get() {
-        return this[key];
-      },
-      set(value) {
-        const old = this[key];
-        if (this.constructor._propertyShouldInvalidate(name, value, old)) {
-          // track old value when changing.
-          if (!this._changedProperties.has(name)) {
-            this._changedProperties.set(name, old);
-          }
-          this[key] = value;
-          this.invalidate();
-        }
-      },
-      configurable: true,
-      enumerable: true
-    });
-    this._classProperties.set(name, {
-      type: {
-        fromAttribute: parseInt,
-        toAttribute: value => {
-          if (value === undefined) {
-            return null;
-          }
-          return isNaN(parseInt(value)) ? 0 : value.toString()
-        }
-      },
-      reflect: true,
-    });
   }
 
   constructor() {
@@ -80,10 +49,6 @@ export const ControlStateMixin = superClass => class extends superClass {
    */
   connectedCallback() {
     super.connectedCallback();
-
-    if (!this.hasAttribute('tabindex')) {
-      this.tabIndex = 0;
-    }
 
     document.body.addEventListener('keydown', this._boundKeydownListener, true);
     document.body.addEventListener('keyup', this._boundKeyupListener, true);
@@ -107,7 +72,7 @@ export const ControlStateMixin = superClass => class extends superClass {
     }
   }
 
-  finishFirstUpdate() {
+  firstRendered() {
     this.addEventListener('focusin', e => {
       if (e.composedPath()[0] === this) {
         this._focus(e);
@@ -117,20 +82,6 @@ export const ControlStateMixin = superClass => class extends superClass {
     });
 
     this.addEventListener('focusout', e => this._setFocused(false));
-
-    // This fixes the bug in Firefox 61 (https://bugzilla.mozilla.org/show_bug.cgi?id=1472887)
-    // where focusout event does not go out of shady DOM because composed property in the event is not true
-    const ensureEventComposed = e => {
-      if (!e.composed) {
-        e.target.dispatchEvent(new CustomEvent(e.type, {
-          bubbles: true,
-          composed: true,
-          cancelable: false
-        }));
-      }
-    };
-    this.shadowRoot.addEventListener('focusin', ensureEventComposed);
-    this.shadowRoot.addEventListener('focusout', ensureEventComposed);
 
     this.addEventListener('keydown', e => {
       if (!e.defaultPrevented && e.shiftKey && e.keyCode === 9) {
@@ -152,12 +103,36 @@ export const ControlStateMixin = superClass => class extends superClass {
     }
   }
 
-  finishUpdate(props) {
-    if (props.has('tabIndex')) {
-      this._tabIndexChanged(this.tabIndex);
+  update(props) {
+    // set default value before `super.update()` to not invalidate
+    if (!this._firstRendered && !this.hasAttribute('tabindex')) {
+      this.tabIndex = 0;
     }
+
+    // disabling element will change tabindex, so we need to make
+    // this happen before `super.update()` to not invalidate again
     if (props.has('disabled')) {
-      this._disabledChanged(this.disabled);
+      this._disabledChanged(this.disabled, props.get('disabled'));
+    }
+
+    // do the same for tabindex to avoid invalidating
+    let tabindex;
+    if (props.has('tabIndex')) {
+      tabindex = this.tabIndex;
+      this._tabIndexChanged(tabindex);
+    }
+
+    super.update(props);
+
+    // `focusElement` is not defined before calling `super.update()`
+    // fpr initial rendering, so we have to delay setting until now
+    if (props.has('disabled')) {
+      this.focusElement.disabled = this.disabled;
+      this.disabled && this.blur();
+    }
+
+    if (tabindex !== undefined) {
+      this.focusElement.tabIndex = tabindex;
     }
   }
 
@@ -226,14 +201,12 @@ export const ControlStateMixin = superClass => class extends superClass {
     this._setFocused(false);
   }
 
-  _disabledChanged(disabled) {
-    this.focusElement.disabled = disabled;
+  _disabledChanged(disabled, oldDisabled) {
     if (disabled) {
-      this.blur();
       this._previousTabIndex = this.tabIndex;
       this.tabIndex = -1;
       this.setAttribute('aria-disabled', 'true');
-    } else {
+    } else if (oldDisabled) {
       if (this._previousTabIndex !== undefined) {
         this.tabIndex = this._previousTabIndex;
       }
@@ -242,15 +215,12 @@ export const ControlStateMixin = superClass => class extends superClass {
   }
 
   _tabIndexChanged(tabindex) {
-    if (tabindex !== undefined) {
-      this.focusElement.tabIndex = tabindex;
-    }
     if (this.disabled && tabindex) {
       // If tabindex attribute was changed while checkbox was disabled
-      if (tabindex !== -1) {
-        this._previousTabIndex = tabindex;
+      if (this.tabIndex !== -1) {
+        this._previousTabIndex = this.tabIndex;
       }
-      this.tabIndex = undefined;
+      this.tabIndex = null;
     }
   }
 };

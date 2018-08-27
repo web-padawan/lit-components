@@ -80,7 +80,6 @@
 
         it('enabling the element should restore old tabindex', async() => {
           customElement.tabIndex = 1;
-          await customElement.updateComplete;
           customElement.disabled = true;
           await customElement.updateComplete;
           expect(customElement.getAttribute('tabindex')).to.not.be.ok;
@@ -99,7 +98,6 @@
 
         it('setting disabled to true and then back to false should restore the previous value of tabindex', async() => {
           customElement.tabIndex = 2;
-          await customElement.updateComplete;
           customElement.disabled = true;
           await customElement.updateComplete;
           expect(customElement.getAttribute('tabindex')).to.not.be.ok;
@@ -254,14 +252,6 @@
           window.ShadyDOM && window.ShadyDOM.flush();
           expect(customElement.hasAttribute('focused')).to.be.false;
         });
-
-        it('focusin and focusout events should work with event.composed set to false', () => {
-          focusElement.dispatchEvent(new CustomEvent('focusin', {composed: false, bubbles: true}));
-          expect(customElement.hasAttribute('focused')).to.be.true;
-
-          focusElement.dispatchEvent(new CustomEvent('focusout', {composed: false, bubbles: true}));
-          expect(customElement.hasAttribute('focused')).to.be.false;
-        });
       });
     });
 
@@ -296,6 +286,7 @@
         document.body.appendChild(customElementWrapper);
         await customElementWrapper.updateComplete;
         customElement = customElementWrapper.focusElement;
+        await customElement.updateComplete;
         focusElement = customElement.focusElement;
       });
 
@@ -312,14 +303,6 @@
         focusElement.dispatchEvent(new CustomEvent('focusin', {composed: true, bubbles: true}));
         expect(customElementWrapper.hasAttribute('focused')).to.be.true;
         focusElement.dispatchEvent(new CustomEvent('focusout', {composed: true, bubbles: true}));
-        expect(customElementWrapper.hasAttribute('focused')).to.be.false;
-      });
-
-      it('focusin and focusout events should work with event.composed set to false', () => {
-        focusElement.dispatchEvent(new CustomEvent('focusin', {composed: false, bubbles: true}));
-        expect(customElementWrapper.hasAttribute('focused')).to.be.true;
-
-        focusElement.dispatchEvent(new CustomEvent('focusout', {composed: false, bubbles: true}));
         expect(customElementWrapper.hasAttribute('focused')).to.be.false;
       });
     });

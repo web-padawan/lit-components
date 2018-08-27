@@ -1,4 +1,4 @@
-import {html, LitElement, BooleanAttribute} from '@polymer/lit-element';
+import {html, LitElement} from '@polymer/lit-element';
 import {ControlStateMixin} from '../control-state/control-state-mixin.js';
 export const CheckboxBase = (elementName, style) => class ProtoCheckbox extends ControlStateMixin(LitElement) {
 
@@ -9,11 +9,11 @@ export const CheckboxBase = (elementName, style) => class ProtoCheckbox extends 
   static get properties() {
     return {
       checked: {
-        type: BooleanAttribute,
+        type: Boolean,
         reflect: true
       },
       disabled: {
-        type: BooleanAttribute,
+        type: Boolean,
         reflect: true
       },
       value: {
@@ -37,7 +37,9 @@ export const CheckboxBase = (elementName, style) => class ProtoCheckbox extends 
             type="checkbox"
             part="native-checkbox"
             ?checked="${this.checked}"
-            @change="${this._boundInputChangeHandler}">
+            @change="${this._boundInputChangeHandler}"
+            role="presentation"
+            tabindex="-1">
         </span>
 
         <span part="label">
