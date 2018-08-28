@@ -17,6 +17,7 @@
     "@webcomponents/webcomponentsjs": "^2.1.0"
   },
   "devDependencies": {
+    "@polymer/iron-form": "^3.0.0-pre.23",
     "@polymer/iron-test-helpers": "^3.0.0-pre.23",
     "wct-browser-legacy": "^1.0.1"
   }
