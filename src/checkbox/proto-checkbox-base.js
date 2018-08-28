@@ -1,10 +1,7 @@
 import {html, LitElement} from '@polymer/lit-element';
 import {ControlStateMixin} from '../control-state/control-state-mixin.js';
-export const CheckboxBase = (elementName, style) => class ProtoCheckbox extends ControlStateMixin(LitElement) {
 
-  static get is() {
-    return elementName;
-  }
+export class CheckboxBase extends ControlStateMixin(LitElement) {
 
   static get properties() {
     return {
@@ -27,10 +24,16 @@ export const CheckboxBase = (elementName, style) => class ProtoCheckbox extends 
     this._boundInputChangeHandler = this._inputChangeHandler.bind(this);
   }
 
+  /** @override */
+  getStyles() {
+    console.warn('warning: `getStyles()` not implemented');
+  }
+
   render() {
     return html`
-      ${style}
-
+      <style>
+        ${this.getStyles()}
+      </style>
       <label>
         <span part="checkbox">
           <input
@@ -58,4 +61,3 @@ export const CheckboxBase = (elementName, style) => class ProtoCheckbox extends 
     return this.shadowRoot.querySelector('label');
   }
 }
-
