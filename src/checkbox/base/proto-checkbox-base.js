@@ -1,5 +1,7 @@
 import {html, LitElement} from '@polymer/lit-element';
-import {ControlStateMixin} from '../control-state/control-state-mixin.js';
+import {ControlStateMixin} from '../../control-state/control-state-mixin.js';
+import {includeStyle} from '../../utils/style-utils.js';
+import './proto-checkbox-styles.js';
 
 export class CheckboxBase extends ControlStateMixin(LitElement) {
 
@@ -24,9 +26,8 @@ export class CheckboxBase extends ControlStateMixin(LitElement) {
     this._boundInputChangeHandler = this._inputChangeHandler.bind(this);
   }
 
-  /** @override */
   getStyles() {
-    console.warn('warning: `getStyles()` not implemented');
+    return includeStyle('proto-checkbox-styles');
   }
 
   render() {
