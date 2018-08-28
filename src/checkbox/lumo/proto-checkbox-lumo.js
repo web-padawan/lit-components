@@ -1,6 +1,6 @@
 import {ProtoCheckbox} from '../proto-checkbox.js';
+import '@vaadin/vaadin-checkbox/theme/lumo/vaadin-checkbox-styles.js';
 import {includeStyle} from '../../utils/style-utils.js';
-import './proto-checkbox-lumo-styles.js';
 
 class ProtoCheckboxLumo extends ProtoCheckbox {
   static get is() {
@@ -9,7 +9,9 @@ class ProtoCheckboxLumo extends ProtoCheckbox {
   getStyles() {
     return `
       ${super.getStyles()}
-      ${includeStyle('proto-checkbox-lumo-styles')}
+      ${includeStyle('lumo-checkbox-style')}
+      ${includeStyle('lumo-checkbox-effects')}
+      ${includeStyle('lumo-checkbox')}
     `;
   }
 };
