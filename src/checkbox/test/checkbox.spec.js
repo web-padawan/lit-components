@@ -3,11 +3,11 @@ import { render } from 'lit-html';
 import { FlattenedNodesObserver } from '@polymer/polymer/lib/utils/flattened-nodes-observer.js';
 import '@polymer/iron-test-helpers/mock-interactions.js';
 import '@polymer/iron-form/iron-form.js';
-import {CheckboxBase} from '../base/proto-checkbox-base.js';
+import {CheckboxBase} from '../base/lit-checkbox-base.js';
 
-customElements.define('proto-checkbox', class ProtoCheckbox extends CheckboxBase {
+customElements.define('lit-checkbox', class LitCheckbox extends CheckboxBase {
   static get is() {
-    return 'proto-checkbox';
+    return 'lit-checkbox';
   }
 });
 
@@ -16,8 +16,8 @@ customElements.define('x-checkbox', class XCheckbox extends LitElement {
     return html`
       <iron-form id="form">
         <form>
-          <proto-checkbox id="boundname" name="${this.checkboxName}"></proto-checkbox>
-          <proto-checkbox id="attrname" name="attrcheckbox"></proto-checkbox>
+          <lit-checkbox id="boundname" name="${this.checkboxName}"></lit-checkbox>
+          <lit-checkbox id="attrname" name="attrcheckbox"></lit-checkbox>
         </form>
       </iron-form>
     `;
@@ -38,7 +38,7 @@ customElements.define('x-checkbox', class XCheckbox extends LitElement {
 });
 
 const fixture = html`
-  <proto-checkbox name="test-checkbox">Vaadin <i>Checkbox</i> with <a href="#">Terms &amp; Conditions</a></proto-checkbox>
+  <lit-checkbox name="test-checkbox">Vaadin <i>Checkbox</i> with <a href="#">Terms &amp; Conditions</a></lit-checkbox>
 `;
 
 describe('checkbox', () => {
@@ -275,7 +275,7 @@ describe('empty checkbox label', () => {
   let checkbox, label;
 
   beforeEach(async() => {
-    checkbox = document.createElement('proto-checkbox');
+    checkbox = document.createElement('lit-checkbox');
     document.body.appendChild(checkbox);
     await checkbox.updateComplete;
     label = checkbox.shadowRoot.querySelector('[part="label"]');
@@ -308,7 +308,7 @@ describe('change event', () => {
   let checkbox;
 
   beforeEach(async() => {
-    checkbox = document.createElement('proto-checkbox');
+    checkbox = document.createElement('lit-checkbox');
     document.body.appendChild(checkbox);
     await checkbox.updateComplete;
   });

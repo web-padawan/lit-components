@@ -3,7 +3,7 @@ import '@polymer/polymer/lib/elements/dom-module.js'
 import {inject} from '../../utils/style-utils.js';
 
 inject(html`
-<dom-module id="proto-checkbox-styles">
+<dom-module id="lit-checkbox-styles">
   <template>
     <style>
       :host {

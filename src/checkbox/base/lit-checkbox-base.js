@@ -2,7 +2,7 @@ import {html, LitElement} from '@polymer/lit-element';
 import {GestureEventListeners} from '@polymer/polymer/lib/mixins/gesture-event-listeners.js';
 import {ControlStateMixin} from '../../control-state/control-state-mixin.js';
 import {includeStyle} from '../../utils/style-utils.js';
-import './proto-checkbox-styles.js';
+import './lit-checkbox-styles.js';
 
 export class CheckboxBase extends ControlStateMixin(GestureEventListeners((LitElement))) {
 
@@ -49,7 +49,7 @@ export class CheckboxBase extends ControlStateMixin(GestureEventListeners((LitEl
   }
 
   getStyles() {
-    return includeStyle('proto-checkbox-styles');
+    return includeStyle('lit-checkbox-styles');
   }
 
   render() {
