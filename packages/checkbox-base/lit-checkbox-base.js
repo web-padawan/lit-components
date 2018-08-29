@@ -1,7 +1,7 @@
 import {html, LitElement} from '@polymer/lit-element';
 import {GestureEventListeners} from '@polymer/polymer/lib/mixins/gesture-event-listeners.js';
-import {ControlStateMixin} from '../../control-state/control-state-mixin.js';
-import {includeStyle} from '../../utils/style-utils.js';
+import {ControlStateMixin} from '@lit/control-state-mixin';
+import {includeStyle} from '@lit/style-utils';
 import './lit-checkbox-styles.js';
 
 export class CheckboxBase extends ControlStateMixin(GestureEventListeners((LitElement))) {

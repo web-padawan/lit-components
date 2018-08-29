@@ -1,0 +1,16 @@
+{
+  "name": "@lit/checkbox-material",
+  "version": "0.1.0",
+  "author": "Vaadin Ltd",
+  "license": "Apache-2.0",
+  "main": "lit-checkbox-material.js",
+  "dependencies": {
+    "@lit/checkbox-base": "^0.1.0",
+    "@polymer/lit-element": "0.6.0-dev.5",
+    "@polymer/polymer": "^3.0.0",
+    "@vaadin/vaadin-material-styles": "^1.1.2"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  }
+}

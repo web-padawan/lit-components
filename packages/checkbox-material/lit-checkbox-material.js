@@ -1,6 +1,6 @@
-import {CheckboxBase} from '../base/lit-checkbox-base.js';
+import {CheckboxBase} from '@lit/checkbox-base';
 import '@vaadin/vaadin-checkbox/theme/material/vaadin-checkbox-styles.js';
-import {includeStyle} from '../../utils/style-utils.js';
+import {includeStyle} from '@lit/style-utils';
 
 class LitCheckboxMaterial extends CheckboxBase {
   static get is() {

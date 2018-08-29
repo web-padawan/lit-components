@@ -1,5 +1,5 @@
 import '@polymer/iron-test-helpers/mock-interactions.js';
-import { ControlStateMixin } from '../control-state-mixin.js';
+import { ControlStateMixin } from '@lit/control-state-mixin';
 import { html, LitElement } from '@polymer/lit-element';
 
 class TestWrapper extends ControlStateMixin(LitElement) {

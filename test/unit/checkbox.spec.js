@@ -3,7 +3,7 @@ import { render } from 'lit-html';
 import { FlattenedNodesObserver } from '@polymer/polymer/lib/utils/flattened-nodes-observer.js';
 import '@polymer/iron-test-helpers/mock-interactions.js';
 import '@polymer/iron-form/iron-form.js';
-import {CheckboxBase} from '../base/lit-checkbox-base.js';
+import {CheckboxBase} from '@lit/checkbox-base';
 
 customElements.define('lit-checkbox', class LitCheckbox extends CheckboxBase {
   static get is() {

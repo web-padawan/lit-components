@@ -10,21 +10,28 @@ The goals of this the experiment are:
 
 ## Installation
 
-1. Install `polymer-cli`
-
-```sh
-npm i -g polymer-cli
-```
-
-2. Install dependencies
+1. Install dependencies
 
 ```sh
 npm install
 ```
 
-3. Serve the project
+2. Install packages
 ```sh
-polymer serve --npm
+npm run bootstrap
+```
+
+Note: this will fail on creating simlinks the first time.
+In order to fix, create `node_modules/@lit` directory.
+
+3. Run tests
+```sh
+npm test
+```
+
+4. Serve the project
+```sh
+npm run dev
 ````
 
-4. Go to http://127.0.0.1:8081
+5. Go to http://127.0.0.1:8081/demo/

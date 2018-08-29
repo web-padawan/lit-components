@@ -1,24 +1,53 @@
 {
   "name": "lit-components",
-  "version": "0.0.1",
+  "private": true,
+  "version": "0.1.0",
   "description": "Prototyping components using LitElement",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "bootstrap": "npm install && ./scripts/bootstrap-unreleased.sh",
+    "clean": "del-cli packages/*/node_modules packages/*/package-lock.json",
+    "dev": "polyserve --npm",
+    "test": "karma start"
   },
   "repository": "https://github.com/web-padawan/lit-components.git",
   "author": "Vaadin Ltd",
   "license": "Apache-2.0",
-  "dependencies": {
-    "@polymer/lit-element": "0.6.0-dev.5",
-    "@polymer/polymer": "^3.0.0",
-    "@vaadin/vaadin-checkbox": "^2.2.1",
-    "@vaadin/vaadin-lumo-styles": "^1.1.0",
-    "@webcomponents/shadycss": "^1.5.0",
-    "@webcomponents/webcomponentsjs": "^2.1.0"
-  },
   "devDependencies": {
-    "@polymer/iron-form": "^3.0.0-pre.23",
-    "@polymer/iron-test-helpers": "^3.0.0-pre.23",
-    "wct-browser-legacy": "^1.0.1"
+    "@babel/core": "^7.0.0",
+    "@babel/preset-env": "^7.0.0",
+    "@webcomponents/webcomponentsjs": "^2.1.1",
+    "babel-loader": "^8.0.0",
+    "chai": "^4.1.2",
+    "del-cli": "^1.1.0",
+    "istanbul-instrumenter-loader": "^3.0.0",
+    "karma": "^2.0.5",
+    "karma-chrome-launcher": "^2.2.0",
+    "karma-coverage-istanbul-reporter": "^2.0.2",
+    "karma-firefox-launcher": "^1.1.0",
+    "karma-mocha": "^1.3.0",
+    "karma-mocha-reporter": "^2.2.5",
+    "karma-sinon-chai": "^2.0.0",
+    "karma-sourcemap-loader": "^0.3.7",
+    "karma-webpack": "^2.0.4",
+    "lerna": "^3.2.1",
+    "mocha": "^5.2.0",
+    "polyserve": "^0.27.12",
+    "sinon": "^6.1.5",
+    "sinon-chai": "^3.2.0",
+    "webpack": "^4.17.1",
+    "webpack-dev-server": "^3.1.7"
+  },
+  "babel": {
+    "presets": [
+      [
+        "@babel/preset-env",
+        {
+          "targets": {
+            "chrome": "68",
+            "firefox": "61"
+          }
+        }
+      ]
+    ]
   }
 }

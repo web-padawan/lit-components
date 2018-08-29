@@ -1,0 +1,19 @@
+{
+  "name": "@lit/checkbox-base",
+  "version": "0.1.0",
+  "author": "Vaadin Ltd",
+  "license": "Apache-2.0",
+  "main": "lit-checkbox-base.js",
+  "dependencies": {
+    "@polymer/lit-element": "0.6.0-dev.5",
+    "@polymer/polymer": "^3.0.0",
+    "@vaadin/vaadin-checkbox": "^2.2.1"
+  },
+  "devDependencies": {
+    "@polymer/iron-form": "^3.0.0-pre.25",
+    "@polymer/iron-test-helpers": "^3.0.0-pre.25"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  }
+}
