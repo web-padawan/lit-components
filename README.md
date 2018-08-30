@@ -21,9 +21,6 @@ npm install
 npm run bootstrap
 ```
 
-Note: this will fail on creating simlinks the first time.
-In order to fix, create `node_modules/@lit` directory.
-
 3. Run tests
 ```sh
 npm test

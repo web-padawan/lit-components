@@ -23,6 +23,9 @@ set -e
 
 packages=(`find packages -name "package.json" | xargs -I '{}' dirname '{}'`)
 
+# FIXME: remove after first publishing
+mkdir -p ${INIT_CWD}/node_modules/@lit
+
 for package in ${packages[@]}; do
   npmname=`node -e "console.log(require(\"${INIT_CWD}/${package}/package.json\").name)"`
   if [ ! -L ${INIT_CWD}/node_modules/${npmname} ]; then
