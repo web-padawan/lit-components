@@ -32,13 +32,7 @@ export class CheckboxGroupBase extends LitElement {
        * by creating new array instance each time.
        */
       value: {
-        shouldInvalidate: (value, oldValue) => {
-          return (
-            value !== oldValue ||
-            value.length !== oldValue.length ||
-            JSON.stringify(value) !== JSON.stringify(oldValue)
-          );
-        }
+        shouldInvalidate: (value, oldValue) => true
       },
 
       /**
@@ -244,9 +238,5 @@ export class CheckboxGroupBase extends LitElement {
     } else {
       this.removeAttribute('has-label');
     }
-  }
-
-  _getErrorMessageAriaHidden(invalid, errorMessage) {
-    return (!errorMessage || !invalid).toString();
   }
 }
