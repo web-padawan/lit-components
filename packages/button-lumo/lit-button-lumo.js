@@ -1,6 +1,6 @@
-import {ButtonBase} from '@lit/button-base';
+import { ButtonBase } from '@lit/button-base';
 import '@vaadin/vaadin-button/theme/lumo/vaadin-button-styles.js';
-import {includeStyle} from '@lit/style-utils';
+import { includeStyle } from '@lit/style-utils';
 
 class LitButtonLumo extends ButtonBase {
   static get is() {
@@ -17,6 +17,6 @@ class LitButtonLumo extends ButtonBase {
       ${includeStyle('lumo-button')}
     `;
   }
-};
+}
 
 customElements.define(LitButtonLumo.is, LitButtonLumo);

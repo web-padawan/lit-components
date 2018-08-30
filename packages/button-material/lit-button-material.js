@@ -1,6 +1,6 @@
-import {ButtonBase} from '@lit/button-base';
+import { ButtonBase } from '@lit/button-base';
 import '@vaadin/vaadin-button/theme/material/vaadin-button-styles.js';
-import {includeStyle} from '@lit/style-utils';
+import { includeStyle } from '@lit/style-utils';
 
 class LitButtonMaterial extends ButtonBase {
   static get is() {
@@ -17,6 +17,6 @@ class LitButtonMaterial extends ButtonBase {
       ${includeStyle('material-button')}
     `;
   }
-};
+}
 
 customElements.define(LitButtonMaterial.is, LitButtonMaterial);

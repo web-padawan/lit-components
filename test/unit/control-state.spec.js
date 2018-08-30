@@ -21,7 +21,7 @@ class TestElement extends ControlStateMixin(LitElement) {
     return html`
       <input id="input">
       <input id="secondInput">
-    `
+    `;
   }
 
   get focusElement() {
@@ -34,7 +34,15 @@ customElements.define('test-element', TestElement);
 describe('control-state-mixin', () => {
   let customElement, focusElement, secondFocusableElement;
 
-  beforeEach(async() => {
+  const focusin = () => {
+    focusElement.dispatchEvent(new CustomEvent('focusin', { composed: true, bubbles: true }));
+  };
+
+  const focusout = () => {
+    focusElement.dispatchEvent(new CustomEvent('focusout', { composed: true, bubbles: true }));
+  };
+
+  beforeEach(async () => {
     customElement = document.createElement('test-element');
     document.body.appendChild(customElement);
     await customElement.updateComplete;
@@ -46,10 +54,10 @@ describe('control-state-mixin', () => {
     if (customElement && customElement.parentNode) {
       customElement.parentNode.removeChild(customElement);
     }
-  })
+  });
 
   describe('tabindex', () => {
-    it('setting tabIndex should forward the value to the internal element', async() => {
+    it('setting tabIndex should forward the value to the internal element', async () => {
       customElement.tabIndex = 1;
       await customElement.updateComplete;
       expect(focusElement.getAttribute('tabindex')).to.be.equal('1');
@@ -59,13 +67,13 @@ describe('control-state-mixin', () => {
       expect(customElement.getAttribute('tabindex')).to.be.equal('0');
     });
 
-    it('setting tabIndex should update the attribute', async() => {
+    it('setting tabIndex should update the attribute', async () => {
       customElement.tabIndex = 1;
       await customElement.updateComplete;
       expect(customElement.getAttribute('tabindex')).to.be.equal('1');
     });
 
-    it('enabling the element should restore old tabindex', async() => {
+    it('enabling the element should restore old tabindex', async () => {
       customElement.tabIndex = 1;
       customElement.disabled = true;
       await customElement.updateComplete;
@@ -76,14 +84,14 @@ describe('control-state-mixin', () => {
       expect(customElement.getAttribute('tabindex')).to.be.equal('1');
     });
 
-    it('setting disabled to true should remove tabindex', async() => {
+    it('setting disabled to true should remove tabindex', async () => {
       customElement.tabIndex = 1;
       customElement.disabled = true;
       await customElement.updateComplete;
       expect(customElement.getAttribute('tabindex')).to.not.be.ok;
     });
 
-    it('setting disabled to true and then back to false should restore the previous value of tabindex', async() => {
+    it('setting disabled to true and then back to false should restore the previous value of tabindex', async () => {
       customElement.tabIndex = 2;
       customElement.disabled = true;
       await customElement.updateComplete;
@@ -96,14 +104,6 @@ describe('control-state-mixin', () => {
   });
 
   describe('_tabPressed and focus-ring', () => {
-    var focusin = () => {
-      focusElement.dispatchEvent(new CustomEvent('focusin', {composed: true, bubbles: true}));
-    };
-
-    var focusout = () => {
-      focusElement.dispatchEvent(new CustomEvent('focusout', {composed: true, bubbles: true}));
-    };
-
     it('should set and unset _tabPressed when press TAB', () => {
       MockInteractions.keyDownOn(document.body, 9);
       expect(customElement._tabPressed).to.be.true;
@@ -159,7 +159,7 @@ describe('control-state-mixin', () => {
       expect(customElement.hasAttribute('focus-ring')).to.be.false;
     });
 
-    it('should refocus the field', (done) => {
+    it('should refocus the field', done => {
       customElement.dispatchEvent(new CustomEvent('focusin'));
       MockInteractions.keyDownOn(customElement, 9, 'shift');
 
@@ -174,7 +174,7 @@ describe('control-state-mixin', () => {
   });
 
   describe('disabled', () => {
-    beforeEach(async() => {
+    beforeEach(async () => {
       customElement.disabled = true;
       await customElement.updateComplete;
     });
@@ -183,24 +183,24 @@ describe('control-state-mixin', () => {
       expect(customElement.getAttribute('tabindex')).to.not.be.ok;
     });
 
-    it('should update internal element tabIndex', async() => {
+    it('should update internal element tabIndex', async () => {
       customElement.tabIndex = 4;
       await customElement.updateComplete;
       expect(customElement.getAttribute('tabindex')).to.be.null;
       expect(focusElement.getAttribute('tabindex')).to.be.equal('4');
     });
 
-    it('should have aria-disabled attribute set to true when disabled', async() => {
+    it('should have aria-disabled attribute set to true when disabled', async () => {
       expect(customElement.getAttribute('aria-disabled')).to.be.equal('true');
     });
 
-    it('should not have aria-disabled attribute when is not disabled', async() => {
+    it('should not have aria-disabled attribute when is not disabled', async () => {
       customElement.disabled = false;
       await customElement.updateComplete;
       expect(customElement.getAttribute('aria-disabled')).to.not.be.ok;
     });
 
-    it('should apply tabindex value, changed while element was disabled, once it is enabled', async() => {
+    it('should apply tabindex value, changed while element was disabled, once it is enabled', async () => {
       customElement.tabIndex = 3;
       await customElement.updateComplete;
       expect(customElement.getAttribute('tabindex')).to.not.be.ok;
@@ -218,23 +218,25 @@ describe('control-state-mixin', () => {
     });
 
     it('should set focused attribute on focusin event dispatched', () => {
-      focusElement.dispatchEvent(new CustomEvent('focusin', {composed: true, bubbles: true}));
+      focusin();
       expect(customElement.hasAttribute('focused')).to.be.true;
     });
 
     it('should not set focused attribute on focusin event dispatched when disabled', () => {
       customElement.disabled = true;
-      focusElement.dispatchEvent(new CustomEvent('focusin', {composed: true, bubbles: true}));
+      focusin();
       expect(customElement.hasAttribute('focused')).to.be.false;
     });
 
     it('should not set focused attribute on focusin event dispatched from other focusable element inside component', () => {
-      secondFocusableElement.dispatchEvent(new CustomEvent('focusin', {composed: true, bubbles: true}));
+      secondFocusableElement.dispatchEvent(
+        new CustomEvent('focusin', { composed: true, bubbles: true })
+      );
       expect(customElement.hasAttribute('focused')).to.be.false;
     });
 
     it('should remove focused attribute when disconnected from the DOM', () => {
-      focusElement.dispatchEvent(new CustomEvent('focusin', {composed: true, bubbles: true}));
+      focusin();
       customElement.parentNode.removeChild(customElement);
       window.ShadyDOM && window.ShadyDOM.flush();
       expect(customElement.hasAttribute('focused')).to.be.false;
@@ -245,8 +247,8 @@ describe('control-state-mixin', () => {
 describe('autofocus', () => {
   let customElement;
 
-  beforeEach(async() => {
-    customElement = document.createElement('test-element')
+  beforeEach(async () => {
+    customElement = document.createElement('test-element');
     customElement.setAttribute('autofocus', '');
     document.body.appendChild(customElement);
     await customElement.updateComplete;
@@ -256,9 +258,9 @@ describe('autofocus', () => {
     if (customElement && customElement.parentNode) {
       customElement.parentNode.removeChild(customElement);
     }
-  })
+  });
 
-  it('should have focused and focus-ring set', (done) => {
+  it('should have focused and focus-ring set', done => {
     window.requestAnimationFrame(() => {
       expect(customElement.hasAttribute('focused')).to.be.true;
       expect(customElement.hasAttribute('focus-ring')).to.be.true;
@@ -270,7 +272,15 @@ describe('autofocus', () => {
 describe('focused with nested focusable elements', () => {
   let customElementWrapper, customElement, focusElement;
 
-  beforeEach(async() => {
+  const focusin = () => {
+    focusElement.dispatchEvent(new CustomEvent('focusin', { composed: true, bubbles: true }));
+  };
+
+  const focusout = () => {
+    focusElement.dispatchEvent(new CustomEvent('focusout', { composed: true, bubbles: true }));
+  };
+
+  beforeEach(async () => {
     customElementWrapper = document.createElement('test-wrapper');
     document.body.appendChild(customElementWrapper);
     await customElementWrapper.updateComplete;
@@ -284,14 +294,15 @@ describe('focused with nested focusable elements', () => {
   });
 
   it('should set focused attribute on focusin event dispatched from an element inside focusElement', () => {
-    focusElement.dispatchEvent(new CustomEvent('focusin', {composed: true, bubbles: true}));
+    focusin();
     expect(customElementWrapper.hasAttribute('focused')).to.be.true;
   });
 
   it('should remove focused attribute on focusout event dispatched from an element inside focusElement', () => {
-    focusElement.dispatchEvent(new CustomEvent('focusin', {composed: true, bubbles: true}));
+    focusin();
     expect(customElementWrapper.hasAttribute('focused')).to.be.true;
-    focusElement.dispatchEvent(new CustomEvent('focusout', {composed: true, bubbles: true}));
+
+    focusout();
     expect(customElementWrapper.hasAttribute('focused')).to.be.false;
   });
 });

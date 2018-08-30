@@ -4,11 +4,14 @@ import '@polymer/iron-test-helpers/mock-interactions.js';
 import { FlattenedNodesObserver } from '@polymer/polymer/lib/utils/flattened-nodes-observer.js';
 import { ButtonBase } from '@lit/button-base';
 
-customElements.define('lit-button', class LitButton extends ButtonBase {
-  static get is() {
-    return 'lit-button';
+customElements.define(
+  'lit-button',
+  class LitButton extends ButtonBase {
+    static get is() {
+      return 'lit-button';
+    }
   }
-});
+);
 
 const fixture = html`
   <lit-button>Vaadin <i>Button</i></lit-button>
@@ -25,7 +28,7 @@ describe('button', () => {
 
   var button, nativeButton, label;
 
-  beforeEach(async() => {
+  beforeEach(async () => {
     const div = document.createElement('div');
     render(fixture, div);
     button = div.firstElementChild;
@@ -47,7 +50,7 @@ describe('button', () => {
     expect(children[2].outerHTML).to.be.equal('<i>Button</i>');
   });
 
-  it('can be disabled imperatively', async() => {
+  it('can be disabled imperatively', async () => {
     button.disabled = true;
     await button.updateComplete;
     expect(nativeButton.hasAttribute('disabled')).to.be.eql(true);
@@ -114,7 +117,7 @@ describe('button', () => {
     expect(button.hasAttribute('active')).to.be.false;
   });
 
-  it('should not have active attribute when disabled', async() => {
+  it('should not have active attribute when disabled', async () => {
     button.disabled = true;
     await button.updateComplete;
     down(button);

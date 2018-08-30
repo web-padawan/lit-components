@@ -12,17 +12,23 @@ module.exports = function(config) {
       },
       FirefoxHeadless: {
         base: 'Firefox',
-        flags: [ '-headless' ],
-      },
+        flags: ['-headless']
+      }
     },
     frameworks: ['mocha', 'sinon-chai'],
     files: [
-      {pattern: 'node_modules/@webcomponents/webcomponentsjs/custom-elements-es5-adapter.js', watched: false},
-      {pattern: 'node_modules/@webcomponents/webcomponentsjs/webcomponents-bundle.js', watched: false},
-      'test/unit/index.js',
+      {
+        pattern: 'node_modules/@webcomponents/webcomponentsjs/custom-elements-es5-adapter.js',
+        watched: false
+      },
+      {
+        pattern: 'node_modules/@webcomponents/webcomponentsjs/webcomponents-bundle.js',
+        watched: false
+      },
+      'test/unit/index.js'
     ],
     preprocessors: {
-      'test/unit/index.js': ['webpack', 'sourcemap'],
+      'test/unit/index.js': ['webpack', 'sourcemap']
     },
     reporters: ['dots', 'coverage-istanbul'],
     port: 9876,
@@ -63,8 +69,8 @@ module.exports = function(config) {
             test: /\.js$/,
             loader: 'babel-loader',
             options: {
-              cacheDirectory: true,
-            },
+              cacheDirectory: true
+            }
           },
           {
             test: /\.js$/,

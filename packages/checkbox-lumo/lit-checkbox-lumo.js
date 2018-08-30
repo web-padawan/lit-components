@@ -1,6 +1,6 @@
-import {CheckboxBase} from '@lit/checkbox-base';
+import { CheckboxBase } from '@lit/checkbox-base';
 import '@vaadin/vaadin-checkbox/theme/lumo/vaadin-checkbox-styles.js';
-import {includeStyle} from '@lit/style-utils';
+import { includeStyle } from '@lit/style-utils';
 
 class LitCheckboxLumo extends CheckboxBase {
   static get is() {
@@ -19,6 +19,6 @@ class LitCheckboxLumo extends CheckboxBase {
       ${includeStyle('lumo-checkbox')}
     `;
   }
-};
+}
 
 customElements.define(LitCheckboxLumo.is, LitCheckboxLumo);

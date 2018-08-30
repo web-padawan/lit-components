@@ -1,11 +1,10 @@
-import {html, LitElement} from '@polymer/lit-element';
-import {GestureEventListeners} from '@polymer/polymer/lib/mixins/gesture-event-listeners.js';
-import {ControlStateMixin} from '@lit/control-state-mixin';
-import {includeStyle} from '@lit/style-utils';
+import { html, LitElement } from '@polymer/lit-element';
+import { GestureEventListeners } from '@polymer/polymer/lib/mixins/gesture-event-listeners.js';
+import { ControlStateMixin } from '@lit/control-state-mixin';
+import { includeStyle } from '@lit/style-utils';
 import './lit-checkbox-styles.js';
 
-export class CheckboxBase extends ControlStateMixin(GestureEventListeners((LitElement))) {
-
+export class CheckboxBase extends ControlStateMixin(GestureEventListeners(LitElement)) {
   static get properties() {
     return {
       /**
@@ -106,22 +105,21 @@ export class CheckboxBase extends ControlStateMixin(GestureEventListeners((LitEl
 
     this.setAttribute('role', 'checkbox');
 
-    this._nativeCheckbox = this.shadowRoot.querySelector('input[type="checkbox"]');
+    this._nativeCheckbox = this.shadowRoot.querySelector('input');
     this._labelPart = this.shadowRoot.querySelector('[part~="label"]');
 
     this.addEventListener('click', this._handleClick.bind(this));
 
     this._addActiveListeners();
 
-    this._labelPart.querySelector('slot').addEventListener(
-      'slotchange',
-      this._updateLabelAttribute.bind(this)
-    );
+    this._labelPart
+      .querySelector('slot')
+      .addEventListener('slotchange', this._updateLabelAttribute.bind(this));
 
     this._updateLabelAttribute();
   }
 
-  update(props) {
+  update(props) {
     if (props.has('indeterminate')) {
       this._indeterminateChanged(this.indeterminate);
     }
@@ -135,7 +133,7 @@ export class CheckboxBase extends ControlStateMixin(GestureEventListeners((LitEl
 
   _addActiveListeners() {
     // DOWN
-    this._addEventListenerToNode(this, 'down', (e) => {
+    this._addEventListenerToNode(this, 'down', e => {
       if (this._interactionsAllowed(e)) {
         this.setAttribute('active', '');
       }
@@ -179,7 +177,11 @@ export class CheckboxBase extends ControlStateMixin(GestureEventListeners((LitEl
     } else {
       this.setAttribute('aria-checked', this.checked);
     }
-    this.dispatchEvent(new CustomEvent('indeterminate-changed', {detail: {value: indeterminate}}));
+    this.dispatchEvent(
+      new CustomEvent('indeterminate-changed', {
+        detail: { value: indeterminate }
+      })
+    );
   }
 
   _inputChangeHandler(e) {
@@ -224,7 +226,7 @@ export class CheckboxBase extends ControlStateMixin(GestureEventListeners((LitEl
 
   _toggleChecked() {
     this.checked = !this.checked;
-    this.dispatchEvent(new CustomEvent('change', {composed: true, bubbles: true}));
+    this.dispatchEvent(new CustomEvent('change', { composed: true, bubbles: true }));
   }
 
   _updateLabelAttribute() {

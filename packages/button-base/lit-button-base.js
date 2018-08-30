@@ -6,7 +6,6 @@ import { includeStyle } from '@lit/style-utils';
 import './lit-button-styles.js';
 
 export class ButtonBase extends ControlStateMixin(GestureEventListeners(LitElement)) {
-
   getStyles() {
     return includeStyle('lit-button-styles');
   }
@@ -59,7 +58,10 @@ export class ButtonBase extends ControlStateMixin(GestureEventListeners(LitEleme
   _addActiveListeners() {
     addListener(this, 'down', () => !this.disabled && this.setAttribute('active', ''));
     addListener(this, 'up', () => this.removeAttribute('active'));
-    this.addEventListener('keydown', e => !this.disabled && [13, 32].indexOf(e.keyCode) >= 0 && this.setAttribute('active', ''));
+    this.addEventListener(
+      'keydown',
+      e => !this.disabled && [13, 32].indexOf(e.keyCode) >= 0 && this.setAttribute('active', '')
+    );
     this.addEventListener('keyup', () => this.removeAttribute('active'));
     this.addEventListener('blur', () => this.removeAttribute('active'));
   }

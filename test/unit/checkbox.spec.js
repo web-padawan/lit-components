@@ -3,17 +3,22 @@ import { render } from 'lit-html';
 import { FlattenedNodesObserver } from '@polymer/polymer/lib/utils/flattened-nodes-observer.js';
 import '@polymer/iron-test-helpers/mock-interactions.js';
 import '@polymer/iron-form/iron-form.js';
-import {CheckboxBase} from '@lit/checkbox-base';
+import { CheckboxBase } from '@lit/checkbox-base';
 
-customElements.define('lit-checkbox', class LitCheckbox extends CheckboxBase {
-  static get is() {
-    return 'lit-checkbox';
+customElements.define(
+  'lit-checkbox',
+  class LitCheckbox extends CheckboxBase {
+    static get is() {
+      return 'lit-checkbox';
+    }
   }
-});
+);
 
-customElements.define('x-checkbox', class XCheckbox extends LitElement {
-  render() {
-    return html`
+customElements.define(
+  'x-checkbox',
+  class XCheckbox extends LitElement {
+    render() {
+      return html`
       <iron-form id="form">
         <form>
           <lit-checkbox id="boundname" name="${this.checkboxName}"></lit-checkbox>
@@ -21,21 +26,22 @@ customElements.define('x-checkbox', class XCheckbox extends LitElement {
         </form>
       </iron-form>
     `;
-  }
+    }
 
-  static get properties() {
-    return {
-      checkboxName: {
-        type: String
-      }
-    };
-  }
+    static get properties() {
+      return {
+        checkboxName: {
+          type: String
+        }
+      };
+    }
 
-  constructor() {
-    super();
-    this.checkboxName = 'boundcheckbox';
+    constructor() {
+      super();
+      this.checkboxName = 'boundcheckbox';
+    }
   }
-});
+);
 
 const fixture = html`
   <lit-checkbox name="test-checkbox">Vaadin <i>Checkbox</i> with <a href="#">Terms &amp; Conditions</a></lit-checkbox>
@@ -52,7 +58,7 @@ describe('checkbox', () => {
 
   let checkbox, nativeCheckbox, label;
 
-  beforeEach(async() => {
+  beforeEach(async () => {
     const div = document.createElement('div');
     render(fixture, div);
     checkbox = div.firstElementChild;
@@ -72,7 +78,7 @@ describe('checkbox', () => {
     expect(children[2].outerHTML).to.be.equal('<i>Checkbox</i>');
   });
 
-  it('can be disabled imperatively', async() => {
+  it('can be disabled imperatively', async () => {
     checkbox.disabled = true;
     await checkbox.updateComplete;
     expect(nativeCheckbox.hasAttribute('disabled')).to.be.eql(true);
@@ -89,7 +95,7 @@ describe('checkbox', () => {
     MockInteractions.downAndUp(checkbox);
   });
 
-  it('should have proper name', async() => {
+  it('should have proper name', async () => {
     expect(checkbox.name).to.eq('');
     checkbox.checked = true;
     await checkbox.updateComplete;
@@ -113,14 +119,14 @@ describe('checkbox', () => {
     expect(checkbox.checked).to.be.false;
   });
 
-  it('should not toggle on click when disabled', async() => {
+  it('should not toggle on click when disabled', async () => {
     checkbox.disabled = true;
     await checkbox.updateComplete;
     label.click();
     expect(checkbox.checked).to.be.false;
   });
 
-  it('should bind checked to the native checkbox and vice versa', async() => {
+  it('should bind checked to the native checkbox and vice versa', async () => {
     checkbox.checked = true;
     await checkbox.updateComplete;
     expect(nativeCheckbox.checked).to.be.eql(true);
@@ -131,7 +137,7 @@ describe('checkbox', () => {
     expect(checkbox.checked).to.be.eql(false);
   });
 
-  it('should bind indeterminate to the native checkbox and vice versa', async() => {
+  it('should bind indeterminate to the native checkbox and vice versa', async () => {
     checkbox.indeterminate = true;
     await checkbox.updateComplete;
     expect(nativeCheckbox.indeterminate).to.be.eql(true);
@@ -142,19 +148,19 @@ describe('checkbox', () => {
     expect(checkbox.indeterminate).to.be.eql(false);
   });
 
-  it('should set aria-checked to "true" when checked', async() => {
+  it('should set aria-checked to "true" when checked', async () => {
     checkbox.checked = true;
     await checkbox.updateComplete;
     expect(checkbox.getAttribute('aria-checked')).to.be.eql('true');
   });
 
-  it('should set aria-checked to "false" when unchecked', async() => {
+  it('should set aria-checked to "false" when unchecked', async () => {
     checkbox.checked = false;
     await checkbox.updateComplete;
     expect(checkbox.getAttribute('aria-checked')).to.be.eql('false');
   });
 
-  it('should set aria-checked to "mixed" when indeterminate', async() => {
+  it('should set aria-checked to "mixed" when indeterminate', async () => {
     checkbox.indeterminate = true;
     await checkbox.updateComplete;
     expect(checkbox.getAttribute('aria-checked')).to.be.eql('mixed');
@@ -204,7 +210,7 @@ describe('checkbox', () => {
     expect(checkbox.hasAttribute('active')).to.be.false;
   });
 
-  it('should be checked after space when initially checked is false and indeterminate is true', async() => {
+  it('should be checked after space when initially checked is false and indeterminate is true', async () => {
     checkbox.checked = false;
     checkbox.indeterminate = true;
     await checkbox.updateComplete;
@@ -218,7 +224,7 @@ describe('checkbox', () => {
     expect(checkbox.getAttribute('aria-checked')).to.be.eql('true');
   });
 
-  it('should not be checked after space when initially checked is true and indeterminate is true', async() => {
+  it('should not be checked after space when initially checked is true and indeterminate is true', async () => {
     checkbox.checked = true;
     checkbox.indeterminate = true;
     await checkbox.updateComplete;
@@ -232,7 +238,7 @@ describe('checkbox', () => {
     expect(checkbox.getAttribute('aria-checked')).to.be.eql('false');
   });
 
-  it('should be checked after click when initially checked is false and indeterminate is true', async() => {
+  it('should be checked after click when initially checked is false and indeterminate is true', async () => {
     checkbox.checked = false;
     checkbox.indeterminate = true;
     await checkbox.updateComplete;
@@ -245,7 +251,7 @@ describe('checkbox', () => {
     expect(checkbox.getAttribute('aria-checked')).to.be.eql('true');
   });
 
-  it('should not be checked after click when initially checked is true and indeterminate is true', async() => {
+  it('should not be checked after click when initially checked is true and indeterminate is true', async () => {
     checkbox.checked = true;
     checkbox.indeterminate = true;
     await checkbox.updateComplete;
@@ -265,7 +271,7 @@ describe('checkbox', () => {
 
     // Workaround for not using timeouts
     const evt = new CustomEvent('slotchange');
-    checkbox.shadowRoot.querySelector('[part="label"]').querySelector('slot').dispatchEvent(evt);
+    checkbox._labelPart.querySelector('slot').dispatchEvent(evt);
 
     expect(label.hasAttribute('empty')).to.be.true;
   });
@@ -274,7 +280,7 @@ describe('checkbox', () => {
 describe('empty checkbox label', () => {
   let checkbox, label;
 
-  beforeEach(async() => {
+  beforeEach(async () => {
     checkbox = document.createElement('lit-checkbox');
     document.body.appendChild(checkbox);
     await checkbox.updateComplete;
@@ -289,7 +295,7 @@ describe('empty checkbox label', () => {
     expect(label.hasAttribute('empty')).to.be.true;
   });
 
-  it('should remove empty attribute from part label when the label is added', async() => {
+  it('should remove empty attribute from part label when the label is added', async () => {
     const paragraph = document.createElement('p');
     paragraph.textContent = 'Added label';
 
@@ -307,7 +313,7 @@ describe('empty checkbox label', () => {
 describe('change event', () => {
   let checkbox;
 
-  beforeEach(async() => {
+  beforeEach(async () => {
     checkbox = document.createElement('lit-checkbox');
     document.body.appendChild(checkbox);
     await checkbox.updateComplete;
@@ -339,17 +345,14 @@ describe('change event', () => {
 describe('iron-form checkbox', () => {
   let xCheckbox, boundNameCheckbox, attrNameCheckbox, form;
 
-  beforeEach(async() => {
+  beforeEach(async () => {
     xCheckbox = document.createElement('x-checkbox');
     document.body.appendChild(xCheckbox);
     await xCheckbox.updateComplete;
     form = xCheckbox.shadowRoot.querySelector('iron-form');
     boundNameCheckbox = xCheckbox.shadowRoot.querySelector('#boundname');
     attrNameCheckbox = xCheckbox.shadowRoot.querySelector('#attrname');
-    await Promise.all([
-      boundNameCheckbox.updateComplete,
-      attrNameCheckbox.updateComplete
-    ]);
+    await Promise.all([boundNameCheckbox.updateComplete, attrNameCheckbox.updateComplete]);
   });
 
   afterEach(() => {
@@ -385,7 +388,7 @@ describe('iron-form checkbox', () => {
     expect(form.serializeForm()).to.be.empty;
   });
 
-  it('should define the name from an attribute', async() => {
+  it('should define the name from an attribute', async () => {
     attrNameCheckbox.checked = true;
     await attrNameCheckbox.updateComplete;
     expect(form.serializeForm().attrcheckbox).to.equal('on');

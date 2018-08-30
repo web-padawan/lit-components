@@ -1,6 +1,6 @@
-import {html} from '@polymer/polymer/lib/utils/html-tag.js';
-import '@polymer/polymer/lib/elements/dom-module.js'
-import {inject} from '@lit/style-utils';
+import { html } from '@polymer/polymer/lib/utils/html-tag.js';
+import '@polymer/polymer/lib/elements/dom-module.js';
+import { inject } from '@lit/style-utils';
 
 inject(html`
 <dom-module id="lit-checkbox-styles">
