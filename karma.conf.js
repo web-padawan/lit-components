@@ -4,8 +4,12 @@ module.exports = function(config) {
   config.set({
     basePath: '',
     singleRun: true,
-    browsers: ['ChromeHeadless', 'FirefoxHeadless'],
+    browsers: ['ChromeHeadlessNoSandbox', 'FirefoxHeadless'],
     customLaunchers: {
+      ChromeHeadlessNoSandbox: {
+        base: 'ChromeHeadless',
+        flags: ['--disable-gpu', '--no-sandbox']
+      },
       FirefoxHeadless: {
         base: 'Firefox',
         flags: [ '-headless' ],
