@@ -8,12 +8,17 @@
   <script type="module" src="../node_modules/@webcomponents/webcomponentsjs/webcomponents-loader.js"></script>
   <script type="module" src="../node_modules/@lit/checkbox-lumo/lit-checkbox-lumo.js"></script>
   <script type="module" src="../node_modules/@lit/checkbox-material/lit-checkbox-material.js"></script>
+  <script type="module" src="../node_modules/@lit/checkbox-group-lumo/lit-checkbox-group-lumo.js"></script>
+  <script type="module" src="../node_modules/@lit/checkbox-group-material/lit-checkbox-group-material.js"></script>
   <script type="module" src="../node_modules/@lit/button-lumo/lit-button-lumo.js"></script>
   <script type="module" src="../node_modules/@lit/button-material/lit-button-material.js"></script>
 
   <style>
     html {
       font-family: -apple-system, BlinkMacSystemFont, "Roboto", "Segoe UI", Helvetica, Arial, sans-serif;
+    }
+    h2, p {
+      padding-left: 20px;
     }
   </style>
 </head>
@@ -38,6 +43,20 @@
     <lit-checkbox-lumo name="works" indeterminate>Indeterminate</lit-checkbox-lumo>
     <lit-checkbox-lumo name="works" tabindex="-1" checked>Tabindex -1</lit-checkbox-lumo>
     <lit-checkbox-material name="works">Material</lit-checkbox-material>
+  </p>
+  <h2>Checkbox group</h2>
+  <p>
+    <lit-checkbox-group-lumo label="Select language" required error-message="Please select">
+      <lit-checkbox-lumo name="language" value="en">English</lit-checkbox-lumo>
+      <lit-checkbox-lumo name="language" value="fr">Français</lit-checkbox-lumo>
+      <lit-checkbox-lumo name="language" value="de">Deutsch</lit-checkbox-lumo>
+    </lit-checkbox-group-lumo>
+    <br>
+    <lit-checkbox-group-material>
+      <lit-checkbox-material value="1">Checkbox <b>1</b></lit-checkbox-material>
+      <lit-checkbox-material value="2">Checkbox <b>2</b></lit-checkbox-material>
+      <lit-checkbox-material value="3">Checkbox <b>3</b></lit-checkbox-material>
+    </lit-checkbox-group-material>
   </p>
 </body>
 

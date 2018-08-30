@@ -1,0 +1,14 @@
+{
+  "name": "@lit/checkbox-group-base",
+  "version": "0.1.0",
+  "author": "Vaadin Ltd",
+  "license": "Apache-2.0",
+  "main": "lit-checkbox-group-base.js",
+  "dependencies": {
+    "@lit/checkbox-base": "^0.1.0",
+    "@polymer/lit-element": "0.6.0-dev.5"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  }
+}

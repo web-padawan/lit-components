@@ -29,7 +29,7 @@ export class CheckboxBase extends ControlStateMixin(GestureEventListeners(LitEle
        * to the server when the control is inside a form.
        */
       value: {
-        shouldInvalidate: () => false
+        reflect: true
       },
 
       _nativeCheckbox: {
@@ -90,14 +90,6 @@ export class CheckboxBase extends ControlStateMixin(GestureEventListeners(LitEle
   firstRendered() {
     super.firstRendered();
 
-    if (!this.hasAttribute('checked')) {
-      this.checked = false;
-    }
-
-    if (!this.hasAttribute('value')) {
-      this.value = 'on';
-    }
-
     const attrName = this.getAttribute('name');
     if (attrName) {
       this.name = attrName;
@@ -120,6 +112,14 @@ export class CheckboxBase extends ControlStateMixin(GestureEventListeners(LitEle
   }
 
   update(props) {
+    if (!this._firstRendered && !this.hasAttribute('checked')) {
+      this.checked = false;
+    }
+
+    if (!this._firstRendered && !this.hasAttribute('value')) {
+      this.value = 'on';
+    }
+
     if (props.has('indeterminate')) {
       this._indeterminateChanged(this.indeterminate);
     }
@@ -169,6 +169,11 @@ export class CheckboxBase extends ControlStateMixin(GestureEventListeners(LitEle
     } else {
       this.setAttribute('aria-checked', checked);
     }
+    this.dispatchEvent(
+      new CustomEvent('checked-changed', {
+        detail: { value: checked }
+      })
+    );
   }
 
   _indeterminateChanged(indeterminate) {

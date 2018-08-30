@@ -5,14 +5,9 @@ import '@polymer/iron-test-helpers/mock-interactions.js';
 import '@polymer/iron-form/iron-form.js';
 import { CheckboxBase } from '@lit/checkbox-base';
 
-customElements.define(
-  'lit-checkbox',
-  class LitCheckbox extends CheckboxBase {
-    static get is() {
-      return 'lit-checkbox';
-    }
-  }
-);
+if (!customElements.get('lit-checkbox')) {
+  customElements.define('lit-checkbox', class extends CheckboxBase {});
+}
 
 customElements.define(
   'x-checkbox',
@@ -104,11 +99,9 @@ describe('checkbox', () => {
 
   it('should toggle on host click', () => {
     checkbox.click();
-
     expect(checkbox.checked).to.be.true;
 
     checkbox.click();
-
     expect(checkbox.checked).to.be.false;
   });
 
@@ -124,6 +117,14 @@ describe('checkbox', () => {
     await checkbox.updateComplete;
     label.click();
     expect(checkbox.checked).to.be.false;
+  });
+
+  it('should dispatch `checked-changed` event when checked changes', async () => {
+    const spy = sinon.spy();
+    checkbox.addEventListener('checked-changed', spy);
+    checkbox.checked = true;
+    await checkbox.updateComplete;
+    expect(spy).to.be.calledOnce;
   });
 
   it('should bind checked to the native checkbox and vice versa', async () => {
@@ -168,9 +169,7 @@ describe('checkbox', () => {
 
   it('should set indeterminate to false when clicked the first time', () => {
     checkbox.indeterminate = true;
-
     checkbox.click();
-
     expect(checkbox.indeterminate).to.be.false;
   });
 
@@ -190,23 +189,18 @@ describe('checkbox', () => {
 
   it('should not have active attribute after up', () => {
     down(checkbox);
-
     up(checkbox);
-
     expect(checkbox.hasAttribute('active')).to.be.false;
   });
 
   it('should have active attribute on space', () => {
     MockInteractions.keyDownOn(checkbox, 32);
-
     expect(checkbox.hasAttribute('active')).to.be.true;
   });
 
   it('should not have active attribute after space', () => {
     MockInteractions.keyDownOn(checkbox, 32);
-
     MockInteractions.keyUpOn(checkbox, 32);
-
     expect(checkbox.hasAttribute('active')).to.be.false;
   });
 
@@ -262,6 +256,14 @@ describe('checkbox', () => {
     expect(checkbox.checked).to.be.false;
     expect(checkbox.indeterminate).to.be.false;
     expect(checkbox.getAttribute('aria-checked')).to.be.eql('false');
+  });
+
+  it('should dispatch `indeterminate-changed` event when indeterminate changes', async () => {
+    const spy = sinon.spy();
+    checkbox.addEventListener('indeterminate-changed', spy);
+    checkbox.indeterminate = true;
+    await checkbox.updateComplete;
+    expect(spy).to.be.calledOnce;
   });
 
   it('should set empty attribute on part label when the label was removed', () => {
