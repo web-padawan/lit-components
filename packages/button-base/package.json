@@ -1,11 +1,13 @@
 {
-  "name": "@lit/control-state-mixin",
+  "name": "@lit/button-base",
   "version": "0.1.0",
   "author": "Vaadin Ltd",
   "license": "Apache-2.0",
-  "main": "control-state-mixin.js",
+  "main": "lit-button-base.js",
   "dependencies": {
-    "@polymer/lit-element": "0.6.0-dev.5"
+    "@polymer/lit-element": "0.6.0-dev.5",
+    "@polymer/polymer": "^3.0.0",
+    "@vaadin/vaadin-button": "^2.1.0"
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"

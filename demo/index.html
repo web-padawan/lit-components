@@ -8,15 +8,37 @@
   <script type="module" src="../node_modules/@webcomponents/webcomponentsjs/webcomponents-loader.js"></script>
   <script type="module" src="../node_modules/@lit/checkbox-lumo/lit-checkbox-lumo.js"></script>
   <script type="module" src="../node_modules/@lit/checkbox-material/lit-checkbox-material.js"></script>
+  <script type="module" src="../node_modules/@lit/button-lumo/lit-button-lumo.js"></script>
+  <script type="module" src="../node_modules/@lit/button-material/lit-button-material.js"></script>
+
+  <style>
+    html {
+      font-family: -apple-system, BlinkMacSystemFont, "Roboto", "Segoe UI", Helvetica, Arial, sans-serif;
+    }
+  </style>
 </head>
 
 <body>
-  <lit-checkbox-lumo name="works" checked disabled>Disabled</lit-checkbox-lumo>
-  <lit-checkbox-lumo name="works" autofocus>Autofocus</lit-checkbox-lumo>
-  <lit-checkbox-lumo name="works">Tabindex 0</lit-checkbox-lumo>
-  <lit-checkbox-lumo name="works" indeterminate>Indeterminate</lit-checkbox-lumo>
-  <lit-checkbox-lumo name="works" tabindex="-1" checked>Tabindex -1</lit-checkbox-lumo>
-  <lit-checkbox-material name="works">Material</lit-checkbox-material>
+  <h2>Buttons</h2>
+  <p>
+    <lit-button-lumo theme="primary">Primary</lit-button-lumo>
+    <lit-button-lumo theme="secondary">Secondary</lit-button-lumo>
+    <lit-button-lumo theme="tertiary">Tertiary</lit-button-lumo>
+    <lit-button-lumo disabled>Disabled</lit-button-lumo>
+    <lit-button-material>Material</lit-button-material>
+    <lit-button-material theme="outlined">Outlined</lit-button-material>
+    <lit-button-material theme="contained">Contained</lit-button-material>
+    <lit-button-material disabled>Disabled</lit-button-material>
+  </p>
+  <h2>Checkboxes</h2>
+  <p>
+    <lit-checkbox-lumo name="works" checked disabled>Disabled</lit-checkbox-lumo>
+    <lit-checkbox-lumo name="works" autofocus>Autofocus</lit-checkbox-lumo>
+    <lit-checkbox-lumo name="works">Tabindex 0</lit-checkbox-lumo>
+    <lit-checkbox-lumo name="works" indeterminate>Indeterminate</lit-checkbox-lumo>
+    <lit-checkbox-lumo name="works" tabindex="-1" checked>Tabindex -1</lit-checkbox-lumo>
+    <lit-checkbox-material name="works">Material</lit-checkbox-material>
+  </p>
 </body>
 
 </html>

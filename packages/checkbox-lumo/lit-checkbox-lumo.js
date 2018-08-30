@@ -8,7 +8,7 @@ class LitCheckboxLumo extends CheckboxBase {
   }
 
   static get version() {
-    return '0.0.1';
+    return '0.1.0';
   }
 
   getStyles() {
