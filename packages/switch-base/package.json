@@ -6,6 +6,7 @@
   "main": "lit-switch-base.js",
   "dependencies": {
     "@lit/checkbox-mixin": "^0.1.0",
+    "@lit/style-utils": "^0.1.0",
     "@polymer/lit-element": "0.6.0-dev.6",
     "@polymer/polymer": "^3.0.0"
   },

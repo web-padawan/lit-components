@@ -1,13 +1,16 @@
 {
-  "name": "@lit/button-base",
+  "name": "@lit/radio-button-material",
   "version": "0.1.0",
   "author": "Vaadin Ltd",
   "license": "Apache-2.0",
-  "main": "lit-button-base.js",
+  "main": "lit-radio-button-material.js",
   "dependencies": {
+    "@lit/radio-button-base": "^0.1.0",
     "@lit/style-utils": "^0.1.0",
     "@polymer/lit-element": "0.6.0-dev.6",
-    "@polymer/polymer": "^3.0.0"
+    "@polymer/polymer": "^3.0.0",
+    "@vaadin/vaadin-radio-button": "^1.1.0",
+    "@vaadin/vaadin-material-styles": "^1.1.2"
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"

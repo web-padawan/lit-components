@@ -1,13 +1,13 @@
 {
-  "name": "@lit/checkbox-base",
+  "name": "@lit/radio-button-base",
   "version": "0.1.0",
   "author": "Vaadin Ltd",
   "license": "Apache-2.0",
-  "main": "lit-checkbox-base.js",
+  "main": "lit-radio-button-base.js",
   "dependencies": {
-    "@lit/checkbox-mixin": "^0.1.0",
     "@lit/style-utils": "^0.1.0",
-    "@polymer/lit-element": "0.6.0-dev.6"
+    "@polymer/lit-element": "0.6.0-dev.6",
+    "@polymer/polymer": "^3.0.0"
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
