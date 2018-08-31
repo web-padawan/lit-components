@@ -66,7 +66,6 @@ export class CheckboxGroupBase extends LitElement {
 
   constructor() {
     super();
-    this.label = '';
     this.value = [];
   }
 
@@ -213,6 +212,12 @@ export class CheckboxGroupBase extends LitElement {
     // setting initial value to empty array, skip validation
     if (value.length === 0 && oldValue === undefined) {
       return;
+    }
+
+    if (value && value.length) {
+      this.setAttribute('has-value', '');
+    } else {
+      this.removeAttribute('has-value');
     }
 
     // set a flag to avoid updating loop

@@ -177,7 +177,7 @@ describe('checkbox group', () => {
     const focusInput = document.createElement('input');
     document.body.appendChild(focusInput);
     focusInput.focus();
-    checkboxGroup.value = '2';
+    checkboxGroup.value = ['2'];
     expect(document.activeElement).to.be.equal(focusInput);
     document.body.removeChild(focusInput);
   });
@@ -190,6 +190,19 @@ describe('checkbox group', () => {
 
     expect(checkboxGroup.hasAttribute('has-label')).to.be.true;
     expect(checkboxGroup.label).to.be.equal('foo');
+  });
+
+  it('should not have the has-value attribute by default', () => {
+    expect(checkboxGroup.hasAttribute('has-value')).to.be.false;
+  });
+
+  it('should change the has-value attribute on value', async () => {
+    checkboxGroup.value = ['2'];
+    await checkboxGroup.updateComplete;
+    expect(checkboxGroup.hasAttribute('has-value')).to.be.true;
+    checkboxGroup.value = [];
+    await checkboxGroup.updateComplete;
+    expect(checkboxGroup.hasAttribute('has-value')).to.be.false;
   });
 
   it('should add label to checkbox group when a label is dynamically set', async () => {
