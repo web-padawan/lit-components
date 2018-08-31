@@ -31,6 +31,7 @@ const style = html`
     }
 
     :host([disabled]) {
+      pointer-events: none;
       -webkit-tap-highlight-color: transparent;
     }
   </style>

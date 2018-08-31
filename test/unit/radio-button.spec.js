@@ -85,6 +85,17 @@ describe('radio-button', () => {
     expect(radio.hasAttribute('disabled')).to.be.true;
   });
 
+  it('should set checked on host click', () => {
+    radio.click();
+    expect(radio.checked).to.be.true;
+  });
+
+  it('should not set checked on host click when disabled', () => {
+    radio.disabled = true;
+    radio.click();
+    expect(radio.checked).to.be.false;
+  });
+
   it('should define radio button label using light DOM', () => {
     const children = label.firstElementChild.assignedNodes();
     expect(children[0].textContent).to.be.equal('Radio ');

@@ -45,7 +45,7 @@ export class RadioButtonBase extends ControlStateMixin(GestureEventListeners(Lit
         ${this.getStyles()}
       </style>
 
-      <label @click="_preventDefault">
+      <label>
         <span part="radio">
           <input
             type="radio"
@@ -79,6 +79,8 @@ export class RadioButtonBase extends ControlStateMixin(GestureEventListeners(Lit
     super.firstUpdated();
 
     this.setAttribute('role', 'radio');
+
+    this.addEventListener('click', this._handleClick.bind(this));
 
     this._addActiveListeners();
 
@@ -141,7 +143,10 @@ export class RadioButtonBase extends ControlStateMixin(GestureEventListeners(Lit
     this.checked = target.checked;
   }
 
-  _preventDefault(e) {
-    e.preventDefault();
+  _handleClick(e) {
+    if (!this.disabled) {
+      e.preventDefault();
+      this.checked = true;
+    }
   }
 }
