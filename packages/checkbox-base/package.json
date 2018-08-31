@@ -6,7 +6,7 @@
   "main": "lit-checkbox-base.js",
   "dependencies": {
     "@lit/checkbox-mixin": "^0.1.0",
-    "@polymer/lit-element": "0.6.0-dev.5",
+    "@polymer/lit-element": "0.6.0-dev.6",
     "@polymer/polymer": "^3.0.0"
   },
   "scripts": {

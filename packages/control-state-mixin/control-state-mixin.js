@@ -30,11 +30,11 @@ export const ControlStateMixin = superClass =>
         },
 
         _previousTabIndex: {
-          shouldInvalidate: () => false
+          hasChanged: () => false
         },
 
         _isShiftTabbing: {
-          shouldInvalidate: () => false
+          hasChanged: () => false
         }
       };
     }
@@ -43,6 +43,9 @@ export const ControlStateMixin = superClass =>
       super();
       this._boundKeydownListener = this._bodyKeydownListener.bind(this);
       this._boundKeyupListener = this._bodyKeyupListener.bind(this);
+      if (!this.hasAttribute('tabindex')) {
+        this.tabIndex = 0;
+      }
     }
 
     /**
@@ -73,7 +76,7 @@ export const ControlStateMixin = superClass =>
       }
     }
 
-    firstRendered() {
+    firstUpdated() {
       this.addEventListener('focusin', e => {
         if (e.composedPath()[0] === this) {
           this._focus(e);
@@ -105,35 +108,30 @@ export const ControlStateMixin = superClass =>
     }
 
     update(props) {
-      // set default value before `super.update()` to not invalidate
-      if (!this._firstRendered && !this.hasAttribute('tabindex')) {
-        this.tabIndex = 0;
-      }
-
-      // disabling element will change tabindex, so we need to make
-      // this happen before `super.update()` to not invalidate again
       if (props.has('disabled')) {
         this._disabledChanged(this.disabled, props.get('disabled'));
       }
 
-      // do the same for tabindex to avoid invalidating
-      let tabindex;
       if (props.has('tabIndex')) {
-        tabindex = this.tabIndex;
-        this._tabIndexChanged(tabindex);
+        // save value of tabindex, as it can be overridden to
+        // undefined in case if the element is disabled
+        this.__tabIndexValue = this.tabIndex;
+        this._tabIndexChanged(this.tabIndex);
       }
 
       super.update(props);
+    }
 
-      // `focusElement` is not defined before calling `super.update()`
-      // fpr initial rendering, so we have to delay setting until now
+    updated(props) {
+      super.updated(props);
+
       if (props.has('disabled')) {
         this.focusElement.disabled = this.disabled;
         this.disabled && this.blur();
       }
 
-      if (tabindex !== undefined) {
-        this.focusElement.tabIndex = tabindex;
+      if (props.has('tabIndex') && this.__tabIndexValue !== undefined) {
+        this.focusElement.tabIndex = this.__tabIndexValue;
       }
     }
 

@@ -32,7 +32,7 @@ export class CheckboxGroupBase extends LitElement {
        * by creating new array instance each time.
        */
       value: {
-        shouldInvalidate: (value, oldValue) => true
+        hasChanged: () => true
       },
 
       /**
@@ -59,9 +59,15 @@ export class CheckboxGroupBase extends LitElement {
       },
 
       _updatingValue: {
-        shouldInvalidate: () => false
+        hasChanged: () => false
       }
     };
+  }
+
+  constructor() {
+    super();
+    this.label = '';
+    this.value = [];
   }
 
   getStyles() {
@@ -89,7 +95,7 @@ export class CheckboxGroupBase extends LitElement {
     `;
   }
 
-  firstRendered() {
+  firstUpdated() {
     this.setAttribute('role', 'checkboxgroup');
 
     const checkedChangedListener = e => this._changeSelectedCheckbox(e.target);
@@ -122,14 +128,6 @@ export class CheckboxGroupBase extends LitElement {
   }
 
   update(props) {
-    if (!this._firstRendered && !this.hasAttribute('label')) {
-      this.label = '';
-    }
-
-    if (!this._firstRendered && !Array.isArray(this.value)) {
-      this.value = [];
-    }
-
     if (props.has('label')) {
       this._labelChanged(this.label);
     }
@@ -138,8 +136,6 @@ export class CheckboxGroupBase extends LitElement {
       this._valueChanged(this.value, props.get('value'));
     }
 
-    super.update(props);
-
     if (props.has('invalid')) {
       this.dispatchEvent(new CustomEvent('invalid-changed', { detail: { value: this.invalid } }));
     }
@@ -147,6 +143,8 @@ export class CheckboxGroupBase extends LitElement {
     if (props.has('disabled')) {
       this._disabledChanged(this.disabled);
     }
+
+    super.update(props);
   }
 
   get updateComplete() {

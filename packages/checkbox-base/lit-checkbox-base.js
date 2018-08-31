@@ -25,7 +25,7 @@ export class CheckboxBase extends ControlStateMixin(CheckboxMixin(LitElement)) {
       },
 
       _nativeCheckbox: {
-        shouldInvalidate: () => false
+        hasChanged: () => false
       }
     };
   }
@@ -33,6 +33,12 @@ export class CheckboxBase extends ControlStateMixin(CheckboxMixin(LitElement)) {
   constructor() {
     super();
     this._boundInputChangeHandler = this._inputChangeHandler.bind(this);
+    if (!this.hasAttribute('checked')) {
+      this.checked = false;
+    }
+    if (!this.hasAttribute('value')) {
+      this.value = 'on';
+    }
   }
 
   getStyles() {
@@ -75,8 +81,8 @@ export class CheckboxBase extends ControlStateMixin(CheckboxMixin(LitElement)) {
     this._storedName = name;
   }
 
-  firstRendered() {
-    super.firstRendered();
+  firstUpdated() {
+    super.firstUpdated();
 
     const attrName = this.getAttribute('name');
     if (attrName) {
@@ -93,14 +99,6 @@ export class CheckboxBase extends ControlStateMixin(CheckboxMixin(LitElement)) {
   }
 
   update(props) {
-    if (!this._firstRendered && !this.hasAttribute('checked')) {
-      this.checked = false;
-    }
-
-    if (!this._firstRendered && !this.hasAttribute('value')) {
-      this.value = 'on';
-    }
-
     if (props.has('indeterminate')) {
       this._indeterminateChanged(this.indeterminate);
     }

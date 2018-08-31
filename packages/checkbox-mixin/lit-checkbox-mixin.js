@@ -16,7 +16,7 @@ export const CheckboxMixin = superClass =>
         },
 
         _labelPart: {
-          shouldInvalidate: () => false
+          hasChanged: () => false
         }
       };
     }

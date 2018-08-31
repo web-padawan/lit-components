@@ -6,7 +6,7 @@
   "main": "lit-switch-lumo.js",
   "dependencies": {
     "@lit/switch-base": "^0.1.0",
-    "@polymer/lit-element": "0.6.0-dev.5",
+    "@polymer/lit-element": "0.6.0-dev.6",
     "@polymer/polymer": "^3.0.0",
     "@vaadin/vaadin-lumo-styles": "^1.1.1"
   },

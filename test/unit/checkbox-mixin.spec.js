@@ -12,7 +12,7 @@ customElements.define(
       </span>
     `;
     }
-    firstRendered() {
+    firstUpdated() {
       this._setupListeners();
     }
   }

@@ -30,8 +30,8 @@ export class ButtonBase extends ControlStateMixin(GestureEventListeners(LitEleme
     `;
   }
 
-  firstRendered() {
-    super.firstRendered();
+  firstUpdated() {
+    super.firstUpdated();
 
     // Leaving default role in the native button, makes navigation announcement
     // being different when using focus navigation (tab) versus using normal

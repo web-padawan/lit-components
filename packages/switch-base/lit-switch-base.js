@@ -8,6 +8,9 @@ export class SwitchBase extends ControlStateMixin(CheckboxMixin(LitElement)) {
   constructor() {
     super();
     this._boundInputChangeHandler = this._inputChangeHandler.bind(this);
+    if (!this.hasAttribute('checked')) {
+      this.checked = false;
+    }
   }
 
   getStyles() {
@@ -44,8 +47,8 @@ export class SwitchBase extends ControlStateMixin(CheckboxMixin(LitElement)) {
     return this.shadowRoot.querySelector('label');
   }
 
-  firstRendered() {
-    super.firstRendered();
+  firstUpdated() {
+    super.firstUpdated();
 
     this.setAttribute('role', 'switch');
     this.setAttribute('data-action', 'aria-switch');
@@ -56,15 +59,11 @@ export class SwitchBase extends ControlStateMixin(CheckboxMixin(LitElement)) {
   }
 
   update(props) {
-    if (!this._firstRendered && !this.hasAttribute('checked')) {
-      this.checked = false;
-    }
+    super.update(props);
 
     if (props.has('checked')) {
       this._checkedChanged(this.checked);
     }
-
-    super.update(props);
   }
 
   _checkedChanged(checked) {
