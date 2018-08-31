@@ -9,16 +9,19 @@ inject(html`
       :host {
         display: inline-block;
       }
+
       label {
         display: inline-flex;
         align-items: baseline;
         outline: none;
       }
+
       [part="checkbox"] {
         position: relative;
         display: inline-block;
         flex: none;
       }
+
       input[type="checkbox"] {
         position: absolute;
         top: 0;
@@ -29,6 +32,7 @@ inject(html`
         cursor: inherit;
         margin: 0;
       }
+
       :host([disabled]) {
         -webkit-tap-highlight-color: transparent;
       }

@@ -14,7 +14,7 @@ customElements.define(
 );
 
 const fixture = html`
-  <lit-button>Vaadin <i>Button</i></lit-button>
+  <lit-button>Lit <i>Button</i></lit-button>
 `;
 
 describe('button', () => {
@@ -46,7 +46,7 @@ describe('button', () => {
 
   it('should define button label using light DOM', () => {
     const children = FlattenedNodesObserver.getFlattenedNodes(label);
-    expect(children[1].textContent).to.be.equal('Vaadin ');
+    expect(children[1].textContent).to.be.equal('Lit ');
     expect(children[2].outerHTML).to.be.equal('<i>Button</i>');
   });
 

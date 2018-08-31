@@ -39,18 +39,10 @@ customElements.define(
 );
 
 const fixture = html`
-  <lit-checkbox name="test-checkbox">Vaadin <i>Checkbox</i> with <a href="#">Terms &amp; Conditions</a></lit-checkbox>
+  <lit-checkbox name="test-checkbox">Lit <i>Checkbox</i> with <a href="#">Terms &amp; Conditions</a></lit-checkbox>
 `;
 
 describe('checkbox', () => {
-  const down = node => {
-    node.dispatchEvent(new CustomEvent('down'));
-  };
-
-  const up = node => {
-    node.dispatchEvent(new CustomEvent('up'));
-  };
-
   let checkbox, nativeCheckbox, label;
 
   beforeEach(async () => {
@@ -69,21 +61,21 @@ describe('checkbox', () => {
 
   it('should define checkbox label using light DOM', () => {
     const children = FlattenedNodesObserver.getFlattenedNodes(label);
-    expect(children[1].textContent).to.be.equal('Vaadin ');
+    expect(children[1].textContent).to.be.equal('Lit ');
     expect(children[2].outerHTML).to.be.equal('<i>Checkbox</i>');
   });
 
-  it('can be disabled imperatively', async () => {
+  it('should propagate disabled attribute to the native checkbox', async () => {
     checkbox.disabled = true;
     await checkbox.updateComplete;
     expect(nativeCheckbox.hasAttribute('disabled')).to.be.eql(true);
   });
 
-  it('has default value "on"', () => {
+  it('should have default value "on"', () => {
     expect(checkbox.value).to.be.eql('on');
   });
 
-  it('fires click event', function(done) {
+  it('should fire click event', function(done) {
     checkbox.addEventListener('click', () => {
       done();
     });
@@ -181,29 +173,6 @@ describe('checkbox', () => {
     expect(checkbox.getAttribute('role')).to.be.eql('checkbox');
   });
 
-  it('should have active attribute on down', () => {
-    down(checkbox);
-
-    expect(checkbox.hasAttribute('active')).to.be.true;
-  });
-
-  it('should not have active attribute after up', () => {
-    down(checkbox);
-    up(checkbox);
-    expect(checkbox.hasAttribute('active')).to.be.false;
-  });
-
-  it('should have active attribute on space', () => {
-    MockInteractions.keyDownOn(checkbox, 32);
-    expect(checkbox.hasAttribute('active')).to.be.true;
-  });
-
-  it('should not have active attribute after space', () => {
-    MockInteractions.keyDownOn(checkbox, 32);
-    MockInteractions.keyUpOn(checkbox, 32);
-    expect(checkbox.hasAttribute('active')).to.be.false;
-  });
-
   it('should be checked after space when initially checked is false and indeterminate is true', async () => {
     checkbox.checked = false;
     checkbox.indeterminate = true;
@@ -265,54 +234,9 @@ describe('checkbox', () => {
     await checkbox.updateComplete;
     expect(spy).to.be.calledOnce;
   });
-
-  it('should set empty attribute on part label when the label was removed', () => {
-    while (checkbox.firstChild) {
-      checkbox.removeChild(checkbox.firstChild);
-    }
-
-    // Workaround for not using timeouts
-    const evt = new CustomEvent('slotchange');
-    checkbox._labelPart.querySelector('slot').dispatchEvent(evt);
-
-    expect(label.hasAttribute('empty')).to.be.true;
-  });
 });
 
-describe('empty checkbox label', () => {
-  let checkbox, label;
-
-  beforeEach(async () => {
-    checkbox = document.createElement('lit-checkbox');
-    document.body.appendChild(checkbox);
-    await checkbox.updateComplete;
-    label = checkbox.shadowRoot.querySelector('[part="label"]');
-  });
-
-  afterEach(() => {
-    checkbox.parentNode.removeChild(checkbox);
-  });
-
-  it('should set empty attribute on part label when there is no label', () => {
-    expect(label.hasAttribute('empty')).to.be.true;
-  });
-
-  it('should remove empty attribute from part label when the label is added', async () => {
-    const paragraph = document.createElement('p');
-    paragraph.textContent = 'Added label';
-
-    checkbox.appendChild(paragraph);
-
-    // Workaround for not using timeouts
-    const evt = new CustomEvent('slotchange');
-    label.querySelector('slot').dispatchEvent(evt);
-
-    await checkbox.updateComplete;
-    expect(label.hasAttribute('empty')).to.be.false;
-  });
-});
-
-describe('change event', () => {
+describe('checkbox change event', () => {
   let checkbox;
 
   beforeEach(async () => {
@@ -325,19 +249,19 @@ describe('change event', () => {
     checkbox.parentNode.removeChild(checkbox);
   });
 
-  it('should not fire change-event when changing checked value programmatically', () => {
+  it('should not be dispatched when changing checked value programmatically', () => {
     checkbox.addEventListener('change', () => {
       throw new Error('Should not come here!');
     });
     checkbox.checked = true;
   });
 
-  it('should fire change-event when user checks the element', done => {
+  it('should be dispatched when user checks the element', done => {
     checkbox.addEventListener('change', () => done());
     checkbox.click();
   });
 
-  it('should fire change-event when user unchecks the element', done => {
+  it('should be dispatched when user unchecks the element', done => {
     checkbox.checked = true;
     checkbox.addEventListener('change', () => done());
     checkbox.click();

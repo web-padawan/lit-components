@@ -8,6 +8,7 @@
     "@lit/checkbox-base": "^0.1.0",
     "@polymer/lit-element": "0.6.0-dev.5",
     "@polymer/polymer": "^3.0.0",
+    "@vaadin/vaadin-checkbox": "^2.2.1",
     "@vaadin/vaadin-material-styles": "^1.1.2"
   },
   "scripts": {
