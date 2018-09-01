@@ -7,13 +7,16 @@ customElements.define(
   class extends CheckboxMixin(LitElement) {
     render() {
       return html`
-      <span part="label">
-        <slot></slot>
-      </span>
-    `;
+        <label>
+          <span part="label">
+            <slot></slot>
+          </span>
+          <input type="checkbox">
+        </label>
+      `;
     }
-    firstUpdated() {
-      this._setupListeners();
+    get focusElement() {
+      return this._nativeCheckbox;
     }
   }
 );

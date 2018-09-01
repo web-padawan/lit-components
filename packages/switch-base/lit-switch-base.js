@@ -1,10 +1,9 @@
 import { html, LitElement } from '@polymer/lit-element';
-import { ControlStateMixin } from '@lit/control-state-mixin';
 import { CheckboxMixin } from '@lit/checkbox-mixin';
 import { includeStyle } from '@lit/style-utils';
 import './lit-switch-styles.js';
 
-export class SwitchBase extends ControlStateMixin(CheckboxMixin(LitElement)) {
+export class SwitchBase extends CheckboxMixin(LitElement) {
   constructor() {
     super();
     this._boundInputChangeHandler = this._inputChangeHandler.bind(this);
@@ -54,8 +53,6 @@ export class SwitchBase extends ControlStateMixin(CheckboxMixin(LitElement)) {
     this.setAttribute('data-action', 'aria-switch');
 
     this.addEventListener('click', this._handleClick.bind(this));
-
-    this._setupListeners();
   }
 
   update(props) {
@@ -81,7 +78,7 @@ export class SwitchBase extends ControlStateMixin(CheckboxMixin(LitElement)) {
   }
 
   _handleClick(e) {
-    if (this._interactionsAllowed(e)) {
+    if (this._interactionsAllowed(e) && e.composedPath()[0] !== this._nativeCheckbox) {
       e.preventDefault();
       this._toggleChecked();
     }

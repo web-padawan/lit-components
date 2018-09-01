@@ -5,6 +5,7 @@
   "license": "Apache-2.0",
   "main": "lit-checkbox-mixin.js",
   "dependencies": {
+    "@lit/control-state-mixin": "^0.1.0",
     "@polymer/lit-element": "0.6.0-dev.6",
     "@polymer/polymer": "^3.0.0"
   },

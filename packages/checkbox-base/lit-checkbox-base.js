@@ -1,10 +1,9 @@
 import { html, LitElement } from '@polymer/lit-element';
-import { ControlStateMixin } from '@lit/control-state-mixin';
 import { CheckboxMixin } from '@lit/checkbox-mixin';
 import { includeStyle } from '@lit/style-utils';
 import './lit-checkbox-styles.js';
 
-export class CheckboxBase extends ControlStateMixin(CheckboxMixin(LitElement)) {
+export class CheckboxBase extends CheckboxMixin(LitElement) {
   static get properties() {
     return {
       /**
@@ -22,10 +21,6 @@ export class CheckboxBase extends ControlStateMixin(CheckboxMixin(LitElement)) {
        */
       value: {
         reflect: true
-      },
-
-      _nativeCheckbox: {
-        hasChanged: () => false
       }
     };
   }
@@ -91,11 +86,7 @@ export class CheckboxBase extends ControlStateMixin(CheckboxMixin(LitElement)) {
 
     this.setAttribute('role', 'checkbox');
 
-    this._nativeCheckbox = this.shadowRoot.querySelector('input');
-
     this.addEventListener('click', this._handleClick.bind(this));
-
-    this._setupListeners();
   }
 
   update(props) {

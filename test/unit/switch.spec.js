@@ -20,7 +20,7 @@ describe('switch', () => {
     element = div.firstElementChild;
     document.body.appendChild(element);
     await element.updateComplete;
-    nativeCheckbox = element.shadowRoot.querySelector('input');
+    nativeCheckbox = element._nativeCheckbox;
     label = element._labelPart;
   });
 

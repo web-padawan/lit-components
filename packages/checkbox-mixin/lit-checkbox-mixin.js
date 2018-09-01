@@ -1,10 +1,11 @@
 import { GestureEventListeners } from '@polymer/polymer/lib/mixins/gesture-event-listeners.js';
+import { ControlStateMixin } from '@lit/control-state-mixin';
 
 /**
  * @polymerMixin
  */
 export const CheckboxMixin = superClass =>
-  class extends GestureEventListeners(superClass) {
+  class extends ControlStateMixin(GestureEventListeners(superClass)) {
     static get properties() {
       return {
         /**
@@ -17,8 +18,28 @@ export const CheckboxMixin = superClass =>
 
         _labelPart: {
           hasChanged: () => false
+        },
+
+        _nativeCheckbox: {
+          hasChanged: () => false
         }
       };
+    }
+
+    firstUpdated() {
+      super.firstUpdated();
+
+      this._nativeCheckbox = this.shadowRoot.querySelector('input');
+
+      this._labelPart = this.shadowRoot.querySelector('[part~="label"]');
+
+      this._labelPart
+        .querySelector('slot')
+        .addEventListener('slotchange', this._updateLabelAttribute.bind(this));
+
+      this._updateLabelAttribute();
+
+      this._addActiveListeners();
     }
 
     /**
@@ -65,23 +86,8 @@ export const CheckboxMixin = superClass =>
       });
     }
 
-    _addLabelListener() {
-      this._labelPart = this.shadowRoot.querySelector('[part~="label"]');
-
-      this._labelPart
-        .querySelector('slot')
-        .addEventListener('slotchange', this._updateLabelAttribute.bind(this));
-
-      this._updateLabelAttribute();
-    }
-
     _toggleChecked() {
       this.checked = !this.checked;
-    }
-
-    _setupListeners() {
-      this._addActiveListeners();
-      this._addLabelListener();
     }
 
     _updateLabelAttribute() {
