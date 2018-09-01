@@ -63,17 +63,17 @@ describe('control-state-mixin', () => {
       expect(focusElement.getAttribute('tabindex')).to.be.equal('1');
     });
 
-    it('we always need a tabindex by default', () => {
+    it('should set tabindex to 0 by default', () => {
       expect(customElement.getAttribute('tabindex')).to.be.equal('0');
     });
 
-    it('setting tabIndex should update the attribute', async () => {
+    it('should update the attribute when setting tabIndex property', async () => {
       customElement.tabIndex = 1;
       await customElement.updateComplete;
       expect(customElement.getAttribute('tabindex')).to.be.equal('1');
     });
 
-    it('enabling the element should restore old tabindex', async () => {
+    it('should restore old tabindex when enabling the element', async () => {
       customElement.tabIndex = 1;
       customElement.disabled = true;
       await customElement.updateComplete;
@@ -84,14 +84,14 @@ describe('control-state-mixin', () => {
       expect(customElement.getAttribute('tabindex')).to.be.equal('1');
     });
 
-    it('setting disabled to true should remove tabindex', async () => {
+    it('should remove tabindex when setting disabled to true', async () => {
       customElement.tabIndex = 1;
       customElement.disabled = true;
       await customElement.updateComplete;
       expect(customElement.getAttribute('tabindex')).to.not.be.ok;
     });
 
-    it('setting disabled to true and then back to false should restore the previous value of tabindex', async () => {
+    it('should restore old tabindex when setting disabled to true and then back to false', async () => {
       customElement.tabIndex = 2;
       customElement.disabled = true;
       await customElement.updateComplete;
@@ -208,6 +208,12 @@ describe('control-state-mixin', () => {
       customElement.disabled = false;
       await customElement.updateComplete;
       expect(customElement.getAttribute('tabindex')).to.be.equal('3');
+    });
+
+    it('should not invoke focus on the focus element when disabled', () => {
+      const spy = sinon.spy(focusElement, 'focus');
+      customElement.focus();
+      expect(spy).to.not.be.called;
     });
   });
 
