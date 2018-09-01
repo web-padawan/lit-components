@@ -7,8 +7,6 @@
   "dependencies": {
     "@lit/button-base": "^0.1.0",
     "@lit/style-utils": "^0.1.0",
-    "@polymer/lit-element": "0.6.0-dev.6",
-    "@polymer/polymer": "^3.0.0",
     "@vaadin/vaadin-button": "^2.1.0",
     "@vaadin/vaadin-lumo-styles": "^1.1.1"
   },
