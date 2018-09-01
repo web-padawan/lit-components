@@ -1,0 +1,15 @@
+{
+  "name": "@lit/radio-group-material",
+  "version": "0.1.0",
+  "author": "Vaadin Ltd",
+  "license": "Apache-2.0",
+  "main": "lit-radio-group-material.js",
+  "dependencies": {
+    "@lit/radio-group-base": "^0.1.0",
+    "@vaadin/vaadin-material-styles": "^1.1.2",
+    "@vaadin/vaadin-radio-button": "^1.1.1"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  }
+}

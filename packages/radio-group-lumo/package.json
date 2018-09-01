@@ -1,0 +1,15 @@
+{
+  "name": "@lit/radio-group-lumo",
+  "version": "0.1.0",
+  "author": "Vaadin Ltd",
+  "license": "Apache-2.0",
+  "main": "lit-radio-group-lumo.js",
+  "dependencies": {
+    "@lit/radio-group-base": "^0.1.0",
+    "@vaadin/vaadin-lumo-styles": "^1.1.1",
+    "@vaadin/vaadin-radio-button": "^1.1.1"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  }
+}

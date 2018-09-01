@@ -20,7 +20,7 @@ export class CheckboxGroupBase extends LitElement {
        */
       label: {
         type: {
-          fromAttribute: value => value,
+          fromAttribute: String,
           toAttribute: value => (value == null ? null : value.toString())
         },
         reflect: true
@@ -36,7 +36,7 @@ export class CheckboxGroupBase extends LitElement {
       },
 
       /**
-       * Error to show when the input value is invalid.
+       * Error to show when the checkbox group value is invalid.
        */
       errorMessage: {
         attribute: 'error-message'

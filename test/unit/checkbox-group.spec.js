@@ -192,11 +192,11 @@ describe('checkbox group', () => {
     expect(checkboxGroup.label).to.be.equal('foo');
   });
 
-  it('should not have the has-value attribute by default', () => {
+  it('should not have has-value attribute by default', () => {
     expect(checkboxGroup.hasAttribute('has-value')).to.be.false;
   });
 
-  it('should change the has-value attribute on value', async () => {
+  it('should toggle has-value attribute on value change', async () => {
     checkboxGroup.value = ['2'];
     await checkboxGroup.updateComplete;
     expect(checkboxGroup.hasAttribute('has-value')).to.be.true;

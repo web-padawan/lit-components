@@ -14,6 +14,8 @@
   <script type="module" src="../node_modules/@lit/button-material/lit-button-material.js"></script>
   <script type="module" src="../node_modules/@lit/radio-button-lumo/lit-radio-button-lumo.js"></script>
   <script type="module" src="../node_modules/@lit/radio-button-material/lit-radio-button-material.js"></script>
+  <script type="module" src="../node_modules/@lit/radio-group-lumo/lit-radio-group-lumo.js"></script>
+  <script type="module" src="../node_modules/@lit/radio-group-material/lit-radio-group-material.js"></script>
   <script type="module" src="../node_modules/@lit/switch-lumo/lit-switch-lumo.js"></script>
   <script type="module" src="../node_modules/@lit/switch-material/lit-switch-material.js"></script>
 
@@ -68,6 +70,19 @@
     <lit-radio-button-lumo disabled>Disabled</lit-radio-button-lumo>
     <lit-radio-button-material>Material</lit-radio-button-material>
     <lit-radio-button-material disabled>Disabled</lit-radio-button-material>
+  </p>
+  <h2>Radio group</h2>
+  <p>
+    <lit-radio-group-lumo label="Risk level" required error-message="Please select level">
+      <lit-radio-button-lumo value="low">Low</lit-radio-button-lumo>
+      <lit-radio-button-lumo value="medium">Medium</lit-radio-button-lumo>
+      <lit-radio-button-lumo value="high">High</lit-radio-button-lumo>
+    </lit-radio-group-lumo>
+    <lit-radio-group-material label="Preferred language">
+      <lit-radio-button-material value="en">English</lit-radio-button-material>
+      <lit-radio-button-material value="fr">Français</lit-radio-button-material>
+      <lit-radio-button-material value="de">Deutsch</lit-radio-button-material>
+    </lit-radio-group-material>
   </p>
   <h2>Switches</h2>
   <p>

@@ -4,9 +4,7 @@ import '@polymer/iron-test-helpers/mock-interactions.js';
 import '@polymer/iron-form/iron-form.js';
 import { RadioButtonBase } from '@lit/radio-button-base';
 
-if (!customElements.get('lit-radio')) {
-  customElements.define('lit-radio', class extends RadioButtonBase {});
-}
+customElements.define('lit-radio', class extends RadioButtonBase {});
 
 customElements.define(
   'x-radio',
@@ -60,6 +58,10 @@ describe('radio-button', () => {
     await radio.updateComplete;
     nativeRadio = radio.shadowRoot.querySelector('input');
     label = radio.shadowRoot.querySelector('[part="label"]');
+  });
+
+  afterEach(() => {
+    radio.parentNode.removeChild(radio);
   });
 
   it('should have proper role', () => {
