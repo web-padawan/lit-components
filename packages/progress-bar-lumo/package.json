@@ -1,0 +1,16 @@
+{
+  "name": "@lit/progress-bar-lumo",
+  "version": "0.1.0",
+  "author": "Vaadin Ltd",
+  "license": "Apache-2.0",
+  "main": "lit-progress-bar-lumo.js",
+  "dependencies": {
+    "@lit/progress-bar-base": "^0.1.0",
+    "@lit/style-utils": "^0.1.0",
+    "@vaadin/vaadin-progress-bar": "^1.1.0",
+    "@vaadin/vaadin-lumo-styles": "^1.1.1"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  }
+}

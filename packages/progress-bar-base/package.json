@@ -1,0 +1,14 @@
+{
+  "name": "@lit/progress-bar-base",
+  "version": "0.1.0",
+  "author": "Vaadin Ltd",
+  "license": "Apache-2.0",
+  "main": "lit-progress-bar-base.js",
+  "dependencies": {
+    "@lit/style-utils": "^0.1.0",
+    "@polymer/lit-element": "0.6.0-dev.6"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  }
+}

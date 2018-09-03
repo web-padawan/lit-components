@@ -5,19 +5,8 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes">
 
-  <script type="module" src="../node_modules/@webcomponents/webcomponentsjs/webcomponents-loader.js"></script>
-  <script type="module" src="../node_modules/@lit/checkbox-lumo/lit-checkbox-lumo.js"></script>
-  <script type="module" src="../node_modules/@lit/checkbox-material/lit-checkbox-material.js"></script>
-  <script type="module" src="../node_modules/@lit/checkbox-group-lumo/lit-checkbox-group-lumo.js"></script>
-  <script type="module" src="../node_modules/@lit/checkbox-group-material/lit-checkbox-group-material.js"></script>
-  <script type="module" src="../node_modules/@lit/button-lumo/lit-button-lumo.js"></script>
-  <script type="module" src="../node_modules/@lit/button-material/lit-button-material.js"></script>
-  <script type="module" src="../node_modules/@lit/radio-button-lumo/lit-radio-button-lumo.js"></script>
-  <script type="module" src="../node_modules/@lit/radio-button-material/lit-radio-button-material.js"></script>
-  <script type="module" src="../node_modules/@lit/radio-group-lumo/lit-radio-group-lumo.js"></script>
-  <script type="module" src="../node_modules/@lit/radio-group-material/lit-radio-group-material.js"></script>
-  <script type="module" src="../node_modules/@lit/switch-lumo/lit-switch-lumo.js"></script>
-  <script type="module" src="../node_modules/@lit/switch-material/lit-switch-material.js"></script>
+  <script src="../node_modules/@webcomponents/webcomponentsjs/webcomponents-loader.js"></script>
+  <script type="module" src="./all.js"></script>
 
   <style>
     html {
@@ -63,6 +52,13 @@
       <lit-checkbox-material value="2">Checkbox <b>2</b></lit-checkbox-material>
       <lit-checkbox-material value="3">Checkbox <b>3</b></lit-checkbox-material>
     </lit-checkbox-group-material>
+  </p>
+  <h2>Progress bars</h2>
+  <p>
+    <lit-progress-bar-lumo min="1" max="10" value="5"></lit-progress-bar-lumo>
+    <lit-progress-bar-lumo indeterminate></lit-progress-bar-lumo>
+    <lit-progress-bar-material min="0" max="20" value="12"></lit-progress-bar-material>
+    <lit-progress-bar-material indeterminate></lit-progress-bar-material>
   </p>
   <h2>Radio buttons</h2>
   <p>
