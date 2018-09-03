@@ -23,9 +23,7 @@ export class SwitchBase extends CheckboxMixin(LitElement) {
       </style>
       <label>
         <span part="track">
-          <span part="thumb-underlay">
-            <span part="thumb"></span>
-          </span>
+          <span part="thumb"></span>
           <input
             type="checkbox"
             ?checked="${this.checked}"

@@ -35,15 +35,13 @@ const style = html`
     [part="thumb"] {
       display: inline-block;
       content: "";
-      width: calc(1.625rem - 4px);
-      height: calc(1.625rem - 4px);
-      margin-top: 2px;
-      margin-left: 2px;
+      width: 1.625rem;
+      height: 1.625rem;
       position: absolute;
       box-sizing: border-box;
       top: 0;
       left: 0;
-      border-radius: calc(calc(1.625rem - 4px) / 2);
+      border-radius: 0.8125rem;
       background-color: #fff;
       transition: transform .2s ease-in;
     }
@@ -53,8 +51,7 @@ const style = html`
     }
 
     :host([checked]) [part="thumb"] {
-      --translate-x: calc(2.75rem - 1.625rem);
-      transform: translateX(var(--translate-x));
+      transform: translateX(1.125rem);
       transition: transform .2s ease-in;
     }
 

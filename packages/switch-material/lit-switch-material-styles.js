@@ -30,83 +30,59 @@ const style = html`
       opacity: 0.54;
     }
 
-    /* ripple container */
-    [part="thumb-underlay"] {
+    [part="thumb"] {
       display: block;
-      position: relative;
+      position: absolute;
       width: 20px;
       height: 20px;
       top: -3px;
       left: -3px;
       border-radius: 50%;
-      transition: transform 0s 0.8s;
-      will-change: transform;
-    }
-
-    [part="thumb"] {
-      width: 100%;
-      height: 100%;
-      margin: 0;
-      border-radius: 50%;
       box-shadow: var(--material-shadow-elevation-2dp);
-      position: absolute;
-      border: 10px solid;
       background-color: var(--material-background-color);
-      border-color: var(--material-background-color);
-      z-index: 1;
+      transition: transform 0.08s;
     }
 
-    /* ripple */
-    [part="thumb-underlay"]::before {
-      display: block;
-      content: '';
-      position: relative;
-      box-sizing: border-box;
+    /* ripple effects */
+    [part="thumb"]::before,
+    [part="thumb"]::after {
+      content: "";
+      position: absolute;
       width: 100%;
       height: 100%;
-      border: 10px solid;
-      border-radius: 50%;
-      background-color: var(--material-disabled-text-color);
-      transform: scale(1);
+      background-color: #000;
       opacity: 0;
-      transition: transform 0s 0.8s, opacity 0.8s;
-      will-change: transform, opacity;
+      border-radius: 50%;
+      transition: all 0.08s;
+      z-index: -1;
     }
 
-    :host([focused]) [part="thumb-underlay"],
-    :host([active]) [part="thumb-underlay"],
-    :host(:hover) [part="thumb-underlay"] {
-      transition-duration: 0.08s, 0.01s;
-      transition-delay: 0s, 0s;
-    }
-
-    :host([focused]) [part="thumb-underlay"]::before,
-    :host([active]) [part="thumb-underlay"]::before,
-    :host(:hover) [part="thumb-underlay"]::before {
-      transition-duration: 0.08s, 0.01s;
-      transition-delay: 0s, 0s;
+    :host([focused]) [part="thumb"]::before,
+    :host(:hover) [part="thumb"]::before {
       transform: scale(2.4);
       opacity: 0.08;
     }
 
-    :host([active]) [part="thumb-underlay"]::before {
+    :host([active]) [part="thumb"]::after {
+      transform: scale(2.4);
       opacity: 0.15;
+      transition-duration: 0.2s;
     }
 
     /* checked state: fill color */
     :host([checked]) [part="track"]::before,
-    :host([checked]) [part="thumb-underlay"]::before,
     :host([checked]) [part="thumb"] {
       background-color: var(--material-primary-color);
       border-color: var(--material-primary-color);
     }
 
-    :host([checked]) [part="thumb-underlay"] {
+    :host([checked]) [part="thumb"] {
       transform: translateX(18px);
     }
 
-    :host([checked]) [part="thumb"] {
-      transform: none;
+    :host([checked]) [part="thumb"]::before,
+    :host([checked]) [part="thumb"]::after {
+      background-color: inherit;
     }
 
     [part="label"]:not([empty]) {
