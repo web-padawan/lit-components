@@ -40,7 +40,6 @@ module.exports = function(config) {
       reports: ['html', 'lcovonly', 'text-summary'],
       dir: path.join(__dirname, 'coverage'),
       combineBrowserReports: true,
-      fixWebpackSourcePaths: true,
       skipFilesWithNoCoverage: true,
       thresholds: {
         global: {
