@@ -1,3 +1,6 @@
+[![Build Status](https://travis-ci.org/web-padawan/lit-components.svg?branch=master)](https://travis-ci.org/web-padawan/lit-components)
+[![Build status](https://ci.appveyor.com/api/projects/status/dgv5d6rqxargb8ud/branch/master?svg=true)](https://ci.appveyor.com/project/web-padawan/lit-components/branch/master)
+
 # Lit Components
 
 Prototyping components using [LitElement](https://github.com/Polymer/lit-element).
