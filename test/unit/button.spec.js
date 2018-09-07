@@ -4,29 +4,22 @@ import '@polymer/iron-test-helpers/mock-interactions.js';
 import { FlattenedNodesObserver } from '@polymer/polymer/lib/utils/flattened-nodes-observer.js';
 import { ButtonBase } from '@lit/button-base';
 
-customElements.define(
-  'lit-button',
-  class LitButton extends ButtonBase {
-    static get is() {
-      return 'lit-button';
-    }
-  }
-);
-
-const fixture = html`
-  <lit-button>Lit <i>Button</i></lit-button>
-`;
+customElements.define('lit-button', class extends ButtonBase {});
 
 describe('button', () => {
-  var down = node => {
+  const fixture = html`
+    <lit-button>Lit <i>Button</i></lit-button>
+  `;
+
+  const down = node => {
     node.dispatchEvent(new CustomEvent('down'));
   };
 
-  var up = node => {
+  const up = node => {
     node.dispatchEvent(new CustomEvent('up'));
   };
 
-  var button, nativeButton, label;
+  let button, nativeButton, label;
 
   beforeEach(async () => {
     const div = document.createElement('div');

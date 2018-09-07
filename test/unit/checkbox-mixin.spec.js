@@ -3,7 +3,7 @@ import '@polymer/iron-test-helpers/mock-interactions.js';
 import { CheckboxMixin } from '@lit/checkbox-mixin';
 
 customElements.define(
-  'lit-check',
+  'check-box',
   class extends CheckboxMixin(LitElement) {
     render() {
       return html`
@@ -33,7 +33,7 @@ describe('checkbox-mixin active', () => {
   let checkbox;
 
   beforeEach(async () => {
-    checkbox = document.createElement('lit-check');
+    checkbox = document.createElement('check-box');
     document.body.appendChild(checkbox);
     await checkbox.updateComplete;
   });
@@ -69,7 +69,7 @@ describe('checkbox-mixin label', () => {
   let checkbox, label;
 
   beforeEach(async () => {
-    checkbox = document.createElement('lit-check');
+    checkbox = document.createElement('check-box');
     document.body.appendChild(checkbox);
     await checkbox.updateComplete;
     label = checkbox._labelPart;
@@ -96,12 +96,13 @@ describe('checkbox-mixin label', () => {
     paragraph.textContent = 'Added label';
 
     checkbox.appendChild(paragraph);
+    window.ShadyDOM && window.ShadyDOM.flush();
     await checkbox.updateComplete;
     expect(label.hasAttribute('empty')).to.be.false;
 
     checkbox.removeChild(paragraph);
+    window.ShadyDOM && window.ShadyDOM.flush();
     await checkbox.updateComplete;
-
     expect(label.hasAttribute('empty')).to.be.true;
   });
 });

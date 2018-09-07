@@ -5,44 +5,13 @@ import '@polymer/iron-test-helpers/mock-interactions.js';
 import '@polymer/iron-form/iron-form.js';
 import { CheckboxBase } from '@lit/checkbox-base';
 
-if (!customElements.get('lit-checkbox')) {
-  customElements.define('lit-checkbox', class extends CheckboxBase {});
-}
-
-customElements.define(
-  'x-checkbox',
-  class XCheckbox extends LitElement {
-    render() {
-      return html`
-      <iron-form id="form">
-        <form>
-          <lit-checkbox id="boundname" name="${this.checkboxName}"></lit-checkbox>
-          <lit-checkbox id="attrname" name="attrcheckbox"></lit-checkbox>
-        </form>
-      </iron-form>
-    `;
-    }
-
-    static get properties() {
-      return {
-        checkboxName: {
-          type: String
-        }
-      };
-    }
-
-    constructor() {
-      super();
-      this.checkboxName = 'boundcheckbox';
-    }
-  }
-);
-
-const fixture = html`
-  <lit-checkbox name="test-checkbox">Lit <i>Checkbox</i> with <a href="#">Terms &amp; Conditions</a></lit-checkbox>
-`;
+customElements.define('lit-check', class extends CheckboxBase {});
 
 describe('checkbox', () => {
+  const fixture = html`
+    <lit-check name="test-checkbox">Lit <i>Checkbox</i> with <a href="#">Terms &amp; Conditions</a></lit-check>
+  `;
+
   let checkbox, nativeCheckbox, label;
 
   beforeEach(async () => {
@@ -240,7 +209,7 @@ describe('checkbox change event', () => {
   let checkbox;
 
   beforeEach(async () => {
-    checkbox = document.createElement('lit-checkbox');
+    checkbox = document.createElement('lit-check');
     document.body.appendChild(checkbox);
     await checkbox.updateComplete;
   });
@@ -269,6 +238,35 @@ describe('checkbox change event', () => {
 });
 
 describe('iron-form checkbox', () => {
+  customElements.define(
+    'x-checkbox',
+    class XCheckbox extends LitElement {
+      render() {
+        return html`
+        <iron-form id="form">
+          <form>
+            <lit-check id="boundname" name="${this.checkboxName}"></lit-check>
+            <lit-check id="attrname" name="attrcheckbox"></lit-check>
+          </form>
+        </iron-form>
+      `;
+      }
+
+      static get properties() {
+        return {
+          checkboxName: {
+            type: String
+          }
+        };
+      }
+
+      constructor() {
+        super();
+        this.checkboxName = 'boundcheckbox';
+      }
+    }
+  );
+
   let xCheckbox, boundNameCheckbox, attrNameCheckbox, form;
 
   beforeEach(async () => {

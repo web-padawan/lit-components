@@ -7,11 +7,11 @@ import { SwitchBase } from '@lit/switch-base';
 
 customElements.define('lit-switch', class extends SwitchBase {});
 
-const fixture = html`
-  <lit-switch>Lit <i>switch</i> with <a href="#">Terms &amp; Conditions</a></lit-switch>
-`;
-
 describe('switch', () => {
+  const fixture = html`
+    <lit-switch>Lit <i>switch</i> with <a href="#">Terms &amp; Conditions</a></lit-switch>
+  `;
+
   let element, nativeCheckbox, label;
 
   beforeEach(async () => {

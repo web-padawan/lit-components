@@ -6,40 +6,11 @@ import { RadioButtonBase } from '@lit/radio-button-base';
 
 customElements.define('lit-radio', class extends RadioButtonBase {});
 
-customElements.define(
-  'x-radio',
-  class XRadio extends LitElement {
-    render() {
-      return html`
-      <iron-form id="form">
-        <form>
-          <lit-radio id="boundname" name="${this.radioButtonName}"></lit-radio>
-          <lit-radio id="attrname" name="attrradiobutton"></lit-radio>
-        </form>
-      </iron-form>
-    `;
-    }
-
-    static get properties() {
-      return {
-        radioButtonName: {
-          type: String
-        }
-      };
-    }
-
-    constructor() {
-      super();
-      this.radioButtonName = 'boundradiobutton';
-    }
-  }
-);
-
-const fixture = html`
-  <lit-radio name="test-radio">Radio <b>Button</b></lit-radio>
-`;
-
 describe('radio-button', () => {
+  const fixture = html`
+    <lit-radio name="test-radio">Radio <b>Button</b></lit-radio>
+  `;
+
   const down = node => {
     node.dispatchEvent(new CustomEvent('down'));
   };
@@ -143,6 +114,35 @@ describe('radio-button', () => {
 });
 
 describe('iron-form radio-button', () => {
+  customElements.define(
+    'x-radio',
+    class XRadio extends LitElement {
+      render() {
+        return html`
+        <iron-form id="form">
+          <form>
+            <lit-radio id="boundname" name="${this.radioButtonName}"></lit-radio>
+            <lit-radio id="attrname" name="attrradiobutton"></lit-radio>
+          </form>
+        </iron-form>
+      `;
+      }
+
+      static get properties() {
+        return {
+          radioButtonName: {
+            type: String
+          }
+        };
+      }
+
+      constructor() {
+        super();
+        this.radioButtonName = 'boundradiobutton';
+      }
+    }
+  );
+
   let xRadio, boundNameRadioButton, attrNameRadioButton, form;
 
   beforeEach(async () => {

@@ -5,10 +5,7 @@ import '@polymer/iron-form/iron-form.js';
 import { CheckboxBase } from '@lit/checkbox-base';
 import { CheckboxGroupBase } from '@lit/checkbox-group-base';
 
-if (!customElements.get('lit-checkbox')) {
-  customElements.define('lit-checkbox', class extends CheckboxBase {});
-}
-
+customElements.define('lit-checkbox', class extends CheckboxBase {});
 customElements.define('lit-checkbox-group', class extends CheckboxGroupBase {});
 
 describe('checkbox group', () => {
@@ -67,6 +64,7 @@ describe('checkbox group', () => {
     const spy = (console.warn = sinon.spy());
     const checkbox = document.createElement('lit-checkbox');
     checkboxGroup.appendChild(checkbox);
+    checkboxGroup._observer.flush();
     await checkboxGroup.updateComplete;
     console.warn = warn;
     expect(spy.called).to.be.true;
@@ -126,6 +124,9 @@ describe('checkbox group', () => {
     await checkboxGroup.updateComplete;
     expect(checkboxGroup.value).to.deep.equal(['1']);
 
+    // FIXME: figure out why this is needed when transpiled
+    await Promise.resolve();
+
     checkboxList[1].checked = true;
     await checkboxGroup.updateComplete;
     expect(checkboxGroup.value).to.deep.equal(['1', '2']);
@@ -136,6 +137,8 @@ describe('checkbox group', () => {
     checkboxList[1].checked = true;
     await checkboxGroup.updateComplete;
     expect(checkboxGroup.value).to.deep.equal(['1', '2']);
+
+    await Promise.resolve();
 
     checkboxList[1].checked = false;
     await checkboxGroup.updateComplete;
@@ -290,9 +293,13 @@ describe('checkbox group validation', () => {
     checkboxList[0].checked = true;
     await checkboxGroup.updateComplete;
 
+    await Promise.resolve();
+
     checkboxList[0].checked = false;
     await checkboxGroup.updateComplete;
     expect(checkboxGroup.hasAttribute('invalid')).to.be.true;
+
+    await Promise.resolve();
 
     checkboxList[0].checked = true;
     await checkboxGroup.updateComplete;

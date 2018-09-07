@@ -20,11 +20,6 @@ describe('radio-group', () => {
     e.dispatchEvent(new CustomEvent('focusout', { bubbles: true, composed: composed }));
   }
 
-  function visible(e) {
-    const rect = e.getBoundingClientRect();
-    return !!(rect.width && rect.height);
-  }
-
   let radioGroup, radioList, errorElement;
 
   beforeEach(async () => {
@@ -337,16 +332,15 @@ describe('radio-group', () => {
   it('should hide error message by default', async () => {
     radioGroup.errorMessage = 'Bad input!';
     await radioGroup.updateComplete;
-    expect(visible(errorElement)).to.be.false;
+    expect(errorElement.offsetHeight).to.equal(0);
   });
 
   it('should show error message on invalid', async () => {
     radioGroup.required = true;
     radioGroup.errorMessage = 'Bad input!';
-    await radioGroup.updateComplete;
     blur(radioGroup);
     await radioGroup.updateComplete;
-    expect(visible(errorElement)).to.be.true;
+    expect(errorElement.offsetHeight).to.be.above(0);
   });
 });
 

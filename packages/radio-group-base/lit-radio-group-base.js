@@ -281,7 +281,7 @@ export class RadioGroupBase extends LitElement {
 
   _valueChanged(value) {
     if (!this._checkedButton || value != this._checkedButton.value) {
-      const newCheckedButton = this._radioButtons.find(button => button.value === value);
+      const newCheckedButton = this._radioButtons.filter(button => button.value === value)[0];
 
       if (newCheckedButton) {
         this._selectButton(newCheckedButton);

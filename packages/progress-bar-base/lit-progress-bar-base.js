@@ -94,14 +94,14 @@ export class ProgressBarBase extends LitElement {
 
   _normalizedValueChanged(value, min, max) {
     const newValue = this._normalizeValue(value, min, max);
-
     const prop = '--vaadin-progress-value';
-    this.style.setProperty(prop, newValue);
 
-    if (window.ShadyCSS) {
-      window.ShadyCSS.styleSubtree(this, {
-        prop: String(newValue)
-      });
+    if (window.ShadyCSS && window.ShadyCSS.nativeCss === false) {
+      const props = {};
+      props[prop] = String(newValue);
+      window.ShadyCSS.styleSubtree(this, props);
+    } else {
+      this.style.setProperty(prop, newValue);
     }
   }
 

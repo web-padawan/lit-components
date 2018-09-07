@@ -4,7 +4,8 @@ module.exports = function(config) {
   config.set({
     basePath: '',
     singleRun: true,
-    browsers: ['ChromeHeadlessNoSandbox', 'FirefoxHeadless'],
+    browsers:
+      process.platform === 'win32' ? ['IE'] : ['ChromeHeadlessNoSandbox', 'FirefoxHeadless'],
     customLaunchers: {
       ChromeHeadlessNoSandbox: {
         base: 'ChromeHeadless',
@@ -63,11 +64,13 @@ module.exports = function(config) {
 
     webpack: {
       devtool: 'inline-source-map',
+      mode: 'development',
       module: {
         rules: [
           {
             test: /\.js$/,
             loader: 'babel-loader',
+            exclude: /node_modules\/(?!(@polymer|@vaadin)\/).*/,
             options: {
               cacheDirectory: true
             }

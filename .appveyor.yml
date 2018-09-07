@@ -1,0 +1,27 @@
+# AppVeyor file
+# http://www.appveyor.com/docs/appveyor-yml
+
+# Build version format
+version: "{build}"
+
+# Scripts that are called at very beginning, before repo cloning
+init:
+  # Fix line endings on Windows
+  - git config --global core.autocrlf true
+
+# Test against this version of Node.js
+environment:
+  nodejs_version: "8"
+
+build: off
+
+install:
+  - ps: Install-Product node $env:nodejs_version
+  - npm install
+  - call scripts\bootstrap-unreleased.bat
+
+test_script:
+  - npm test
+
+# Preserve node_modules between builds
+cache: node_modules -> appveyor.yml,package.json,package-lock.json
