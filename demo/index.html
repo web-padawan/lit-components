@@ -5,8 +5,11 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes">
 
-  <script src="../node_modules/@webcomponents/webcomponentsjs/webcomponents-loader.js"></script>
-  <script type="module" src="./all.js"></script>
+  <script>if (!window.customElements) { document.write('<!--'); }</script>
+  <script src="./vendor/custom-elements-es5-adapter.js"></script>
+  <!--! DO NOT REMOVE THIS COMMENT, WE NEED ITS CLOSING MARKER -->
+
+  <script src="./vendor/webcomponents-bundle.js"></script>
 
   <style>
     html {

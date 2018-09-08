@@ -33,5 +33,3 @@ npm test
 ```sh
 npm run dev
 ````
-
-5. Go to http://127.0.0.1:8081/demo/

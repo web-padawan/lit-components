@@ -1,4 +1,5 @@
 const path = require('path');
+const { rules } = require('./utils/webpack.common.js');
 
 module.exports = function(config) {
   config.set({
@@ -66,14 +67,7 @@ module.exports = function(config) {
       mode: 'development',
       module: {
         rules: [
-          {
-            test: /\.js$/,
-            loader: 'babel-loader',
-            exclude: /node_modules\/(?!(@polymer|@vaadin)\/).*/,
-            options: {
-              cacheDirectory: true
-            }
-          },
+          ...rules,
           {
             test: /\.js$/,
             loader: 'istanbul-instrumenter-loader',
