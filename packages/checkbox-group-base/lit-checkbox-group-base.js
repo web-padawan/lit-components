@@ -146,12 +146,6 @@ export class CheckboxGroupBase extends LitElement {
     super.update(props);
   }
 
-  get updateComplete() {
-    return super.updateComplete.then(() => {
-      return Promise.all(this._checkboxes.map(cb => cb.updateComplete));
-    });
-  }
-
   get _checkboxes() {
     return this._filterCheckboxes(this.querySelectorAll('*'));
   }

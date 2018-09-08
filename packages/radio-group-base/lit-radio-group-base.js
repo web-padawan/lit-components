@@ -170,12 +170,6 @@ export class RadioGroupBase extends LitElement {
     return this._filterRadioButtons(this.querySelectorAll('*'));
   }
 
-  get updateComplete() {
-    return super.updateComplete.then(() => {
-      return Promise.all(this._radioButtons.map(radio => radio.updateComplete));
-    });
-  }
-
   _addActiveListeners() {
     this.addEventListener('keydown', e => {
       // if e.target is vaadin-radio-group then assign to checkedRadioButton currently checked radio button
