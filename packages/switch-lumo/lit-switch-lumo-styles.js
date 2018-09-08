@@ -16,7 +16,7 @@ const style = html`
       height: calc(var(--lumo-size-xs) - 4px);
       margin-top: 2px;
       margin-left: 2px;
-      border-radius: calc(calc(var(--lumo-size-xs) - 4px) / 2);
+      border-radius: 50%;
       background-color: var(--lumo-base-color);
     }
 
@@ -25,8 +25,7 @@ const style = html`
     }
 
     :host([checked]) [part="thumb"] {
-      --translate-x: calc(var(--lumo-size-l) - var(--lumo-size-xs));
-      transform: translateX(var(--translate-x));
+      transform: translateX(1.125rem);
     }
 
     :host([checked][disabled]) [part="track"] {
