@@ -4,6 +4,9 @@
 # Build version format
 version: "{build}"
 
+# Do not build feature branch with open Pull Requests
+skip_branch_with_pr: true
+
 # Scripts that are called at very beginning, before repo cloning
 init:
   # Fix line endings on Windows
