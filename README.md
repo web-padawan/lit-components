@@ -13,13 +13,13 @@ The goals of this the experiment are:
 
 ## Installation
 
-1. Install dependencies
+### Install dependencies
 
 ```sh
 npm install
 ```
 
-2. Install packages
+### Install packages
 
 For OS X or Linux users:
 
@@ -33,12 +33,17 @@ For Windows users:
 call scripts\bootstrap-unreleased.bat
 ```
 
-3. Run tests
+### Run tests
 ```sh
 npm test
 ```
 
-4. Serve the project
+### Run ESLint
+```sh
+npm run lint
+```
+
+### Serve the project
 ```sh
 npm run dev
 ````
