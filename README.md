@@ -20,8 +20,17 @@ npm install
 ```
 
 2. Install packages
+
+For OS X or Linux users:
+
 ```sh
 npm run bootstrap
+```
+
+For Windows users:
+
+```
+call scripts\bootstrap-unreleased.bat
 ```
 
 3. Run tests

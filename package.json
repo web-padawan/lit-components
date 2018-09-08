@@ -4,8 +4,9 @@
   "version": "0.1.0",
   "description": "Prototyping components using LitElement",
   "scripts": {
-    "bootstrap": "npm install && ./scripts/bootstrap-unreleased.sh",
+    "bootstrap": "./scripts/bootstrap-unreleased.sh",
     "clean": "del-cli packages/*/node_modules packages/*/package-lock.json",
+    "nuke": "rm -rf package-lock.json node_modules && npm install && npm run bootstrap",
     "precommit": "lint-staged",
     "lint": "eslint *.js packages/**/*.js test/**/*.js",
     "dev": "webpack-serve --open",
