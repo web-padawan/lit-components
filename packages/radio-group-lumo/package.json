@@ -6,7 +6,7 @@
   "main": "lit-radio-group-lumo.js",
   "dependencies": {
     "@lit/radio-group-base": "^0.1.0",
-    "@vaadin/vaadin-lumo-styles": "^1.1.1",
+    "@vaadin/vaadin-lumo-styles": "^1.2.0",
     "@vaadin/vaadin-radio-button": "^1.1.1"
   },
   "scripts": {
