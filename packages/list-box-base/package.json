@@ -1,0 +1,16 @@
+{
+  "name": "@lit/list-box-base",
+  "version": "0.1.0",
+  "author": "Vaadin Ltd",
+  "license": "Apache-2.0",
+  "main": "lit-list-box-base.js",
+  "dependencies": {
+    "@lit/list-mixin": "^0.1.0",
+    "@lit/style-utils": "^0.1.0",
+    "@polymer/lit-element": "0.6.0",
+    "lit-html": "0.11.2"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  }
+}

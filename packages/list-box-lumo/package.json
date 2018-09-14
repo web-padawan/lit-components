@@ -1,0 +1,16 @@
+{
+  "name": "@lit/list-box-lumo",
+  "version": "0.1.0",
+  "author": "Vaadin Ltd",
+  "license": "Apache-2.0",
+  "main": "lit-list-box-lumo.js",
+  "dependencies": {
+    "@lit/list-box-base": "^0.1.0",
+    "@lit/style-utils": "^0.1.0",
+    "@vaadin/vaadin-list-box": "^1.1.0",
+    "@vaadin/vaadin-lumo-styles": "^1.2.0"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  }
+}
