@@ -1,0 +1,16 @@
+{
+  "name": "@lit/tabs-material",
+  "version": "0.1.0",
+  "author": "Vaadin Ltd",
+  "license": "Apache-2.0",
+  "main": "lit-tabs-material.js",
+  "dependencies": {
+    "@lit/style-utils": "^0.1.0",
+    "@lit/tabs-base": "^0.1.0",
+    "@vaadin/vaadin-tabs": "^2.1.0",
+    "@vaadin/vaadin-material-styles": "^1.2.0"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  }
+}

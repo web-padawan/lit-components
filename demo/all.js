@@ -24,3 +24,9 @@ import '@lit/radio-group-material/lit-radio-group-material.js';
 
 import '@lit/switch-lumo/lit-switch-lumo.js';
 import '@lit/switch-material/lit-switch-material.js';
+
+import '@lit/tab-lumo/lit-tab-lumo.js';
+import '@lit/tab-material/lit-tab-material.js';
+
+import '@lit/tabs-lumo/lit-tabs-lumo.js';
+import '@lit/tabs-material/lit-tabs-material.js';
