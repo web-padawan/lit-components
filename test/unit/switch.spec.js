@@ -1,7 +1,6 @@
 import { html } from '@polymer/lit-element';
 import { render } from 'lit-html';
 import { FlattenedNodesObserver } from '@polymer/polymer/lib/utils/flattened-nodes-observer.js';
-import '@polymer/iron-test-helpers/mock-interactions.js';
 import '@polymer/iron-form/iron-form.js';
 import { SwitchBase } from '@lit/switch-base';
 

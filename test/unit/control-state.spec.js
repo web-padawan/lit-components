@@ -1,6 +1,14 @@
-import '@polymer/iron-test-helpers/mock-interactions.js';
 import { ControlStateMixin } from '@lit/control-state-mixin';
 import { html, LitElement } from '@polymer/lit-element';
+import {
+  shiftTabDown,
+  shiftTabEvent,
+  shiftTabUp,
+  spaceDown,
+  spaceUp,
+  tabDown,
+  tabUp
+} from '../helpers/keys.js';
 
 class TestWrapper extends ControlStateMixin(LitElement) {
   render() {
@@ -105,46 +113,46 @@ describe('control-state-mixin', () => {
 
   describe('_tabPressed and focus-ring', () => {
     it('should set and unset _tabPressed when press TAB', () => {
-      MockInteractions.keyDownOn(document.body, 9);
+      tabDown(document.body);
       expect(customElement._tabPressed).to.be.true;
-      MockInteractions.keyUpOn(document.body, 9);
+      tabUp(document.body);
       expect(customElement._tabPressed).to.be.false;
     });
 
     it('should set and unset _tabPressed when press SHIFT+TAB', () => {
-      MockInteractions.keyDownOn(document.body, 9, 'shift');
+      shiftTabDown(document.body);
       expect(customElement._tabPressed).to.be.true;
-      MockInteractions.keyUpOn(document.body, 9, 'shift');
+      shiftTabUp(document.body);
       expect(customElement._tabPressed).to.be.false;
     });
 
     it('should set _isShiftTabbing when pressing shift-tab', () => {
-      const event = MockInteractions.keyboardEventFor('keydown', 9, 'shift');
+      const event = shiftTabEvent();
       customElement.dispatchEvent(event);
       expect(customElement._isShiftTabbing).to.be.true;
     });
 
     it('should skip setting _isShiftTabbing if event is defaultPrevented', () => {
-      const evt = MockInteractions.keyboardEventFor('keydown', 9, 'shift');
+      const event = shiftTabEvent();
       // In Edge just calling preventDefault() does not work because of the polyfilled dispatchEvent
-      Object.defineProperty(evt, 'defaultPrevented', {
+      Object.defineProperty(event, 'defaultPrevented', {
         get() {
           return true;
         }
       });
-      customElement.dispatchEvent(evt);
+      customElement.dispatchEvent(event);
       expect(customElement._isShiftTabbing).not.to.be.ok;
     });
 
     it('should not change _tabPressed on any other key except TAB', () => {
-      MockInteractions.keyDownOn(document.body, 65);
+      spaceDown(document.body);
       expect(customElement._tabPressed).to.be.false;
-      MockInteractions.keyUpOn(document.body, 65);
+      spaceUp(document.body);
       expect(customElement._tabPressed).to.be.false;
     });
 
     it('should set the focus-ring attribute when TAB is pressed and focus is received', () => {
-      MockInteractions.keyDownOn(document.body, 9);
+      tabDown(document.body);
       focusin();
       expect(customElement.hasAttribute('focus-ring')).to.be.true;
       focusout();
@@ -152,7 +160,7 @@ describe('control-state-mixin', () => {
     });
 
     it('should set the focus-ring attribute when SHIFT+TAB is pressed and focus is received', () => {
-      MockInteractions.keyDownOn(document.body, 9, 'shift');
+      shiftTabDown(document.body);
       focusin();
       expect(customElement.hasAttribute('focus-ring')).to.be.true;
       focusout();
@@ -161,7 +169,7 @@ describe('control-state-mixin', () => {
 
     it('should refocus the field', done => {
       customElement.dispatchEvent(new CustomEvent('focusin'));
-      MockInteractions.keyDownOn(customElement, 9, 'shift');
+      shiftTabDown(document.body);
 
       // Shift + Tab disables refocusing temporarily, normal behavior is restored asynchronously.
       setTimeout(() => {

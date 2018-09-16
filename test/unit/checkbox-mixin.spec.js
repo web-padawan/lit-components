@@ -1,6 +1,6 @@
 import { LitElement, html } from '@polymer/lit-element';
-import '@polymer/iron-test-helpers/mock-interactions.js';
 import { CheckboxMixin } from '@lit/checkbox-mixin';
+import { spaceDown, spaceUp } from '../helpers/keys.js';
 
 customElements.define(
   'check-box',
@@ -54,13 +54,13 @@ describe('checkbox-mixin active', () => {
   });
 
   it('should have active attribute on space', () => {
-    MockInteractions.keyDownOn(checkbox, 32);
+    spaceDown(checkbox);
     expect(checkbox.hasAttribute('active')).to.be.true;
   });
 
   it('should not have active attribute after space', () => {
-    MockInteractions.keyDownOn(checkbox, 32);
-    MockInteractions.keyUpOn(checkbox, 32);
+    spaceDown(checkbox);
+    spaceUp(checkbox);
     expect(checkbox.hasAttribute('active')).to.be.false;
   });
 });

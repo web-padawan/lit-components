@@ -1,8 +1,8 @@
 import { html } from '@polymer/lit-element';
 import { render } from 'lit-html';
-import '@polymer/iron-test-helpers/mock-interactions.js';
 import { FlattenedNodesObserver } from '@polymer/polymer/lib/utils/flattened-nodes-observer.js';
 import { ButtonBase } from '@lit/button-base';
+import { downAndUp, enterDown, enterUp, spaceDown, spaceUp } from '../helpers/keys.js';
 
 customElements.define('lit-button', class extends ButtonBase {});
 
@@ -49,11 +49,11 @@ describe('button', () => {
     expect(nativeButton.hasAttribute('disabled')).to.be.eql(true);
   });
 
-  it('fires click event', function(done) {
+  it('should fire click event', done => {
     button.addEventListener('click', () => {
       done();
     });
-    MockInteractions.downAndUp(button);
+    downAndUp(button);
   });
 
   it('host should have the `button` role', () => {
@@ -83,30 +83,24 @@ describe('button', () => {
   });
 
   it('should have active attribute on enter', () => {
-    MockInteractions.keyDownOn(button, 13);
-
+    enterDown(button);
     expect(button.hasAttribute('active')).to.be.true;
   });
 
   it('should not have active attribute 500ms after enter', () => {
-    MockInteractions.keyDownOn(button, 13);
-
-    MockInteractions.keyUpOn(button, 13);
-
+    enterDown(button);
+    enterUp(button);
     expect(button.hasAttribute('active')).to.be.false;
   });
 
   it('should have active attribute on space', () => {
-    MockInteractions.keyDownOn(button, 32);
-
+    spaceDown(button);
     expect(button.hasAttribute('active')).to.be.true;
   });
 
   it('should not have active attribute after space', () => {
-    MockInteractions.keyDownOn(button, 32);
-
-    MockInteractions.keyUpOn(button, 32);
-
+    spaceDown(button);
+    spaceUp(button);
     expect(button.hasAttribute('active')).to.be.false;
   });
 
@@ -114,21 +108,20 @@ describe('button', () => {
     button.disabled = true;
     await button.updateComplete;
     down(button);
-    MockInteractions.keyDownOn(button, 13);
-    MockInteractions.keyDownOn(button, 32);
-
+    enterDown(button);
+    spaceDown(button);
     expect(button.hasAttribute('active')).to.be.false;
   });
 
   it('should not have active attribute when disconnected from the DOM', () => {
-    MockInteractions.keyDownOn(button, 32);
+    spaceDown(button);
     button.parentNode.removeChild(button);
     window.ShadyDOM && window.ShadyDOM.flush();
     expect(button.hasAttribute('active')).to.be.false;
   });
 
   it('should not have active attribute after blur', () => {
-    MockInteractions.keyDownOn(button, 32);
+    spaceDown(button);
     button.dispatchEvent(new CustomEvent('blur'));
     expect(button.hasAttribute('active')).to.be.false;
   });

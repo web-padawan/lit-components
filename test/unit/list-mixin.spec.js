@@ -1,30 +1,19 @@
 import { LitElement, html } from '@polymer/lit-element';
 import { render } from 'lit-html';
-import '@polymer/iron-test-helpers/mock-interactions.js';
 import { ItemMixin } from '@lit/item-mixin';
 import { ListMixin } from '@lit/list-mixin';
+import {
+  arrowDown,
+  arrowDownIE,
+  arrowLeft,
+  arrowRight,
+  arrowUp,
+  home,
+  end,
+  keyDownChar
+} from '../helpers/keys.js';
 
 describe('list-mixin', () => {
-  function arrowDown(target) {
-    MockInteractions.keyDownOn(target, 40, [], 'ArrowDown');
-  }
-
-  function arrowRight(target) {
-    MockInteractions.keyDownOn(target, 39, [], 'ArrowRight');
-  }
-
-  function arrowDownIE(target) {
-    MockInteractions.keyDownOn(target, 40, [], 'Down');
-  }
-
-  function arrowUp(target) {
-    MockInteractions.keyDownOn(target, 38, [], 'ArrowUp');
-  }
-
-  function arrowLeft(target) {
-    MockInteractions.keyDownOn(target, 37, [], 'ArrowLeft');
-  }
-
   function click(target, modifier) {
     const props = {
       bubbles: true,
@@ -33,18 +22,6 @@ describe('list-mixin', () => {
     props[`${modifier}Key`] = true;
     const event = new MouseEvent('click', props);
     target.dispatchEvent(event);
-  }
-
-  function home(target) {
-    MockInteractions.keyDownOn(target, 36, [], 'Home');
-  }
-
-  function end(target) {
-    MockInteractions.keyDownOn(target, 35, [], 'End');
-  }
-
-  function keyDownChar(target, letter, modifier) {
-    MockInteractions.keyDownOn(target, letter.charCodeAt(0), modifier, letter);
   }
 
   customElements.define(

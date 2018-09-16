@@ -1,7 +1,7 @@
 import { LitElement, html } from '@polymer/lit-element';
 import { render } from 'lit-html';
-import '@polymer/iron-test-helpers/mock-interactions.js';
 import { ItemMixin } from '@lit/item-mixin';
+import { enter, spaceDown, spaceUp, space } from '../helpers/keys.js';
 
 describe('item-mixin', () => {
   customElements.define(
@@ -16,24 +16,6 @@ describe('item-mixin', () => {
       }
     }
   );
-
-  function spaceDown(target) {
-    MockInteractions.keyDownOn(target, 32, [], ' ');
-  }
-
-  function spaceUp(target) {
-    MockInteractions.keyUpOn(target, 32, [], ' ');
-  }
-
-  function space(target) {
-    spaceDown(target);
-    spaceUp(target);
-  }
-
-  function enter(target) {
-    MockInteractions.keyDownOn(target, 13, [], 'Enter');
-    MockInteractions.keyUpOn(target, 13, [], 'Enter');
-  }
 
   function fire(target, type) {
     target.dispatchEvent(new CustomEvent(type, { composed: true, bubbles: true }));

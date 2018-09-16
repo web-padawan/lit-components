@@ -1,6 +1,5 @@
 import { html } from '@polymer/lit-element';
 import { render } from 'lit-html';
-import '@polymer/iron-test-helpers/mock-interactions.js';
 import '@polymer/iron-form/iron-form.js';
 import { CheckboxBase } from '@lit/checkbox-base';
 import { CheckboxGroupBase } from '@lit/checkbox-group-base';

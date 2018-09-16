@@ -1,8 +1,8 @@
 import { html } from '@polymer/lit-element';
 import { render } from 'lit-html';
-import '@polymer/iron-test-helpers/mock-interactions.js';
 import { TabsBase } from '@lit/tabs-base';
 import { TabBase } from '@lit/tab-base';
+import { arrowDown, arrowLeft, arrowRight, arrowUp } from '../helpers/keys.js';
 
 customElements.define('x-tabs', class extends TabsBase {});
 customElements.define('x-tab', class extends TabBase {});
@@ -138,22 +138,6 @@ describe('tabs in flex container', () => {
 });
 
 describe('scrollable tabs', () => {
-  function arrowDown(target) {
-    MockInteractions.keyDownOn(target, 40, [], 'ArrowDown');
-  }
-
-  function arrowRight(target) {
-    MockInteractions.keyDownOn(target, 39, [], 'ArrowRight');
-  }
-
-  function arrowUp(target) {
-    MockInteractions.keyDownOn(target, 38, [], 'ArrowUp');
-  }
-
-  function arrowLeft(target) {
-    MockInteractions.keyDownOn(target, 37, [], 'ArrowLeft');
-  }
-
   let tabs, scroller;
 
   const fixture = html`

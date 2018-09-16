@@ -1,8 +1,8 @@
 import { html } from '@polymer/lit-element';
 import { render } from 'lit-html';
-import '@polymer/iron-test-helpers/mock-interactions.js';
 import { RadioButtonBase } from '@lit/radio-button-base';
 import { RadioGroupBase } from '@lit/radio-group-base';
+import { arrowDown, arrowLeft, arrowRight, arrowUp } from '../helpers/keys.js';
 
 customElements.define('lit-radio-button', class extends RadioButtonBase {});
 customElements.define('lit-radio-group', class extends RadioGroupBase {});
@@ -90,15 +90,13 @@ describe('radio-group', () => {
     radioList[1].checked = true;
     await radioGroup.updateComplete;
 
-    MockInteractions.keyDownOn(radioGroup, 39);
-    MockInteractions.keyUpOn(radioGroup, 39);
+    arrowRight(radioGroup);
     await radioGroup.updateComplete;
 
     expect(radioList[2].checked).to.be.true;
     expect(radioList[0].checked).to.be.false;
 
-    MockInteractions.keyDownOn(radioGroup, 40);
-    MockInteractions.keyUpOn(radioGroup, 40);
+    arrowDown(radioGroup);
     await radioGroup.updateComplete;
 
     expect(radioList[0].checked).to.be.true;
@@ -108,7 +106,7 @@ describe('radio-group', () => {
   it('should check radio button with keyboard if not disabled or readonly', async () => {
     radioList[1].checked = true;
     await radioGroup.updateComplete;
-    MockInteractions.keyDownOn(radioGroup, 39);
+    arrowRight(radioGroup);
     await radioGroup.updateComplete;
     expect(radioList[2].checked).to.be.true;
   });
@@ -117,7 +115,7 @@ describe('radio-group', () => {
     radioList[1].checked = true;
     radioGroup.disabled = true;
     await radioGroup.updateComplete;
-    MockInteractions.keyDownOn(radioGroup, 39);
+    arrowRight(radioGroup);
     expect(radioList[2].checked).to.be.false;
   });
 
@@ -125,7 +123,7 @@ describe('radio-group', () => {
     radioList[1].checked = true;
     radioGroup.readonly = true;
     await radioGroup.updateComplete;
-    MockInteractions.keyDownOn(radioGroup, 39);
+    arrowRight(radioGroup);
     await radioGroup.updateComplete;
     expect(radioList[2].checked).to.be.false;
   });
@@ -134,15 +132,13 @@ describe('radio-group', () => {
     radioList[1].checked = true;
     await radioGroup.updateComplete;
 
-    MockInteractions.keyDownOn(radioGroup, 37);
-    MockInteractions.keyUpOn(radioGroup, 37);
+    arrowLeft(radioGroup);
     await radioGroup.updateComplete;
 
     expect(radioList[0].checked).to.be.true;
     expect(radioList[1].checked).to.be.false;
 
-    MockInteractions.keyDownOn(radioGroup, 38);
-    MockInteractions.keyUpOn(radioGroup, 38);
+    arrowUp(radioGroup);
     await radioGroup.updateComplete;
 
     expect(radioList[2].checked).to.be.true;
@@ -154,13 +150,10 @@ describe('radio-group', () => {
     radioList[1].checked = true;
     await radioGroup.updateComplete;
 
-    MockInteractions.keyDownOn(radioGroup, 39);
-    MockInteractions.keyUpOn(radioGroup, 39);
-
+    arrowRight(radioGroup);
     expect(radioList[2].hasAttribute('focus-ring')).to.be.true;
 
-    MockInteractions.keyDownOn(radioGroup, 40);
-    MockInteractions.keyUpOn(radioGroup, 40);
+    arrowDown(radioGroup);
     expect(radioList[0].hasAttribute('focus-ring')).to.be.true;
   });
 
@@ -169,12 +162,10 @@ describe('radio-group', () => {
     radioList[1].checked = true;
     await radioGroup.updateComplete;
 
-    MockInteractions.keyDownOn(radioGroup, 37);
-    MockInteractions.keyUpOn(radioGroup, 37);
+    arrowLeft(radioGroup);
     expect(radioList[0].hasAttribute('focus-ring')).to.be.true;
 
-    MockInteractions.keyDownOn(radioGroup, 38);
-    MockInteractions.keyUpOn(radioGroup, 38);
+    arrowUp(radioGroup);
     expect(radioList[2].hasAttribute('focus-ring')).to.be.true;
   });
 
@@ -373,8 +364,7 @@ describe('radio-group with disabled button', () => {
   it('should miss disabled button after right/down', async () => {
     radioList[1].checked = true;
     await radioGroup.updateComplete;
-    MockInteractions.keyDownOn(radioGroup, 39);
-    MockInteractions.keyUpOn(radioGroup, 39);
+    arrowRight(radioGroup);
     await radioGroup.updateComplete;
     expect(radioList[3].checked).to.be.true;
   });
@@ -382,8 +372,7 @@ describe('radio-group with disabled button', () => {
   it('should miss disabled button after left/up', async () => {
     radioList[3].checked = true;
     await radioGroup.updateComplete;
-    MockInteractions.keyDownOn(radioGroup, 37);
-    MockInteractions.keyUpOn(radioGroup, 37);
+    arrowLeft(radioGroup);
     await radioGroup.updateComplete;
     expect(radioList[1].checked).to.be.true;
   });

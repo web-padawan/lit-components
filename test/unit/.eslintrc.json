@@ -5,7 +5,6 @@
     "afterEach": false,
     "it": false,
     "expect": false,
-    "sinon": false,
-    "MockInteractions": false
+    "sinon": false
   }
 }

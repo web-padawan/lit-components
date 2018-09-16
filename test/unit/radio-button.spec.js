@@ -1,8 +1,8 @@
 import { LitElement, html } from '@polymer/lit-element';
 import { render } from 'lit-html';
-import '@polymer/iron-test-helpers/mock-interactions.js';
 import '@polymer/iron-form/iron-form.js';
 import { RadioButtonBase } from '@lit/radio-button-base';
+import { spaceDown, spaceUp } from '../helpers/keys.js';
 
 customElements.define('lit-radio', class extends RadioButtonBase {});
 
@@ -98,13 +98,13 @@ describe('radio-button', () => {
   });
 
   it('should have active attribute on space', () => {
-    MockInteractions.keyDownOn(radio, 32);
+    spaceDown(radio);
     expect(radio.hasAttribute('active')).to.be.true;
   });
 
   it('should not have active attribute after space', () => {
-    MockInteractions.keyDownOn(radio, 32);
-    MockInteractions.keyUpOn(radio, 32);
+    spaceDown(radio);
+    spaceUp(radio);
     expect(radio.hasAttribute('active')).to.be.false;
   });
 

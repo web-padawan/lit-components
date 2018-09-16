@@ -1,9 +1,9 @@
 import { LitElement, html } from '@polymer/lit-element';
 import { render } from 'lit-html';
 import { FlattenedNodesObserver } from '@polymer/polymer/lib/utils/flattened-nodes-observer.js';
-import '@polymer/iron-test-helpers/mock-interactions.js';
 import '@polymer/iron-form/iron-form.js';
 import { CheckboxBase } from '@lit/checkbox-base';
+import { downAndUp, spaceDown, spaceUp } from '../helpers/keys.js';
 
 customElements.define('lit-check', class extends CheckboxBase {});
 
@@ -44,11 +44,11 @@ describe('checkbox', () => {
     expect(checkbox.value).to.be.eql('on');
   });
 
-  it('should fire click event', function(done) {
+  it('should fire click event', done => {
     checkbox.addEventListener('click', () => {
       done();
     });
-    MockInteractions.downAndUp(checkbox);
+    downAndUp(checkbox);
   });
 
   it('should have proper name', async () => {
@@ -147,8 +147,8 @@ describe('checkbox', () => {
     checkbox.indeterminate = true;
     await checkbox.updateComplete;
 
-    MockInteractions.keyDownOn(checkbox, 32);
-    MockInteractions.keyUpOn(checkbox, 32);
+    spaceDown(checkbox);
+    spaceUp(checkbox);
 
     await checkbox.updateComplete;
     expect(checkbox.checked).to.be.true;
@@ -161,8 +161,8 @@ describe('checkbox', () => {
     checkbox.indeterminate = true;
     await checkbox.updateComplete;
 
-    MockInteractions.keyDownOn(checkbox, 32);
-    MockInteractions.keyUpOn(checkbox, 32);
+    spaceDown(checkbox);
+    spaceUp(checkbox);
 
     await checkbox.updateComplete;
     expect(checkbox.checked).to.be.false;
