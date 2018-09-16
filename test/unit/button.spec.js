@@ -3,6 +3,7 @@ import { render } from 'lit-html';
 import { FlattenedNodesObserver } from '@polymer/polymer/lib/utils/flattened-nodes-observer.js';
 import { ButtonBase } from '@lit/button-base';
 import { downAndUp, enterDown, enterUp, spaceDown, spaceUp } from '../helpers/keys.js';
+import { blur, down, up } from '../helpers/events.js';
 
 customElements.define('lit-button', class extends ButtonBase {});
 
@@ -10,14 +11,6 @@ describe('button', () => {
   const fixture = html`
     <lit-button>Lit <i>Button</i></lit-button>
   `;
-
-  const down = node => {
-    node.dispatchEvent(new CustomEvent('down'));
-  };
-
-  const up = node => {
-    node.dispatchEvent(new CustomEvent('up'));
-  };
 
   let button, nativeButton, label;
 
@@ -122,7 +115,7 @@ describe('button', () => {
 
   it('should not have active attribute after blur', () => {
     spaceDown(button);
-    button.dispatchEvent(new CustomEvent('blur'));
+    blur(button);
     expect(button.hasAttribute('active')).to.be.false;
   });
 });

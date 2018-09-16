@@ -3,6 +3,7 @@ import { render } from 'lit-html';
 import { FlattenedNodesObserver } from '@polymer/polymer/lib/utils/flattened-nodes-observer.js';
 import '@polymer/iron-form/iron-form.js';
 import { SwitchBase } from '@lit/switch-base';
+import { change } from '../helpers/events';
 
 customElements.define('lit-switch', class extends SwitchBase {});
 
@@ -75,7 +76,7 @@ describe('switch', () => {
     expect(nativeCheckbox.checked).to.be.eql(true);
 
     nativeCheckbox.checked = false;
-    nativeCheckbox.dispatchEvent(new CustomEvent('change'));
+    change(nativeCheckbox);
     await element.updateComplete;
     expect(element.checked).to.be.eql(false);
   });

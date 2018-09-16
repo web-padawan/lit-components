@@ -2,6 +2,7 @@ import { LitElement, html } from '@polymer/lit-element';
 import { render } from 'lit-html';
 import { ItemMixin } from '@lit/item-mixin';
 import { enter, spaceDown, spaceUp, space } from '../helpers/keys.js';
+import { blur, focus, mousedown, mouseup } from '../helpers/events.js';
 
 describe('item-mixin', () => {
   customElements.define(
@@ -16,10 +17,6 @@ describe('item-mixin', () => {
       }
     }
   );
-
-  function fire(target, type) {
-    target.dispatchEvent(new CustomEvent(type, { composed: true, bubbles: true }));
-  }
 
   let item;
 
@@ -51,25 +48,25 @@ describe('item-mixin', () => {
     });
 
     it('should have focused attribute when focused', () => {
-      fire(item, 'focus');
+      focus(item);
       expect(item.hasAttribute('focused')).to.be.true;
     });
 
     it('should not have focused attribute when blurred', () => {
-      fire(item, 'focus');
-      fire(item, 'blur');
+      focus(item);
+      blur(item);
       expect(item.hasAttribute('focused')).to.be.false;
     });
 
     it('should have active attribute on mousedown', () => {
-      fire(item, 'mousedown');
+      mousedown(item);
       expect(item.hasAttribute('active')).to.be.true;
       expect(item._mousedown).to.be.true;
     });
 
     it('should not have active attribute after mouseup', () => {
-      fire(item, 'mousedown');
-      fire(item, 'mouseup');
+      mousedown(item);
+      mouseup(item);
       expect(item.hasAttribute('active')).to.be.false;
       expect(item._mousedown).to.be.false;
     });
@@ -102,20 +99,20 @@ describe('item-mixin', () => {
     });
 
     it('should have focus-ring attribute when focused with keyboard', () => {
-      fire(item, 'focus');
+      focus(item);
       expect(item.hasAttribute('focus-ring')).to.be.true;
     });
 
     it('should not have focus-ring after blur', () => {
-      fire(item, 'focus');
-      fire(item, 'blur');
+      focus(item);
+      blur(item);
       expect(item.hasAttribute('focus-ring')).to.be.false;
     });
 
     it('set this._mousedown to false if mouseup was outside', () => {
-      fire(item, 'mousedown');
+      mousedown(item);
       expect(item._mousedown).to.be.true;
-      fire(document, 'mouseup');
+      mouseup(item);
       expect(item._mousedown).to.be.false;
     });
 

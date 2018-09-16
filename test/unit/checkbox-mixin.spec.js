@@ -1,6 +1,7 @@
 import { LitElement, html } from '@polymer/lit-element';
 import { CheckboxMixin } from '@lit/checkbox-mixin';
 import { spaceDown, spaceUp } from '../helpers/keys.js';
+import { down, up } from '../helpers/events.js';
 
 customElements.define(
   'check-box',
@@ -22,14 +23,6 @@ customElements.define(
 );
 
 describe('checkbox-mixin active', () => {
-  const down = node => {
-    node.dispatchEvent(new CustomEvent('down'));
-  };
-
-  const up = node => {
-    node.dispatchEvent(new CustomEvent('up'));
-  };
-
   let checkbox;
 
   beforeEach(async () => {

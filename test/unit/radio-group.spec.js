@@ -3,6 +3,7 @@ import { render } from 'lit-html';
 import { RadioButtonBase } from '@lit/radio-button-base';
 import { RadioGroupBase } from '@lit/radio-group-base';
 import { arrowDown, arrowLeft, arrowRight, arrowUp } from '../helpers/keys.js';
+import { focusout } from '../helpers/events.js';
 
 customElements.define('lit-radio-button', class extends RadioButtonBase {});
 customElements.define('lit-radio-group', class extends RadioGroupBase {});
@@ -15,10 +16,6 @@ describe('radio-group', () => {
       <lit-radio-button>Button <b>3</b></lit-radio-button>
     </lit-radio-group>
   `;
-
-  function blur(e, composed = true) {
-    e.dispatchEvent(new CustomEvent('focusout', { bubbles: true, composed: composed }));
-  }
 
   let radioGroup, radioList, errorElement;
 
@@ -302,7 +299,7 @@ describe('radio-group', () => {
   it('should pass validation and set invalid when field is required and user blurs', async () => {
     radioGroup.required = true;
     await radioGroup.updateComplete;
-    blur(radioGroup);
+    focusout(radioGroup);
     expect(radioGroup.checkValidity()).to.be.false;
     expect(radioGroup.invalid).to.be.true;
   });
@@ -329,7 +326,7 @@ describe('radio-group', () => {
   it('should show error message on invalid', async () => {
     radioGroup.required = true;
     radioGroup.errorMessage = 'Bad input!';
-    blur(radioGroup);
+    focusout(radioGroup);
     await radioGroup.updateComplete;
     expect(errorElement.offsetHeight).to.be.above(0);
   });

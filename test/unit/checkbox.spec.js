@@ -4,6 +4,7 @@ import { FlattenedNodesObserver } from '@polymer/polymer/lib/utils/flattened-nod
 import '@polymer/iron-form/iron-form.js';
 import { CheckboxBase } from '@lit/checkbox-base';
 import { downAndUp, spaceDown, spaceUp } from '../helpers/keys.js';
+import { change } from '../helpers/events.js';
 
 customElements.define('lit-check', class extends CheckboxBase {});
 
@@ -94,7 +95,7 @@ describe('checkbox', () => {
     expect(nativeCheckbox.checked).to.be.eql(true);
 
     nativeCheckbox.checked = false;
-    nativeCheckbox.dispatchEvent(new CustomEvent('change'));
+    change(nativeCheckbox);
     await checkbox.updateComplete;
     expect(checkbox.checked).to.be.eql(false);
   });
@@ -105,7 +106,7 @@ describe('checkbox', () => {
     expect(nativeCheckbox.indeterminate).to.be.eql(true);
 
     nativeCheckbox.indeterminate = false;
-    nativeCheckbox.dispatchEvent(new CustomEvent('change'));
+    change(nativeCheckbox);
     await checkbox.updateComplete;
     expect(checkbox.indeterminate).to.be.eql(false);
   });

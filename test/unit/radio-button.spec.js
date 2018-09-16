@@ -3,6 +3,7 @@ import { render } from 'lit-html';
 import '@polymer/iron-form/iron-form.js';
 import { RadioButtonBase } from '@lit/radio-button-base';
 import { spaceDown, spaceUp } from '../helpers/keys.js';
+import { change, down, up } from '../helpers/events.js';
 
 customElements.define('lit-radio', class extends RadioButtonBase {});
 
@@ -10,14 +11,6 @@ describe('radio-button', () => {
   const fixture = html`
     <lit-radio name="test-radio">Radio <b>Button</b></lit-radio>
   `;
-
-  const down = node => {
-    node.dispatchEvent(new CustomEvent('down'));
-  };
-
-  const up = node => {
-    node.dispatchEvent(new CustomEvent('up'));
-  };
 
   let radio, nativeRadio, label;
 
@@ -81,7 +74,7 @@ describe('radio-button', () => {
     expect(nativeRadio.checked).to.be.true;
 
     nativeRadio.checked = false;
-    nativeRadio.dispatchEvent(new CustomEvent('change'));
+    change(nativeRadio);
     await radio.updateComplete;
     expect(radio.checked).to.be.false;
   });
