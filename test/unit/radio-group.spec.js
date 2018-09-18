@@ -35,9 +35,9 @@ describe('radio-group', () => {
   });
 
   it('should set focus to the first element by default', () => {
-    expect(radioList[0].tabindex).to.eq(0);
-    expect(radioList[1].tabindex).to.eq(-1);
-    expect(radioList[2].tabindex).to.eq(-1);
+    expect(radioList[0].tabIndex).to.eq(0);
+    expect(radioList[1].tabIndex).to.eq(-1);
+    expect(radioList[2].tabIndex).to.eq(-1);
   });
 
   it('should set role properly', () => {
@@ -71,16 +71,16 @@ describe('radio-group', () => {
     radioList[1].checked = true;
     await radioGroup.updateComplete;
 
-    expect(radioList[0].tabindex).to.eq(-1);
-    expect(radioList[1].tabindex).to.eq(0);
-    expect(radioList[2].tabindex).to.eq(-1);
+    expect(radioList[0].tabIndex).to.eq(-1);
+    expect(radioList[1].tabIndex).to.eq(0);
+    expect(radioList[2].tabIndex).to.eq(-1);
 
     radioList[2].checked = true;
     await radioGroup.updateComplete;
 
-    expect(radioList[0].tabindex).to.eq(-1);
-    expect(radioList[1].tabindex).to.eq(-1);
-    expect(radioList[2].tabindex).to.eq(0);
+    expect(radioList[0].tabIndex).to.eq(-1);
+    expect(radioList[1].tabIndex).to.eq(-1);
+    expect(radioList[2].tabIndex).to.eq(0);
   });
 
   it('should focus and check next/first radio button after right/down', async () => {

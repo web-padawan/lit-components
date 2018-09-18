@@ -313,7 +313,7 @@ export class RadioGroupBase extends LitElement {
 
   _setFocusable(idx) {
     const items = this._radioButtons;
-    items.forEach(e => (e.tabindex = e === items[idx] ? 0 : -1));
+    items.forEach(e => (e.tabIndex = e === items[idx] ? 0 : -1));
   }
 
   _labelChanged(label) {
