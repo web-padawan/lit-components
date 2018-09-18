@@ -5,7 +5,12 @@ export { html } from '@polymer/polymer/lib/utils/html-tag.js';
 
 export const includeStyle = id => {
   const template = DomModule.import(id, 'template');
-  return template && stylesFromTemplate(template)[0].textContent;
+  return (
+    template &&
+    stylesFromTemplate(template)
+      .map(style => style.textContent)
+      .join(' ')
+  );
 };
 
 export const injectStyle = (id, template) => {

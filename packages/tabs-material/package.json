@@ -7,7 +7,7 @@
   "dependencies": {
     "@lit/style-utils": "^0.1.0",
     "@lit/tabs-base": "^0.1.0",
-    "@vaadin/vaadin-tabs": "^2.1.0",
+    "@vaadin/vaadin-tabs": "^2.1.1",
     "@vaadin/vaadin-material-styles": "^1.2.0"
   },
   "scripts": {

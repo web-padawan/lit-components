@@ -7,7 +7,7 @@
   "dependencies": {
     "@lit/checkbox-base": "^0.1.0",
     "@lit/style-utils": "^0.1.0",
-    "@vaadin/vaadin-checkbox": "^2.2.1",
+    "@vaadin/vaadin-checkbox": "^2.2.2",
     "@vaadin/vaadin-material-styles": "^1.2.0"
   },
   "scripts": {
