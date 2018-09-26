@@ -7,7 +7,6 @@
     "bootstrap": "./scripts/bootstrap-unreleased.sh",
     "clean": "del-cli packages/*/node_modules packages/*/package-lock.json",
     "nuke": "rm -rf package-lock.json node_modules && npm install && npm run bootstrap",
-    "precommit": "lint-staged",
     "lint": "eslint *.js packages/**/*.js test/**/*.js",
     "dev": "webpack-serve --open",
     "test": "karma start"
@@ -16,23 +15,23 @@
   "author": "Vaadin Ltd",
   "license": "Apache-2.0",
   "devDependencies": {
-    "@babel/core": "^7.0.1",
-    "@babel/plugin-transform-runtime": "^7.0.0",
-    "@babel/preset-env": "^7.0.0",
+    "@babel/core": "^7.1.0",
+    "@babel/plugin-transform-runtime": "^7.1.0",
+    "@babel/preset-env": "^7.1.0",
     "@babel/runtime": "^7.0.0",
     "@polymer/iron-form": "^3.0.1",
     "@polymer/iron-test-helpers": "^3.0.1",
     "@webcomponents/webcomponentsjs": "^2.1.3",
     "babel-eslint": "^9.0.0",
     "babel-loader": "^8.0.2",
-    "chai": "^4.1.2",
+    "chai": "^4.2.0",
     "copy-webpack-plugin": "^4.5.2",
     "del-cli": "^1.1.0",
     "eslint": "^5.6.0",
-    "eslint-config-prettier": "^3.0.1",
+    "eslint-config-prettier": "^3.1.0",
     "eslint-config-vaadin": "^0.2.7",
     "html-webpack-plugin": "^4.0.0-alpha.2",
-    "husky": "^0.14.3",
+    "husky": "^1.0.0",
     "istanbul-instrumenter-loader": "^3.0.1",
     "karma": "^3.0.0",
     "karma-chrome-launcher": "^2.2.0",
@@ -45,14 +44,19 @@
     "karma-sourcemap-loader": "^0.3.7",
     "karma-webpack": "^4.0.0-rc.2",
     "lerna": "^3.4.0",
-    "lint-staged": "^7.2.2",
+    "lint-staged": "^7.3.0",
     "mocha": "^5.2.0",
-    "prettier": "^1.14.2",
-    "sinon": "^6.3.3",
+    "prettier": "^1.14.3",
+    "sinon": "^6.3.4",
     "sinon-chai": "^3.2.0",
-    "webpack": "^4.19.0",
-    "webpack-cli": "^3.1.0",
+    "webpack": "^4.20.2",
+    "webpack-cli": "^3.1.1",
     "webpack-serve": "^2.0.2"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
   },
   "lint-staged": {
     "*.js": [
