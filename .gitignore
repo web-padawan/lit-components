@@ -2,3 +2,5 @@ node_modules
 coverage
 lerna-debug.log
 build
+tmp
+test/regressions/screenshots
