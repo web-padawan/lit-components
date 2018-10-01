@@ -11,7 +11,7 @@
     "lint": "eslint *.js packages/**/*.js test/**/*.js",
     "dev": "webpack-serve --open",
     "test": "karma start",
-    "test:regressions": "BABEL_ENV=regressions webpack --config test/regressions/webpack.config.js && vrtest run --config test/vrtest.config.js --record"
+    "test:regressions": "BABEL_ENV=regressions webpack --config test/regressions/webpack.config.js && del-cli test/regressions/screenshots/chrome/* && vrtest run --config test/vrtest.config.js --record"
   },
   "repository": "https://github.com/web-padawan/lit-components.git",
   "author": "Vaadin Ltd",

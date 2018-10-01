@@ -33,13 +33,7 @@ tests.forEach(test => {
     suite = vrtest.createSuite(test.suite);
   }
 
-  const TestCase = test.case;
-
-  if (!TestCase) {
-    return;
-  }
-
   suite.createTest(test.name, () => {
-    render(TestCase, rootEl);
+    render(test.case, rootEl);
   });
 });
