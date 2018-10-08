@@ -26,7 +26,6 @@ export class RadioButtonBase extends ControlStateMixin(GestureEventListeners(Lit
 
   constructor() {
     super();
-    this._boundInputChangeHandler = this._inputChangeHandler.bind(this);
     if (!this.hasAttribute('checked')) {
       this.checked = false;
     }
@@ -51,7 +50,7 @@ export class RadioButtonBase extends ControlStateMixin(GestureEventListeners(Lit
             type="radio"
             ?checked="${this.checked}"
             ?disabled="${this.disabled}"
-            @change="${this._boundInputChangeHandler}"
+            @change="${this._inputChangeHandler}"
             role="presentation"
             tabindex="-1">
         </span>

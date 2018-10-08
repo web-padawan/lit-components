@@ -6,7 +6,6 @@ import './lit-switch-styles.js';
 export class SwitchBase extends CheckboxMixin(LitElement) {
   constructor() {
     super();
-    this._boundInputChangeHandler = this._inputChangeHandler.bind(this);
     if (!this.hasAttribute('checked')) {
       this.checked = false;
     }
@@ -28,7 +27,7 @@ export class SwitchBase extends CheckboxMixin(LitElement) {
             type="checkbox"
             ?checked="${this.checked}"
             ?disabled="${this.disabled}"
-            @change="${this._boundInputChangeHandler}"
+            @change="${this._inputChangeHandler}"
             role="presentation"
             tabindex="-1">
         </span>

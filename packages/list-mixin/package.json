@@ -6,7 +6,7 @@
   "main": "lit-list-mixin.js",
   "dependencies": {
     "@lit/item-mixin": "^0.1.0",
-    "@polymer/lit-element": "0.6.1",
+    "@polymer/lit-element": "0.6.2",
     "@polymer/polymer": "^3.0.0"
   },
   "scripts": {

@@ -28,13 +28,13 @@ export class TabsBase extends ListMixin(LitElement) {
         ${this.getStyles()}
       </style>
 
-      <div @click="${() => this._scrollBack()}" part="back-button"></div>
+      <div @click="${this._scrollBack}" part="back-button"></div>
 
       <div part="tabs">
         <slot></slot>
       </div>
 
-      <div @click="${() => this._scrollForward()}" part="forward-button"></div>
+      <div @click="${this._scrollForward}" part="forward-button"></div>
     `;
   }
 

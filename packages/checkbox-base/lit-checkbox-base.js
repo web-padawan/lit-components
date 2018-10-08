@@ -27,7 +27,6 @@ export class CheckboxBase extends CheckboxMixin(LitElement) {
 
   constructor() {
     super();
-    this._boundInputChangeHandler = this._inputChangeHandler.bind(this);
     if (!this.hasAttribute('checked')) {
       this.checked = false;
     }
@@ -52,7 +51,7 @@ export class CheckboxBase extends CheckboxMixin(LitElement) {
             ?checked="${this.checked}"
             ?disabled="${this.disabled}"
             .indeterminate="${this.indeterminate}"
-            @change="${this._boundInputChangeHandler}"
+            @change="${this._inputChangeHandler}"
             role="presentation"
             tabindex="-1">
         </span>
