@@ -3,6 +3,7 @@ import { render } from 'lit-html';
 import '@polymer/iron-form/iron-form.js';
 import { CheckboxBase } from '@lit/checkbox-base';
 import { CheckboxGroupBase } from '@lit/checkbox-group-base';
+import { focusout } from '../helpers/events.js';
 
 customElements.define('lit-checkbox', class extends CheckboxBase {});
 customElements.define('lit-checkbox-group', class extends CheckboxGroupBase {});
@@ -32,21 +33,17 @@ describe('checkbox group', () => {
     checkboxGroup.parentNode.removeChild(checkboxGroup);
   });
 
-  it('sets role properly', () => {
-    expect(checkboxGroup.getAttribute('role')).to.eq('checkboxgroup');
-  });
-
-  it('changes aria-disabled on disabled change', async () => {
+  it('should change aria-disabled on disabled change', async () => {
     checkboxGroup.disabled = true;
     await checkboxGroup.updateComplete;
     expect(checkboxGroup.getAttribute('aria-disabled')).to.eq('true');
   });
 
-  it('can be disabled imperatively', async () => {
+  it('should set disabled property on the checkboxes when disabled', async () => {
     checkboxGroup.disabled = true;
     await checkboxGroup.updateComplete;
     expect(checkboxGroup.hasAttribute('disabled')).to.be.true;
-    expect(checkboxList[0].hasAttribute('disabled')).to.be.true;
+    expect(checkboxList[0].disabled).to.be.true;
   });
 
   it('should set disabled property to dynamically added checkboxes', async () => {
@@ -305,6 +302,19 @@ describe('checkbox group validation', () => {
     await checkboxList[0].updateComplete;
     await checkboxGroup.updateComplete;
     expect(checkboxGroup.hasAttribute('invalid')).to.be.false;
+  });
+
+  it('should run validation and set invalid on blur when required', () => {
+    checkboxGroup.required = true;
+    focusout(checkboxGroup, document.body);
+    expect(checkboxGroup.invalid).to.be.true;
+  });
+
+  it('should not run validation while tabbing between checkboxes', () => {
+    checkboxGroup.required = true;
+    const spy = sinon.spy(checkboxGroup, 'validate');
+    focusout(checkboxGroup, checkboxList[1].focusElement);
+    expect(spy).to.be.not.called;
   });
 
   it('should prevent submitting form when value is empty', () => {

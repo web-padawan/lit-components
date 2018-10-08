@@ -98,4 +98,12 @@ describe('checkbox-mixin label', () => {
     await checkbox.updateComplete;
     expect(label.hasAttribute('empty')).to.be.true;
   });
+
+  it('should set empty attribute when there is one empty text node', async () => {
+    const textNode = document.createTextNode(' ');
+    checkbox.appendChild(textNode);
+    window.ShadyDOM && window.ShadyDOM.flush();
+    await checkbox.updateComplete;
+    expect(label.hasAttribute('empty')).to.be.true;
+  });
 });

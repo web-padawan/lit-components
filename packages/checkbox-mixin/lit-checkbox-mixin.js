@@ -90,9 +90,19 @@ export const CheckboxMixin = superClass =>
       this.checked = !this.checked;
     }
 
+    _isEmptyNodes(nodes) {
+      // treat one empty text node as no content
+      return (
+        nodes.length === 0 ||
+        (nodes.length === 1 &&
+          nodes[0].nodeType === Node.TEXT_NODE &&
+          nodes[0].textContent.trim() === '')
+      );
+    }
+
     _updateLabelAttribute() {
       const label = this._labelPart;
-      if (label.firstElementChild.assignedNodes().length === 0) {
+      if (this._isEmptyNodes(label.firstElementChild.assignedNodes())) {
         label.setAttribute('empty', '');
       } else {
         label.removeAttribute('empty');

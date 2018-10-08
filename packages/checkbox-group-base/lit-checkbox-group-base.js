@@ -95,8 +95,6 @@ export class CheckboxGroupBase extends LitElement {
   }
 
   firstUpdated() {
-    this.setAttribute('role', 'checkboxgroup');
-
     const checkedChangedListener = e => this._changeSelectedCheckbox(e.target);
 
     this._observer = new FlattenedNodesObserver(this, info => {
@@ -122,6 +120,17 @@ export class CheckboxGroupBase extends LitElement {
 
       if (addedCheckboxes.some(checkbox => !checkbox.hasAttribute('value'))) {
         console.warn('Please add value attribute to all checkboxes in checkbox group');
+      }
+    });
+
+    this.addEventListener('focusout', e => {
+      // validate when stepping out of the checkbox group
+      if (
+        !this._checkboxes.some(
+          checkbox => e.relatedTarget === checkbox || checkbox.shadowRoot.contains(e.relatedTarget)
+        )
+      ) {
+        this.validate();
       }
     });
   }
