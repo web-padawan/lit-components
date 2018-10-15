@@ -1,9 +1,10 @@
 sudo: false
 dist: trusty
 language: node_js
-node_js: 8.11
+node_js: 8.12
 
 cache:
+  yarn: true
   directories:
     - node_modules
 
@@ -15,8 +16,9 @@ branches:
   only:
    - master
 
+install:
+  - yarn
+
 script:
-  - npm install
-  - npm run bootstrap
-  - npm run lint
-  - npm test
+  - yarn lint
+  - yarn test

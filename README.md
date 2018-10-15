@@ -16,34 +16,20 @@ The goals of this the experiment are:
 ### Install dependencies
 
 ```sh
-npm install
-```
-
-### Install packages
-
-For OS X or Linux users:
-
-```sh
-npm run bootstrap
-```
-
-For Windows users:
-
-```
-call scripts\bootstrap-unreleased.bat
+yarn
 ```
 
 ### Run tests
 ```sh
-npm test
+yarn test
 ```
 
 ### Run ESLint
 ```sh
-npm run lint
+yarn lint
 ```
 
 ### Serve the project
 ```sh
-npm run dev
+yarn dev
 ````

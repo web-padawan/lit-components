@@ -17,7 +17,7 @@ jobs:
           # fallback to using the latest cache if no exact match is found
           - v1-dependencies-
 
-      - run: npm install && npm run bootstrap
+      - run: yarn
 
       - save_cache:
           paths:
@@ -27,5 +27,5 @@ jobs:
       - run:
           name: Visual regression tests
           command: |
-            DOCKER_TEST_URL=http://$(ip addr show lo | grep "inet\b" | awk '{print $2}' | cut -d/ -f1):3090 npm run test:regressions
-            npm run argos
+            DOCKER_TEST_URL=http://$(ip addr show lo | grep "inet\b" | awk '{print $2}' | cut -d/ -f1):3090 yarn test:regressions
+            yarn argos
