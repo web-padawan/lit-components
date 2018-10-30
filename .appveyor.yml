@@ -14,7 +14,7 @@ init:
 
 # Test against this version of Node.js
 environment:
-  nodejs_version: "8.12"
+  nodejs_version: "10"
 
 build: off
 
@@ -26,4 +26,4 @@ test_script:
   - yarn test
 
 # Preserve node_modules between builds
-cache: node_modules -> appveyor.yml,package.json,yarn.lock
+cache: node_modules -> .appveyor.yml,package.json,yarn.lock

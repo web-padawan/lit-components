@@ -2,7 +2,7 @@ version: 2
 jobs:
   build:
     docker:
-      - image: circleci/node:9.10
+      - image: circleci/node:10.12
       - image: selenium/standalone-chrome:3.11.0
 
     working_directory: ~/repo
