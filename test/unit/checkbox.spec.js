@@ -10,7 +10,9 @@ customElements.define('lit-check', class extends CheckboxBase {});
 
 describe('checkbox', () => {
   const fixture = html`
-    <lit-check name="test-checkbox">Lit <i>Checkbox</i> with <a href="#">Terms &amp; Conditions</a></lit-check>
+    <lit-check name="name"
+      >Lit <i>Checkbox</i> with <a href="#">Terms &amp; Conditions</a></lit-check
+    >
   `;
 
   let checkbox, nativeCheckbox, label;
@@ -31,8 +33,8 @@ describe('checkbox', () => {
 
   it('should define checkbox label using light DOM', () => {
     const children = FlattenedNodesObserver.getFlattenedNodes(label);
-    expect(children[1].textContent).to.be.equal('Lit ');
-    expect(children[2].outerHTML).to.be.equal('<i>Checkbox</i>');
+    expect(children[0].textContent).to.be.equal('Lit ');
+    expect(children[1].outerHTML).to.be.equal('<i>Checkbox</i>');
   });
 
   it('should propagate disabled attribute to the native checkbox', async () => {
@@ -56,7 +58,7 @@ describe('checkbox', () => {
     expect(checkbox.name).to.eq('');
     checkbox.checked = true;
     await checkbox.updateComplete;
-    expect(checkbox.name).to.eq('test-checkbox');
+    expect(checkbox.name).to.eq('name');
   });
 
   it('should toggle on host click', () => {
@@ -68,7 +70,7 @@ describe('checkbox', () => {
   });
 
   it('should not toggle on link inside host click', () => {
-    const link = FlattenedNodesObserver.getFlattenedNodes(label)[4];
+    const link = FlattenedNodesObserver.getFlattenedNodes(label)[3];
     expect(link.outerHTML).to.be.equal('<a href="#">Terms &amp; Conditions</a>');
     link.click();
     expect(checkbox.checked).to.be.false;
@@ -244,13 +246,13 @@ describe('iron-form checkbox', () => {
     class XCheckbox extends LitElement {
       render() {
         return html`
-        <iron-form id="form">
-          <form>
-            <lit-check id="boundname" name="${this.checkboxName}"></lit-check>
-            <lit-check id="attrname" name="attrcheckbox"></lit-check>
-          </form>
-        </iron-form>
-      `;
+          <iron-form id="form">
+            <form>
+              <lit-check id="boundname" name="${this.checkboxName}"></lit-check>
+              <lit-check id="attrname" name="attrcheckbox"></lit-check>
+            </form>
+          </iron-form>
+        `;
       }
 
       static get properties() {

@@ -1,35 +1,31 @@
-import { injectStyle, html } from '@lit/style-utils';
+import { css } from 'lit-css';
 
-const style = html`
-  <style>
-    :host {
-      display: inline-flex;
-    }
+export default css`
+  :host {
+    display: inline-flex;
+  }
 
-    :host::before {
-      display: inline-block;
-      content: "\\2003";
-      width: 0;
-    }
+  :host::before {
+    display: inline-block;
+    content: '\\2003';
+    width: 0;
+  }
 
-    :host([hidden]) {
-      display: none !important;
-    }
+  :host([hidden]) {
+    display: none !important;
+  }
 
-    .vaadin-group-field-container {
-      display: flex;
-      flex-direction: column;
-    }
+  .vaadin-group-field-container {
+    display: flex;
+    flex-direction: column;
+  }
 
-    [part="label"]:empty {
-      display: none;
-    }
+  [part='label']:empty {
+    display: none;
+  }
 
-    :host(:not([invalid])) [part="error-message"] {
-      max-height: 0;
-      overflow: hidden;
-    }
-  </style>
+  :host(:not([invalid])) [part='error-message'] {
+    max-height: 0;
+    overflow: hidden;
+  }
 `;
-
-injectStyle('lit-radio-group-styles', style);

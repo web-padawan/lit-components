@@ -1,6 +1,7 @@
+import { css } from 'lit-css';
 import { ListBoxBase } from '@lit/list-box-base';
 import '@vaadin/vaadin-list-box/theme/lumo/vaadin-list-box-styles.js';
-import { includeStyle } from '@lit/style-utils';
+import { getStyleModule } from '@lit/polymer-style-module';
 
 class LitListBoxLumo extends ListBoxBase {
   static get is() {
@@ -11,10 +12,10 @@ class LitListBoxLumo extends ListBoxBase {
     return '0.1.0';
   }
 
-  getStyles() {
-    return `
-      ${super.getStyles()}
-      ${includeStyle('lumo-list-box').replace(/vaadin-item/g, 'lit-item-lumo')}
+  static get style() {
+    return css`
+      ${super.style}
+      ${getStyleModule('lumo-list-box').replace(/vaadin-item/g, 'lit-item-lumo')}
     `;
   }
 }

@@ -1,15 +1,11 @@
-import { injectStyle, html } from '@lit/style-utils';
+import { css } from 'lit-css';
 
-const style = html`
-  <style>
-    :host {
-      display: flex;
-    }
+export default css`
+  :host {
+    display: flex;
+  }
 
-    :host([hidden]) {
-      display: none !important;
-    }
-  </style>
+  :host([hidden]) {
+    display: none !important;
+  }
 `;
-
-injectStyle('lit-tab-styles', style);

@@ -1,9 +1,16 @@
-import { LitElement, html } from '@polymer/lit-element';
+import { html } from '@polymer/lit-element';
+import { css } from 'lit-css';
+import { StyledLitElement } from 'styled-lit-element';
 import { ListMixin } from '@lit/list-mixin';
-import { includeStyle } from '@lit/style-utils';
-import './lit-tabs-styles.js';
+import styles from './lit-tabs-styles.js';
 
-export class TabsBase extends ListMixin(LitElement) {
+export class TabsBase extends ListMixin(StyledLitElement) {
+  static get style() {
+    return css`
+      ${styles}
+    `;
+  }
+
   constructor() {
     super();
 
@@ -18,22 +25,10 @@ export class TabsBase extends ListMixin(LitElement) {
     }
   }
 
-  getStyles() {
-    return includeStyle('lit-tabs-styles');
-  }
-
   render() {
     return html`
-      <style>
-        ${this.getStyles()}
-      </style>
-
       <div @click="${this._scrollBack}" part="back-button"></div>
-
-      <div part="tabs">
-        <slot></slot>
-      </div>
-
+      <div part="tabs"><slot></slot></div>
       <div @click="${this._scrollForward}" part="forward-button"></div>
     `;
   }

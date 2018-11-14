@@ -1,9 +1,16 @@
-import { html, LitElement } from '@polymer/lit-element';
+import { html } from '@polymer/lit-element';
+import { css } from 'lit-css';
+import { StyledLitElement } from 'styled-lit-element';
 import { CheckboxMixin } from '@lit/checkbox-mixin';
-import { includeStyle } from '@lit/style-utils';
-import './lit-checkbox-styles.js';
+import styles from './lit-checkbox-styles.js';
 
-export class CheckboxBase extends CheckboxMixin(LitElement) {
+export class CheckboxBase extends CheckboxMixin(StyledLitElement) {
+  static get style() {
+    return css`
+      ${styles}
+    `;
+  }
+
   static get properties() {
     return {
       /**
@@ -35,15 +42,8 @@ export class CheckboxBase extends CheckboxMixin(LitElement) {
     }
   }
 
-  getStyles() {
-    return includeStyle('lit-checkbox-styles');
-  }
-
   render() {
     return html`
-      <style>
-        ${this.getStyles()}
-      </style>
       <label>
         <span part="checkbox">
           <input
@@ -53,12 +53,10 @@ export class CheckboxBase extends CheckboxMixin(LitElement) {
             .indeterminate="${this.indeterminate}"
             @change="${this._inputChangeHandler}"
             role="presentation"
-            tabindex="-1">
+            tabindex="-1"
+          />
         </span>
-
-        <span part="label">
-          <slot></slot>
-        </span>
+        <span part="label"><slot></slot></span>
       </label>
     `;
   }

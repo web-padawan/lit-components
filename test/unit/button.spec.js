@@ -32,8 +32,8 @@ describe('button', () => {
 
   it('should define button label using light DOM', () => {
     const children = FlattenedNodesObserver.getFlattenedNodes(label);
-    expect(children[1].textContent).to.be.equal('Lit ');
-    expect(children[2].outerHTML).to.be.equal('<i>Button</i>');
+    expect(children[0].textContent).to.be.equal('Lit ');
+    expect(children[1].outerHTML).to.be.equal('<i>Button</i>');
   });
 
   it('can be disabled imperatively', async () => {

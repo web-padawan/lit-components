@@ -1,6 +1,7 @@
+import { css } from 'lit-css';
 import { RadioGroupBase } from '@lit/radio-group-base';
 import '@vaadin/vaadin-radio-button/theme/material/vaadin-radio-group-styles.js';
-import { includeStyle } from '@lit/style-utils';
+import { getStyleModule } from '@lit/polymer-style-module';
 
 class LitRadioGroupMaterial extends RadioGroupBase {
   static get is() {
@@ -11,10 +12,10 @@ class LitRadioGroupMaterial extends RadioGroupBase {
     return '0.1.0';
   }
 
-  getStyles() {
-    return `
-      ${super.getStyles()}
-      ${includeStyle('material-radio-group')}
+  static get style() {
+    return css`
+      ${super.style}
+      ${getStyleModule('material-radio-group')}
     `;
   }
 }

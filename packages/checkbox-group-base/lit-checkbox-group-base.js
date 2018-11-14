@@ -1,10 +1,17 @@
-import { html, LitElement } from '@polymer/lit-element';
+import { html } from '@polymer/lit-element';
+import { css } from 'lit-css';
+import { StyledLitElement } from 'styled-lit-element';
 import { FlattenedNodesObserver } from '@polymer/polymer/lib/utils/flattened-nodes-observer.js';
 import { CheckboxBase } from '@lit/checkbox-base';
-import { includeStyle } from '@lit/style-utils';
-import './lit-checkbox-group-styles.js';
+import styles from './lit-checkbox-group-styles.js';
 
-export class CheckboxGroupBase extends LitElement {
+export class CheckboxGroupBase extends StyledLitElement {
+  static get style() {
+    return css`
+      ${styles}
+    `;
+  }
+
   static get properties() {
     return {
       /**
@@ -69,25 +76,16 @@ export class CheckboxGroupBase extends LitElement {
     this.value = [];
   }
 
-  getStyles() {
-    return includeStyle('lit-checkbox-group-styles');
-  }
-
   render() {
     return html`
-      <style>
-        ${this.getStyles()}
-      </style>
       <div class="vaadin-group-field-container">
         <label part="label">${this.label}</label>
-        <div part="group-field">
-          <slot id="slot"></slot>
-        </div>
+        <div part="group-field"><slot id="slot"></slot></div>
         <div
           part="error-message"
           aria-live="assertive"
           aria-hidden="${!this.errorMessage || !this.invalid}"
-          >
+        >
           ${this.errorMessage}
         </div>
       </div>

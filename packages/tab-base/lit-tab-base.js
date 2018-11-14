@@ -1,18 +1,18 @@
-import { LitElement, html } from '@polymer/lit-element';
+import { html } from '@polymer/lit-element';
+import { css } from 'lit-css';
+import { StyledLitElement } from 'styled-lit-element';
 import { ItemMixin } from '@lit/item-mixin';
-import { includeStyle } from '@lit/style-utils';
-import './lit-tab-styles.js';
+import styles from './lit-tab-styles.js';
 
-export class TabBase extends ItemMixin(LitElement) {
-  getStyles() {
-    return includeStyle('lit-tab-styles');
+export class TabBase extends ItemMixin(StyledLitElement) {
+  static get style() {
+    return css`
+      ${styles}
+    `;
   }
 
   render() {
     return html`
-      <style>
-        ${this.getStyles()}
-      </style>
       <slot></slot>
     `;
   }

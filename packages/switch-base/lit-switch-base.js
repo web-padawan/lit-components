@@ -1,9 +1,16 @@
-import { html, LitElement } from '@polymer/lit-element';
+import { html } from '@polymer/lit-element';
+import { css } from 'lit-css';
+import { StyledLitElement } from 'styled-lit-element';
 import { CheckboxMixin } from '@lit/checkbox-mixin';
-import { includeStyle } from '@lit/style-utils';
-import './lit-switch-styles.js';
+import styles from './lit-switch-styles.js';
 
-export class SwitchBase extends CheckboxMixin(LitElement) {
+export class SwitchBase extends CheckboxMixin(StyledLitElement) {
+  static get style() {
+    return css`
+      ${styles}
+    `;
+  }
+
   constructor() {
     super();
     if (!this.hasAttribute('checked')) {
@@ -11,15 +18,8 @@ export class SwitchBase extends CheckboxMixin(LitElement) {
     }
   }
 
-  getStyles() {
-    return includeStyle('lit-switch-styles');
-  }
-
   render() {
     return html`
-      <style>
-        ${this.getStyles()}
-      </style>
       <label>
         <span part="track">
           <span part="thumb"></span>
@@ -29,12 +29,10 @@ export class SwitchBase extends CheckboxMixin(LitElement) {
             ?disabled="${this.disabled}"
             @change="${this._inputChangeHandler}"
             role="presentation"
-            tabindex="-1">
+            tabindex="-1"
+          />
         </span>
-
-        <span part="label">
-          <slot></slot>
-        </span>
+        <span part="label"><slot></slot></span>
       </label>
     `;
   }

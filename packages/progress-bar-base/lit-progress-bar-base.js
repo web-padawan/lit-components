@@ -1,8 +1,15 @@
-import { html, LitElement } from '@polymer/lit-element';
-import { includeStyle } from '@lit/style-utils';
-import './lit-progress-bar-styles.js';
+import { html } from '@polymer/lit-element';
+import { css } from 'lit-css';
+import { StyledLitElement } from 'styled-lit-element';
+import styles from './lit-progress-bar-styles.js';
 
-export class ProgressBarBase extends LitElement {
+export class ProgressBarBase extends StyledLitElement {
+  static get style() {
+    return css`
+      ${styles}
+    `;
+  }
+
   constructor() {
     super();
     if (!this.hasAttribute('indeterminate')) {
@@ -50,18 +57,9 @@ export class ProgressBarBase extends LitElement {
     };
   }
 
-  getStyles() {
-    return includeStyle('lit-progress-bar-styles');
-  }
-
   render() {
     return html`
-      <style>
-        ${this.getStyles()}
-      </style>
-      <div part="bar">
-        <div part="value"></div>
-      </div>
+      <div part="bar"><div part="value"></div></div>
     `;
   }
 

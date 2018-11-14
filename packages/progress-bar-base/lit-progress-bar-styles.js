@@ -1,27 +1,23 @@
-import { injectStyle, html } from '@lit/style-utils';
+import { css } from 'lit-css';
 
-const style = html`
-  <style>
-    :host {
-      display: block;
-      width: 100%; /* prevent collapsing inside non-stretching column flex */
-      height: 8px;
-    }
+export default css`
+  :host {
+    display: block;
+    width: 100%; /* prevent collapsing inside non-stretching column flex */
+    height: 8px;
+  }
 
-    :host([hidden]) {
-      display: none !important;
-    }
+  :host([hidden]) {
+    display: none !important;
+  }
 
-    [part="bar"] {
-      height: 100%;
-    }
+  [part='bar'] {
+    height: 100%;
+  }
 
-    [part="value"] {
-      height: 100%;
-      transform-origin: 0 50%;
-      transform: scaleX(var(--vaadin-progress-value));
-    }
-  </style>
+  [part='value'] {
+    height: 100%;
+    transform-origin: 0 50%;
+    transform: scaleX(var(--vaadin-progress-value));
+  }
 `;
-
-injectStyle('lit-progress-bar-styles', style);

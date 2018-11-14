@@ -1,21 +1,19 @@
-import { LitElement, html } from '@polymer/lit-element';
+import { html } from '@polymer/lit-element';
+import { css } from 'lit-css';
+import { StyledLitElement } from 'styled-lit-element';
 import { ItemMixin } from '@lit/item-mixin';
-import { includeStyle } from '@lit/style-utils';
-import './lit-item-styles.js';
+import styles from './lit-item-styles.js';
 
-export class ItemBase extends ItemMixin(LitElement) {
-  getStyles() {
-    return includeStyle('lit-item-styles');
+export class ItemBase extends ItemMixin(StyledLitElement) {
+  static get style() {
+    return css`
+      ${styles}
+    `;
   }
 
   render() {
     return html`
-      <style>
-        ${this.getStyles()}
-      </style>
-      <div part="content">
-        <slot></slot>
-      </div>
+      <div part="content"><slot></slot></div>
     `;
   }
 }

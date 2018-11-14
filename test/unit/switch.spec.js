@@ -30,8 +30,8 @@ describe('switch', () => {
 
   it('should define label using light DOM', () => {
     const children = FlattenedNodesObserver.getFlattenedNodes(label);
-    expect(children[1].textContent).to.be.equal('Lit ');
-    expect(children[2].outerHTML).to.be.equal('<i>switch</i>');
+    expect(children[0].textContent).to.be.equal('Lit ');
+    expect(children[1].outerHTML).to.be.equal('<i>switch</i>');
   });
 
   it('should propagate disabled attribute to the native checkbox', async () => {
@@ -49,7 +49,7 @@ describe('switch', () => {
   });
 
   it('should not toggle on link inside host click', () => {
-    const link = FlattenedNodesObserver.getFlattenedNodes(label)[4];
+    const link = FlattenedNodesObserver.getFlattenedNodes(label)[3];
     expect(link.outerHTML).to.be.equal('<a href="#">Terms &amp; Conditions</a>');
     link.click();
     expect(element.checked).to.be.false;

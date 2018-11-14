@@ -1,6 +1,7 @@
+import { css } from 'lit-css';
 import { ItemBase } from '@lit/item-base';
 import '@vaadin/vaadin-item/theme/lumo/vaadin-item-styles.js';
-import { includeStyle } from '@lit/style-utils';
+import { getStyleModule } from '@lit/polymer-style-module';
 
 class LitItemLumo extends ItemBase {
   static get is() {
@@ -11,10 +12,10 @@ class LitItemLumo extends ItemBase {
     return '0.1.0';
   }
 
-  getStyles() {
-    return `
-      ${super.getStyles()}
-      ${includeStyle('lumo-item')}
+  static get style() {
+    return css`
+      ${super.style}
+      ${getStyleModule('lumo-item')}
     `;
   }
 }

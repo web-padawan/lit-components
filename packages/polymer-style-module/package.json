@@ -1,9 +1,9 @@
 {
-  "name": "@lit/style-utils",
+  "name": "@lit/polymer-style-module",
   "version": "0.1.0",
   "author": "Vaadin Ltd",
   "license": "Apache-2.0",
-  "main": "style-utils.js",
+  "main": "polymer-style-module.js",
   "dependencies": {
     "@polymer/polymer": "^3.0.0"
   },

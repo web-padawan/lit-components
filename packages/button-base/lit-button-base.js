@@ -1,30 +1,24 @@
-import { html, LitElement } from '@polymer/lit-element';
+import { html } from '@polymer/lit-element';
+import { css } from 'lit-css';
+import { StyledLitElement } from 'styled-lit-element';
 import { GestureEventListeners } from '@polymer/polymer/lib/mixins/gesture-event-listeners.js';
 import { addListener } from '@polymer/polymer/lib/utils/gestures.js';
 import { ControlStateMixin } from '@lit/control-state-mixin';
-import { includeStyle } from '@lit/style-utils';
-import './lit-button-styles.js';
+import styles from './lit-button-styles.js';
 
-export class ButtonBase extends ControlStateMixin(GestureEventListeners(LitElement)) {
-  getStyles() {
-    return includeStyle('lit-button-styles');
+export class ButtonBase extends ControlStateMixin(GestureEventListeners(StyledLitElement)) {
+  static get style() {
+    return css`
+      ${styles}
+    `;
   }
 
   render() {
     return html`
-      <style>
-        ${this.getStyles()}
-      </style>
       <div class="vaadin-button-container">
-        <div part="prefix">
-          <slot name="prefix"></slot>
-        </div>
-        <div part="label">
-          <slot></slot>
-        </div>
-        <div part="suffix">
-          <slot name="suffix"></slot>
-        </div>
+        <div part="prefix"><slot name="prefix"></slot></div>
+        <div part="label"><slot></slot></div>
+        <div part="suffix"><slot name="suffix"></slot></div>
       </div>
       <button type="button" role="presentation"></button>
     `;

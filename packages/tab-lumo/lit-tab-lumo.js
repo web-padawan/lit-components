@@ -1,6 +1,7 @@
+import { css } from 'lit-css';
 import { TabBase } from '@lit/tab-base';
 import '@vaadin/vaadin-tabs/theme/lumo/vaadin-tab-styles.js';
-import { includeStyle } from '@lit/style-utils';
+import { getStyleModule } from '@lit/polymer-style-module';
 
 class LitTabLumo extends TabBase {
   static get is() {
@@ -11,10 +12,10 @@ class LitTabLumo extends TabBase {
     return '0.1.0';
   }
 
-  getStyles() {
-    return `
-      ${super.getStyles()}
-      ${includeStyle('lumo-tab')}
+  static get style() {
+    return css`
+      ${super.style}
+      ${getStyleModule('lumo-tab')}
     `;
   }
 }

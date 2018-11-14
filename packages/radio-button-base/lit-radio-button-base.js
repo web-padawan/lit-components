@@ -1,10 +1,17 @@
-import { html, LitElement } from '@polymer/lit-element';
+import { html } from '@polymer/lit-element';
+import { css } from 'lit-css';
+import { StyledLitElement } from 'styled-lit-element';
 import { GestureEventListeners } from '@polymer/polymer/lib/mixins/gesture-event-listeners.js';
 import { ControlStateMixin } from '@lit/control-state-mixin';
-import { includeStyle } from '@lit/style-utils';
-import './lit-radio-button-styles.js';
+import styles from './lit-radio-button-styles.js';
 
-export class RadioButtonBase extends ControlStateMixin(GestureEventListeners(LitElement)) {
+export class RadioButtonBase extends ControlStateMixin(GestureEventListeners(StyledLitElement)) {
+  static get style() {
+    return css`
+      ${styles}
+    `;
+  }
+
   static get properties() {
     return {
       /**
@@ -34,16 +41,8 @@ export class RadioButtonBase extends ControlStateMixin(GestureEventListeners(Lit
     }
   }
 
-  getStyles() {
-    return includeStyle('lit-radio-button-styles');
-  }
-
   render() {
     return html`
-      <style>
-        ${this.getStyles()}
-      </style>
-
       <label>
         <span part="radio">
           <input
@@ -52,12 +51,10 @@ export class RadioButtonBase extends ControlStateMixin(GestureEventListeners(Lit
             ?disabled="${this.disabled}"
             @change="${this._inputChangeHandler}"
             role="presentation"
-            tabindex="-1">
+            tabindex="-1"
+          />
         </span>
-
-        <span part="label">
-          <slot></slot>
-        </span>
+        <span part="label"><slot></slot></span>
       </label>
     `;
   }

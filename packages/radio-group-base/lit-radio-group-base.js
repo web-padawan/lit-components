@@ -1,39 +1,38 @@
-import { html, LitElement } from '@polymer/lit-element';
+import { html } from '@polymer/lit-element';
+import { css } from 'lit-css';
+import { StyledLitElement } from 'styled-lit-element';
 import { FlattenedNodesObserver } from '@polymer/polymer/lib/utils/flattened-nodes-observer.js';
-import { includeStyle } from '@lit/style-utils';
 import { RadioButtonBase } from '@lit/radio-button-base';
-import './lit-radio-group-styles.js';
+import styles from './lit-radio-group-styles.js';
 
 let uniqueId = 0;
 
-export class RadioGroupBase extends LitElement {
+export class RadioGroupBase extends StyledLitElement {
+  static get style() {
+    return css`
+      ${styles}
+    `;
+  }
+
   constructor() {
     super();
     this._errorId = `lit-radio-group-error-${++uniqueId}`;
     this.invalid = false;
   }
 
-  getStyles() {
-    return includeStyle('lit-radio-group-styles');
-  }
-
   render() {
     return html`
-      <style>
-        ${this.getStyles()}
-      </style>
-
       <div class="vaadin-group-field-container">
         <label part="label">${this.label}</label>
-        <div part="group-field">
-          <slot></slot>
-        </div>
+        <div part="group-field"><slot></slot></div>
         <div
           part="error-message"
           id="${this._errorId}"
           aria-live="assertive"
           aria-hidden="${!(this.invalid && this.errorMessage)}"
-        >${this.errorMessage}</div>
+        >
+          ${this.errorMessage}
+        </div>
       </div>
     `;
   }

@@ -1,40 +1,36 @@
-import { injectStyle, html } from '@lit/style-utils';
+import { css } from 'lit-css';
 
-const style = html`
-  <style>
-    :host {
-      display: inline-block;
-      outline: none;
-    }
+export default css`
+  :host {
+    display: inline-block;
+    outline: none;
+  }
 
-    label {
-      display: inline-flex;
-      align-items: baseline;
-      outline: none;
-    }
+  label {
+    display: inline-flex;
+    align-items: baseline;
+    outline: none;
+  }
 
-    [part="radio"] {
-      position: relative;
-      display: inline-block;
-      flex: none;
-    }
+  [part='radio'] {
+    position: relative;
+    display: inline-block;
+    flex: none;
+  }
 
-    input[type="radio"] {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      opacity: 0;
-      cursor: inherit;
-      margin: 0;
-    }
+  input[type='radio'] {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    cursor: inherit;
+    margin: 0;
+  }
 
-    :host([disabled]) {
-      pointer-events: none;
-      -webkit-tap-highlight-color: transparent;
-    }
-  </style>
+  :host([disabled]) {
+    pointer-events: none;
+    -webkit-tap-highlight-color: transparent;
+  }
 `;
-
-injectStyle('lit-radio-button-styles', style);

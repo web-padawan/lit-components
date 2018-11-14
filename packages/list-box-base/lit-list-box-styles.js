@@ -1,22 +1,18 @@
-import { injectStyle, html } from '@lit/style-utils';
+import { css } from 'lit-css';
 
-const style = html`
-  <style>
-    :host {
-      display: flex;
-    }
+export default css`
+  :host {
+    display: flex;
+  }
 
-    :host([hidden]) {
-      display: none !important;
-    }
+  :host([hidden]) {
+    display: none !important;
+  }
 
-    [part="items"] {
-      height: 100%;
-      width: 100%;
-      overflow-y: auto;
-      -webkit-overflow-scrolling: touch;
-    }
-  </style>
+  [part='items'] {
+    height: 100%;
+    width: 100%;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+  }
 `;
-
-injectStyle('lit-list-box-styles', style);

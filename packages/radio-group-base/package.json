@@ -6,9 +6,8 @@
   "main": "lit-radio-group-base.js",
   "dependencies": {
     "@lit/radio-button-base": "^0.1.0",
-    "@lit/style-utils": "^0.1.0",
-    "@polymer/lit-element": "0.6.2",
-    "@polymer/polymer": "^3.0.0"
+    "@polymer/polymer": "^3.0.0",
+    "styled-lit-element": "0.1.0"
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"

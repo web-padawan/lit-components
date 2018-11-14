@@ -1,6 +1,7 @@
+import { css } from 'lit-css';
 import { CheckboxGroupBase } from '@lit/checkbox-group-base';
 import '@vaadin/vaadin-checkbox/theme/material/vaadin-checkbox-group-styles.js';
-import { includeStyle } from '@lit/style-utils';
+import { getStyleModule } from '@lit/polymer-style-module';
 
 class LitCheckboxGroupMaterial extends CheckboxGroupBase {
   static get is() {
@@ -11,10 +12,10 @@ class LitCheckboxGroupMaterial extends CheckboxGroupBase {
     return '0.1.0';
   }
 
-  getStyles() {
-    return `
-      ${super.getStyles()}
-      ${includeStyle('material-checkbox-group')}
+  static get style() {
+    return css`
+      ${super.style}
+      ${getStyleModule('material-checkbox-group')}
     `;
   }
 }

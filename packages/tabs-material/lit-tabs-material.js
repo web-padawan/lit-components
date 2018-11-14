@@ -1,6 +1,7 @@
+import { css } from 'lit-css';
 import { TabsBase } from '@lit/tabs-base';
 import '@vaadin/vaadin-tabs/theme/material/vaadin-tabs-styles.js';
-import { includeStyle } from '@lit/style-utils';
+import { getStyleModule } from '@lit/polymer-style-module';
 
 class LitTabsMaterial extends TabsBase {
   static get is() {
@@ -11,10 +12,10 @@ class LitTabsMaterial extends TabsBase {
     return '0.1.0';
   }
 
-  getStyles() {
-    return `
-      ${super.getStyles()}
-      ${includeStyle('material-tabs')}
+  static get style() {
+    return css`
+      ${super.style}
+      ${getStyleModule('material-tabs')}
     `;
   }
 }

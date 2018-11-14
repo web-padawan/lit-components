@@ -1,30 +1,26 @@
-import { injectStyle, html } from '@lit/style-utils';
+import { css } from 'lit-css';
 
-const style = html`
-  <style>
-    :host {
-      display: inline-flex;
-    }
+export default css`
+  :host {
+    display: inline-flex;
+  }
 
-    :host::before {
-      content: "\\2003";
-      width: 0;
-      display: inline-block;
-    }
+  :host::before {
+    content: '\\2003';
+    width: 0;
+    display: inline-block;
+  }
 
-    :host([hidden]) {
-      display: none !important;
-    }
+  :host([hidden]) {
+    display: none !important;
+  }
 
-    .vaadin-group-field-container {
-      display: flex;
-      flex-direction: column;
-    }
+  .vaadin-group-field-container {
+    display: flex;
+    flex-direction: column;
+  }
 
-    [part="label"]:empty {
-      display: none;
-    }
-  </style>
+  [part='label']:empty {
+    display: none;
+  }
 `;
-
-injectStyle('lit-checkbox-group-styles', style);

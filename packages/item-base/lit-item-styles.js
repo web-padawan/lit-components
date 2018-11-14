@@ -1,15 +1,11 @@
-import { injectStyle, html } from '@lit/style-utils';
+import { css } from 'lit-css';
 
-const style = html`
-  <style>
-    :host {
-      display: inline-block;
-    }
+export default css`
+  :host {
+    display: inline-block;
+  }
 
-    :host([hidden]) {
-      display: none !important;
-    }
-  </style>
+  :host([hidden]) {
+    display: none !important;
+  }
 `;
-
-injectStyle('lit-item-styles', style);
