@@ -15,7 +15,7 @@ class LitButtonMaterial extends ButtonBase {
   static get style() {
     return css`
       ${super.style}
-      ${getStyleModule('lumo-button')}
+      ${getStyleModule('material-button')}
     `;
   }
 }
