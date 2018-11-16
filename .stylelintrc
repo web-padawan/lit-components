@@ -11,5 +11,8 @@
   "extends": [
     "stylelint-config-standard",
     "stylelint-config-prettier"
-  ]
+  ],
+  "rules": {
+    "no-empty-source": null
+  }
 }
