@@ -56,8 +56,8 @@ export default css`
     z-index: -1;
   }
 
-  :host([focused]) [part='thumb']::before,
-  :host(:hover) [part='thumb']::before {
+  :host(:hover) [part='thumb']::before,
+  :host([focused]) [part='thumb']::before {
     transform: scale(2.4);
     opacity: 0.08;
   }

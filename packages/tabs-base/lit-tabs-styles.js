@@ -29,14 +29,14 @@ export default css`
     }
   }
 
-  :host([orientation='horizontal']) [part='tabs']::-webkit-scrollbar {
-    display: none;
-  }
-
   :host([orientation='vertical']) [part='tabs'] {
     height: 100%;
     overflow-y: auto;
     -webkit-overflow-scrolling: touch;
+  }
+
+  :host([orientation='horizontal']) [part='tabs']::-webkit-scrollbar {
+    display: none;
   }
 
   [part='back-button'],

@@ -27,6 +27,10 @@ export default css`
     transform: translateX(1.125rem);
   }
 
+  :host([focus-ring]) [part='track'] {
+    box-shadow: 0 0 0 3px var(--lumo-primary-color-50pct);
+  }
+
   :host([checked][disabled]) [part='track'] {
     background-color: var(--lumo-primary-color);
     opacity: 0.3;
@@ -34,10 +38,6 @@ export default css`
 
   [part='label']:not([empty]) {
     margin: 0.1875em 0.875em 0.1875em 0.375em;
-  }
-
-  :host([focus-ring]) [part='track'] {
-    box-shadow: 0 0 0 3px var(--lumo-primary-color-50pct);
   }
 
   :host([disabled]) {
