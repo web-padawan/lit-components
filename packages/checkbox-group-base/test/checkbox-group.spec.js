@@ -3,7 +3,7 @@ import { render } from 'lit-html';
 import '@polymer/iron-form/iron-form.js';
 import { CheckboxBase } from '@lit/checkbox-base';
 import { CheckboxGroupBase } from '@lit/checkbox-group-base';
-import { focusout } from '../helpers/events.js';
+import { focusout } from '@lit/test-helpers';
 
 customElements.define('lit-checkbox', class extends CheckboxBase {});
 customElements.define('lit-checkbox-group', class extends CheckboxGroupBase {});

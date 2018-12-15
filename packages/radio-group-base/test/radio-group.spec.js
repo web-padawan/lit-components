@@ -2,8 +2,7 @@ import { html } from '@polymer/lit-element';
 import { render } from 'lit-html';
 import { RadioButtonBase } from '@lit/radio-button-base';
 import { RadioGroupBase } from '@lit/radio-group-base';
-import { arrowDown, arrowLeft, arrowRight, arrowUp } from '../helpers/keys.js';
-import { focusout } from '../helpers/events.js';
+import { arrowDown, arrowLeft, arrowRight, arrowUp, focusout } from '@lit/test-helpers';
 
 customElements.define('lit-radio-button', class extends RadioButtonBase {});
 customElements.define('lit-radio-group', class extends RadioGroupBase {});

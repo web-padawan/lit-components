@@ -11,7 +11,7 @@ import {
   home,
   end,
   keyDownChar
-} from '../helpers/keys.js';
+} from '@lit/test-helpers';
 
 describe('list-mixin', () => {
   function click(target, modifier) {
@@ -29,9 +29,7 @@ describe('list-mixin', () => {
     class extends ItemMixin(LitElement) {
       render() {
         return html`
-          <div>
-            <slot></slot>
-          </div>
+          <div><slot></slot></div>
         `;
       }
     }
@@ -52,14 +50,12 @@ describe('list-mixin', () => {
               display: flex;
             }
 
-            :host([orientation="vertical"]) #scroll {
+            :host([orientation='vertical']) #scroll {
               height: 100%;
               flex-direction: column;
             }
           </style>
-          <div id="scroll">
-            <slot></slot>
-          </div>
+          <div id="scroll"><slot></slot></div>
         `;
       }
       get _scrollerElement() {
@@ -72,14 +68,13 @@ describe('list-mixin', () => {
     <x-list style="width: 400px; height: 400px;">
       <list-item>Foo</list-item>
       <list-item>Bar</list-item>
-      <hr>
+      <hr />
       <list-item disabled>Bay</list-item>
       <list-item><span>Baz</span></list-item>
-      <hr>
+      <hr />
       <list-item disabled>Qux</list-item>
       <list-item>
-        <img src="data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=">
-        <span>Xyzzy</span>
+        <img src="data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=" /> <span>Xyzzy</span>
       </list-item>
     </x-list>
   `;

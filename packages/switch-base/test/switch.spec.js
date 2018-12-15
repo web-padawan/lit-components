@@ -3,7 +3,7 @@ import { render } from 'lit-html';
 import { FlattenedNodesObserver } from '@polymer/polymer/lib/utils/flattened-nodes-observer.js';
 import '@polymer/iron-form/iron-form.js';
 import { SwitchBase } from '@lit/switch-base';
-import { change } from '../helpers/events';
+import { change } from '@lit/test-helpers';
 
 customElements.define('lit-switch', class extends SwitchBase {});
 

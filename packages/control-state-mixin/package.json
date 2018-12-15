@@ -4,7 +4,8 @@
   "author": "Vaadin Ltd",
   "license": "Apache-2.0",
   "main": "control-state-mixin.js",
-  "dependencies": {
+  "devDependencies": {
+    "@lit/test-helpers": "0.1.0",
     "@polymer/lit-element": "^0.6.4"
   },
   "scripts": {

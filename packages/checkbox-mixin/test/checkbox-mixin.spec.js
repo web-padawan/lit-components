@@ -1,7 +1,6 @@
 import { LitElement, html } from '@polymer/lit-element';
 import { CheckboxMixin } from '@lit/checkbox-mixin';
-import { spaceDown, spaceUp } from '../helpers/keys.js';
-import { down, up } from '../helpers/events.js';
+import { down, up, spaceDown, spaceUp } from '@lit/test-helpers';
 
 customElements.define(
   'check-box',
@@ -9,10 +8,7 @@ customElements.define(
     render() {
       return html`
         <label>
-          <span part="label">
-            <slot></slot>
-          </span>
-          <input type="checkbox">
+          <span part="label"> <slot></slot> </span> <input type="checkbox" />
         </label>
       `;
     }

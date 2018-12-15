@@ -2,7 +2,7 @@ import { html } from '@polymer/lit-element';
 import { render } from 'lit-html';
 import { TabsBase } from '@lit/tabs-base';
 import { TabBase } from '@lit/tab-base';
-import { arrowDown, arrowLeft, arrowRight, arrowUp } from '../helpers/keys.js';
+import { arrowDown, arrowLeft, arrowRight, arrowUp } from '@lit/test-helpers';
 
 customElements.define('x-tabs', class extends TabsBase {});
 customElements.define('x-tab', class extends TabBase {});

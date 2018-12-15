@@ -1,6 +1,8 @@
 import { ControlStateMixin } from '@lit/control-state-mixin';
 import { html, LitElement } from '@polymer/lit-element';
 import {
+  focusin,
+  focusout,
   shiftTabDown,
   shiftTabEvent,
   shiftTabUp,
@@ -8,8 +10,7 @@ import {
   spaceUp,
   tabDown,
   tabUp
-} from '../helpers/keys.js';
-import { focusin, focusout } from '../helpers/events.js';
+} from '@lit/test-helpers';
 
 class TestWrapper extends ControlStateMixin(LitElement) {
   render() {
@@ -28,8 +29,7 @@ customElements.define('test-wrapper', TestWrapper);
 class TestElement extends ControlStateMixin(LitElement) {
   render() {
     return html`
-      <input id="input">
-      <input id="secondInput">
+      <input id="input" /> <input id="secondInput" />
     `;
   }
 

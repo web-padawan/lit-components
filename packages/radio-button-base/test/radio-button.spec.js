@@ -2,8 +2,7 @@ import { LitElement, html } from '@polymer/lit-element';
 import { render } from 'lit-html';
 import '@polymer/iron-form/iron-form.js';
 import { RadioButtonBase } from '@lit/radio-button-base';
-import { spaceDown, spaceUp } from '../helpers/keys.js';
-import { change, down, up } from '../helpers/events.js';
+import { change, down, up, spaceDown, spaceUp } from '@lit/test-helpers';
 
 customElements.define('lit-radio', class extends RadioButtonBase {});
 
@@ -112,13 +111,13 @@ describe('iron-form radio-button', () => {
     class XRadio extends LitElement {
       render() {
         return html`
-        <iron-form id="form">
-          <form>
-            <lit-radio id="boundname" name="${this.radioButtonName}"></lit-radio>
-            <lit-radio id="attrname" name="attrradiobutton"></lit-radio>
-          </form>
-        </iron-form>
-      `;
+          <iron-form id="form">
+            <form>
+              <lit-radio id="boundname" name="${this.radioButtonName}"></lit-radio>
+              <lit-radio id="attrname" name="attrradiobutton"></lit-radio>
+            </form>
+          </iron-form>
+        `;
       }
 
       static get properties() {

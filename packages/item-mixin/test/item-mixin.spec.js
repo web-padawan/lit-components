@@ -1,8 +1,16 @@
 import { LitElement, html } from '@polymer/lit-element';
 import { render } from 'lit-html';
 import { ItemMixin } from '@lit/item-mixin';
-import { enter, spaceDown, spaceUp, space } from '../helpers/keys.js';
-import { blur, focus, mousedown, mouseup } from '../helpers/events.js';
+import {
+  enter,
+  spaceDown,
+  spaceUp,
+  space,
+  blur,
+  focus,
+  mousedown,
+  mouseup
+} from '@lit/test-helpers';
 
 describe('item-mixin', () => {
   customElements.define(
@@ -10,9 +18,7 @@ describe('item-mixin', () => {
     class extends ItemMixin(LitElement) {
       render() {
         return html`
-          <div>
-            <slot></slot>
-          </div>
+          <div><slot></slot></div>
         `;
       }
     }
@@ -189,9 +195,7 @@ describe('item-mixin', () => {
 
   describe('with clickable child', () => {
     const fixture = html`
-      <x-item>
-        <button>text-content</button>
-      </x-item>
+      <x-item> <button>text-content</button> </x-item>
     `;
 
     beforeEach(async () => {

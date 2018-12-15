@@ -2,8 +2,16 @@ import { html } from '@polymer/lit-element';
 import { render } from 'lit-html';
 import { FlattenedNodesObserver } from '@polymer/polymer/lib/utils/flattened-nodes-observer.js';
 import { ButtonBase } from '@lit/button-base';
-import { downAndUp, enterDown, enterUp, spaceDown, spaceUp } from '../helpers/keys.js';
-import { blur, down, up } from '../helpers/events.js';
+import {
+  blur,
+  down,
+  up,
+  downAndUp,
+  enterDown,
+  enterUp,
+  spaceDown,
+  spaceUp
+} from '@lit/test-helpers';
 
 customElements.define('lit-button', class extends ButtonBase {});
 
