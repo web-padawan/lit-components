@@ -5,7 +5,7 @@
   "license": "Apache-2.0",
   "main": "lit-item-mixin.js",
   "dependencies": {
-    "@polymer/lit-element": "^0.6.4"
+    "@polymer/lit-element": "^0.6.5"
   },
   "devDependencies": {
     "@lit/test-helpers": "0.1.0"
