@@ -5,14 +5,21 @@
   ],
   "env": {
     "browser": true,
-    "mocha": true,
     "node": true,
     "es6": true
   },
-  "globals": {
-    "expect": false,
-    "sinon": false
-  },
+  "overrides": [
+    {
+      "files": [ "packages/**/test/*.spec.js" ],
+      "env": {
+        "mocha": true
+      },
+      "globals": {
+        "expect": false,
+        "sinon": false
+      }
+    }
+  ],
   "parser": "babel-eslint",
   "parserOptions": {
     "ecmaVersion": 7,
