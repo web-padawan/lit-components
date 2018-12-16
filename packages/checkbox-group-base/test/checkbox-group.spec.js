@@ -2,8 +2,8 @@ import { html } from '@polymer/lit-element';
 import { render } from 'lit-html';
 import '@polymer/iron-form/iron-form.js';
 import { CheckboxBase } from '@lit/checkbox-base';
-import { CheckboxGroupBase } from '@lit/checkbox-group-base';
 import { focusout } from '@lit/test-helpers';
+import { CheckboxGroupBase } from '../lit-checkbox-group-base.js';
 
 customElements.define('lit-checkbox', class extends CheckboxBase {});
 customElements.define('lit-checkbox-group', class extends CheckboxGroupBase {});
@@ -17,7 +17,8 @@ describe('checkbox group', () => {
     </lit-checkbox-group>
   `;
 
-  let checkboxGroup, checkboxList;
+  let checkboxGroup;
+  let checkboxList;
 
   beforeEach(async () => {
     const div = document.createElement('div');
@@ -56,8 +57,9 @@ describe('checkbox group', () => {
   });
 
   it('should warn if dynamically added checkbox does not have value attribute', async () => {
-    const warn = console.warn;
-    const spy = (console.warn = sinon.spy());
+    const warn = { console };
+    const spy = sinon.spy();
+    console.warn = spy;
     const checkbox = document.createElement('lit-checkbox');
     checkboxGroup.appendChild(checkbox);
     checkboxGroup._observer.flush();
@@ -87,7 +89,7 @@ describe('checkbox group', () => {
   });
 
   it('should create new array instance for checkbox group value when checkbox is added', async () => {
-    const value = checkboxGroup.value;
+    const value = { checkboxGroup };
     const checkbox = document.createElement('lit-checkbox');
     checkbox.setAttribute('value', 'new');
     checkbox.setAttribute('checked', '');
@@ -98,7 +100,7 @@ describe('checkbox group', () => {
   });
 
   it('should create new array instance for checkbox group value when checkbox is removed', async () => {
-    const value = checkboxGroup.value;
+    const value = { checkboxGroup };
     const checkbox = checkboxList[0];
     checkbox.checked = true;
     checkboxGroup.removeChild(checkbox);
@@ -227,7 +229,9 @@ describe('checkbox group', () => {
 });
 
 describe('checkbox group validation', () => {
-  let checkboxGroup, checkboxList, ironForm;
+  let checkboxGroup;
+  let checkboxList;
+  let ironForm;
 
   const fixture = html`
     <iron-form>

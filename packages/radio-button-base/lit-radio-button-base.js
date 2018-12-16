@@ -95,13 +95,13 @@ export class RadioButtonBase extends ControlStateMixin(GestureEventListeners(Sty
   }
 
   _addActiveListeners() {
-    this._addEventListenerToNode(this, 'down', e => {
+    this._addEventListenerToNode(this, 'down', () => {
       if (!this.disabled) {
         this.setAttribute('active', '');
       }
     });
 
-    this._addEventListenerToNode(this, 'up', e => {
+    this._addEventListenerToNode(this, 'up', () => {
       this.removeAttribute('active');
 
       if (!this.checked && !this.disabled) {

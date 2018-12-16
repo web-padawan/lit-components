@@ -1,8 +1,8 @@
 import { LitElement, html } from '@polymer/lit-element';
 import { render } from 'lit-html';
 import '@polymer/iron-form/iron-form.js';
-import { RadioButtonBase } from '@lit/radio-button-base';
 import { change, down, up, spaceDown, spaceUp } from '@lit/test-helpers';
+import { RadioButtonBase } from '../lit-radio-button-base.js';
 
 customElements.define('lit-radio', class extends RadioButtonBase {});
 
@@ -11,7 +11,9 @@ describe('radio-button', () => {
     <lit-radio name="test-radio">Radio <b>Button</b></lit-radio>
   `;
 
-  let radio, nativeRadio, label;
+  let radio;
+  let nativeRadio;
+  let label;
 
   beforeEach(async () => {
     const div = document.createElement('div');
@@ -135,54 +137,59 @@ describe('iron-form radio-button', () => {
     }
   );
 
-  let xRadio, boundNameRadioButton, attrNameRadioButton, form;
+  let wrapper;
+  let radio;
+  let form;
 
   beforeEach(async () => {
-    xRadio = document.createElement('x-radio');
-    document.body.appendChild(xRadio);
-    await xRadio.updateComplete;
-    form = xRadio.shadowRoot.querySelector('iron-form');
-    boundNameRadioButton = xRadio.shadowRoot.querySelector('#boundname');
-    attrNameRadioButton = xRadio.shadowRoot.querySelector('#attrname');
-    await Promise.all([boundNameRadioButton.updateComplete, attrNameRadioButton.updateComplete]);
+    wrapper = document.createElement('x-radio');
+    document.body.appendChild(wrapper);
+    await wrapper.updateComplete;
+    form = wrapper.shadowRoot.querySelector('iron-form');
   });
 
   afterEach(() => {
-    xRadio.parentNode.removeChild(xRadio);
+    wrapper.parentNode.removeChild(wrapper);
   });
 
   it('should serialize', () => {
-    boundNameRadioButton.checked = true;
-    expect(boundNameRadioButton.name).to.equal('boundradiobutton');
+    radio = wrapper.shadowRoot.querySelector('#boundname');
+    radio.checked = true;
+    expect(radio.name).to.equal('boundradiobutton');
     expect(form.serializeForm().boundradiobutton).to.equal('on');
   });
 
   it('should serialize with a custom value', () => {
-    boundNameRadioButton.checked = true;
-    boundNameRadioButton.value = 'foo';
+    radio = wrapper.shadowRoot.querySelector('#boundname');
+    radio.checked = true;
+    radio.value = 'foo';
     expect(form.serializeForm().boundradiobutton).to.equal('foo');
   });
 
   it('should not serialize when not checked', () => {
-    expect(boundNameRadioButton.name).to.be.empty;
+    radio = wrapper.shadowRoot.querySelector('#boundname');
+    expect(radio.name).to.be.empty;
     expect(form.serializeForm()).to.be.empty;
   });
 
   it('should not serialize without a name', () => {
-    boundNameRadioButton.checked = true;
-    boundNameRadioButton.name = '';
+    radio = wrapper.shadowRoot.querySelector('#boundname');
+    radio.checked = true;
+    radio.name = '';
     expect(form.serializeForm()).to.be.empty;
   });
 
   it('should not serialize after unchecked', () => {
-    boundNameRadioButton.checked = true;
-    boundNameRadioButton.checked = false;
+    radio = wrapper.shadowRoot.querySelector('#boundname');
+    radio.checked = true;
+    radio.checked = false;
     expect(form.serializeForm()).to.be.empty;
   });
 
   it('should define the name from an attribute', async () => {
-    attrNameRadioButton.checked = true;
-    await attrNameRadioButton.updateComplete;
+    radio = wrapper.shadowRoot.querySelector('#attrname');
+    radio.checked = true;
+    await radio.updateComplete;
     expect(form.serializeForm().attrradiobutton).to.equal('on');
   });
 });

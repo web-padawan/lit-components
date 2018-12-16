@@ -1,7 +1,6 @@
 import { LitElement, html } from '@polymer/lit-element';
 import { render } from 'lit-html';
 import { ItemMixin } from '@lit/item-mixin';
-import { ListMixin } from '@lit/list-mixin';
 import {
   arrowDown,
   arrowDownIE,
@@ -12,6 +11,7 @@ import {
   end,
   keyDownChar
 } from '@lit/test-helpers';
+import { ListMixin } from '../lit-list-mixin.js';
 
 describe('list-mixin', () => {
   function click(target, modifier) {
@@ -58,6 +58,7 @@ describe('list-mixin', () => {
           <div id="scroll"><slot></slot></div>
         `;
       }
+
       get _scrollerElement() {
         return this.shadowRoot.getElementById('scroll');
       }
@@ -130,7 +131,7 @@ describe('list-mixin', () => {
 
   describe('selection', () => {
     it('should not select any item by default', () => {
-      list.items.forEach(e => expect(!!list.items[0].selected).to.be.false);
+      list.items.forEach(item => expect(item.selected).to.be.not.ok);
     });
 
     it('should select an item when `selected` property is set', async () => {
@@ -363,7 +364,8 @@ describe('list-mixin', () => {
 
   describe('scroll', () => {
     beforeEach(() => {
-      list.style.width = list.style.height = '50px';
+      list.style.width = '50px';
+      list.style.height = '50px';
     });
 
     it('should move scroll horizontally when orientation is horizontal', () => {

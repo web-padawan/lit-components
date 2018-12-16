@@ -1,4 +1,4 @@
-import { TabBase } from '@lit/tab-base';
+import { TabBase } from '../lit-tab-base.js';
 
 describe('tab', () => {
   customElements.define('test-tab', class extends TabBase {});

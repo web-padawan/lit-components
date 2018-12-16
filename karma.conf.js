@@ -1,7 +1,7 @@
 const path = require('path');
 const { rules } = require('./utils/webpack.common.js');
 
-module.exports = function(config) {
+module.exports = config => {
   config.set({
     basePath: '',
     singleRun: true,

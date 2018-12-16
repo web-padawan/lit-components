@@ -1,9 +1,10 @@
-import { ProgressBarBase } from '@lit/progress-bar-base';
+import { ProgressBarBase } from '../lit-progress-bar-base.js';
 
 customElements.define('lit-progress', class extends ProgressBarBase {});
 
 describe('progress-bar', () => {
-  let progress, value;
+  let progress;
+  let value;
 
   beforeEach(async () => {
     progress = document.createElement('lit-progress');
@@ -18,11 +19,9 @@ describe('progress-bar', () => {
 
   function getProgressValue(element) {
     const prop = '--vaadin-progress-value';
-    if (window.ShadyCSS) {
-      return window.ShadyCSS.getComputedStyleValue(element, prop);
-    } else {
-      return window.getComputedStyle(element).getPropertyValue(prop);
-    }
+    return window.ShadyCSS
+      ? window.ShadyCSS.getComputedStyleValue(element, prop)
+      : window.getComputedStyle(element).getPropertyValue(prop);
   }
 
   it('should have proper scale', async () => {
@@ -107,7 +106,8 @@ describe('progress-bar', () => {
 });
 
 describe('progress-bar in column flex layout', () => {
-  let layout, progress;
+  let layout;
+  let progress;
 
   beforeEach(async () => {
     layout = document.createElement('div');

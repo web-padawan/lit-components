@@ -5,6 +5,10 @@ import { FlattenedNodesObserver } from '@polymer/polymer/lib/utils/flattened-nod
 import { CheckboxBase } from '@lit/checkbox-base';
 import styles from './lit-checkbox-group-styles.js';
 
+function filterCheckboxes(nodes) {
+  return Array.from(nodes).filter(child => child instanceof CheckboxBase);
+}
+
 export class CheckboxGroupBase extends StyledLitElement {
   static get style() {
     return css`
@@ -96,7 +100,7 @@ export class CheckboxGroupBase extends StyledLitElement {
     const checkedChangedListener = e => this._changeSelectedCheckbox(e.target);
 
     this._observer = new FlattenedNodesObserver(this, info => {
-      const addedCheckboxes = this._filterCheckboxes(info.addedNodes);
+      const addedCheckboxes = filterCheckboxes(info.addedNodes);
 
       addedCheckboxes.forEach(checkbox => {
         checkbox.addEventListener('checked-changed', checkedChangedListener);
@@ -109,7 +113,7 @@ export class CheckboxGroupBase extends StyledLitElement {
         }
       });
 
-      this._filterCheckboxes(info.removedNodes).forEach(checkbox => {
+      filterCheckboxes(info.removedNodes).forEach(checkbox => {
         checkbox.removeEventListener('checked-changed', checkedChangedListener);
         if (checkbox.checked) {
           this._removeCheckboxFromValue(checkbox.value);
@@ -154,7 +158,7 @@ export class CheckboxGroupBase extends StyledLitElement {
   }
 
   get _checkboxes() {
-    return this._filterCheckboxes(this.querySelectorAll('*'));
+    return filterCheckboxes(this.querySelectorAll('*'));
   }
 
   /**
@@ -168,14 +172,12 @@ export class CheckboxGroupBase extends StyledLitElement {
     return !this.invalid;
   }
 
-  _filterCheckboxes(nodes) {
-    return Array.from(nodes).filter(child => child instanceof CheckboxBase);
-  }
-
   _disabledChanged(disabled) {
     this.setAttribute('aria-disabled', disabled);
 
-    this._checkboxes.forEach(checkbox => (checkbox.disabled = disabled));
+    this._checkboxes.forEach(checkbox => {
+      checkbox.disabled = disabled;
+    });
   }
 
   _addCheckboxToValue(value) {

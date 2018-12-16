@@ -2,8 +2,8 @@ import { LitElement, html } from '@polymer/lit-element';
 import { render } from 'lit-html';
 import { FlattenedNodesObserver } from '@polymer/polymer/lib/utils/flattened-nodes-observer.js';
 import '@polymer/iron-form/iron-form.js';
-import { CheckboxBase } from '@lit/checkbox-base';
 import { change, downAndUp, spaceDown, spaceUp } from '@lit/test-helpers';
+import { CheckboxBase } from '../lit-checkbox-base.js';
 
 customElements.define('lit-check', class extends CheckboxBase {});
 
@@ -14,7 +14,9 @@ describe('checkbox', () => {
     >
   `;
 
-  let checkbox, nativeCheckbox, label;
+  let checkbox;
+  let nativeCheckbox;
+  let label;
 
   beforeEach(async () => {
     const div = document.createElement('div');
@@ -269,54 +271,59 @@ describe('iron-form checkbox', () => {
     }
   );
 
-  let xCheckbox, boundNameCheckbox, attrNameCheckbox, form;
+  let wrapper;
+  let checkbox;
+  let form;
 
   beforeEach(async () => {
-    xCheckbox = document.createElement('x-checkbox');
-    document.body.appendChild(xCheckbox);
-    await xCheckbox.updateComplete;
-    form = xCheckbox.shadowRoot.querySelector('iron-form');
-    boundNameCheckbox = xCheckbox.shadowRoot.querySelector('#boundname');
-    attrNameCheckbox = xCheckbox.shadowRoot.querySelector('#attrname');
-    await Promise.all([boundNameCheckbox.updateComplete, attrNameCheckbox.updateComplete]);
+    wrapper = document.createElement('x-checkbox');
+    document.body.appendChild(wrapper);
+    await wrapper.updateComplete;
+    form = wrapper.shadowRoot.querySelector('iron-form');
   });
 
   afterEach(() => {
-    xCheckbox.parentNode.removeChild(xCheckbox);
+    wrapper.parentNode.removeChild(wrapper);
   });
 
   it('should serialize', () => {
-    boundNameCheckbox.checked = true;
-    expect(boundNameCheckbox.name).to.equal('boundcheckbox');
+    checkbox = wrapper.shadowRoot.querySelector('#boundname');
+    checkbox.checked = true;
+    expect(checkbox.name).to.equal('boundcheckbox');
     expect(form.serializeForm().boundcheckbox).to.equal('on');
   });
 
   it('should serialize with a custom value', () => {
-    boundNameCheckbox.checked = true;
-    boundNameCheckbox.value = 'foo';
+    checkbox = wrapper.shadowRoot.querySelector('#boundname');
+    checkbox.checked = true;
+    checkbox.value = 'foo';
     expect(form.serializeForm().boundcheckbox).to.equal('foo');
   });
 
   it('should not serialize when not checked', () => {
-    expect(boundNameCheckbox.name).to.be.empty;
+    checkbox = wrapper.shadowRoot.querySelector('#boundname');
+    expect(checkbox.name).to.be.empty;
     expect(form.serializeForm()).to.be.empty;
   });
 
   it('should not serialize without a name', () => {
-    boundNameCheckbox.checked = true;
-    boundNameCheckbox.name = '';
+    checkbox = wrapper.shadowRoot.querySelector('#boundname');
+    checkbox.checked = true;
+    checkbox.name = '';
     expect(form.serializeForm()).to.be.empty;
   });
 
   it('should not serialize after unchecked', () => {
-    boundNameCheckbox.checked = true;
-    boundNameCheckbox.checked = false;
+    checkbox = wrapper.shadowRoot.querySelector('#boundname');
+    checkbox.checked = true;
+    checkbox.checked = false;
     expect(form.serializeForm()).to.be.empty;
   });
 
   it('should define the name from an attribute', async () => {
-    attrNameCheckbox.checked = true;
-    await attrNameCheckbox.updateComplete;
+    checkbox = wrapper.shadowRoot.querySelector('#attrname');
+    checkbox.checked = true;
+    await checkbox.updateComplete;
     expect(form.serializeForm().attrcheckbox).to.equal('on');
   });
 });

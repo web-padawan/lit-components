@@ -1,4 +1,4 @@
-import { ItemBase } from '@lit/item-base';
+import { ItemBase } from '../lit-item-base.js';
 
 describe('item', () => {
   customElements.define('test-item', class extends ItemBase {});

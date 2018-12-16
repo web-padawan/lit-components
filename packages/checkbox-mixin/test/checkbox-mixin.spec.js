@@ -1,6 +1,6 @@
 import { LitElement, html } from '@polymer/lit-element';
-import { CheckboxMixin } from '@lit/checkbox-mixin';
 import { down, up, spaceDown, spaceUp } from '@lit/test-helpers';
+import { CheckboxMixin } from '../lit-checkbox-mixin.js';
 
 customElements.define(
   'check-box',
@@ -12,6 +12,7 @@ customElements.define(
         </label>
       `;
     }
+
     get focusElement() {
       return this._nativeCheckbox;
     }
@@ -55,7 +56,8 @@ describe('checkbox-mixin active', () => {
 });
 
 describe('checkbox-mixin label', () => {
-  let checkbox, label;
+  let checkbox;
+  let label;
 
   beforeEach(async () => {
     checkbox = document.createElement('check-box');

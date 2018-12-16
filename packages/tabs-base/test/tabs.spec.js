@@ -1,14 +1,14 @@
 import { html } from '@polymer/lit-element';
 import { render } from 'lit-html';
-import { TabsBase } from '@lit/tabs-base';
 import { TabBase } from '@lit/tab-base';
 import { arrowDown, arrowLeft, arrowRight, arrowUp } from '@lit/test-helpers';
+import { TabsBase } from '../lit-tabs-base.js';
 
 customElements.define('x-tabs', class extends TabsBase {});
 customElements.define('x-tab', class extends TabBase {});
 
 describe('tabs', () => {
-  var tabs;
+  let tabs;
 
   const fixture = html`
     <x-tabs style="width: 400px; height: 400px;">
@@ -86,9 +86,11 @@ describe('tabs', () => {
 
           // Cannot set negative values to native scroll, monkey patching the properties
           let pixels = 0;
-          Object.defineProperty(scroll, orientation == 'horizontal' ? 'scrollLeft' : 'scrollTop', {
+          Object.defineProperty(scroll, orientation === 'horizontal' ? 'scrollLeft' : 'scrollTop', {
             get: () => pixels,
-            set: v => (pixels = v)
+            set: v => {
+              pixels = v;
+            }
           });
 
           // Simulate over-scrolling
@@ -103,7 +105,8 @@ describe('tabs', () => {
 });
 
 describe('tabs in flex container', () => {
-  let wrapper, tabs;
+  let wrapper;
+  let tabs;
 
   const fixture = html`
     <div style="display: flex; width: 400px;">
@@ -138,7 +141,8 @@ describe('tabs in flex container', () => {
 });
 
 describe('scrollable tabs', () => {
-  let tabs, scroller;
+  let tabs;
+  let scroller;
 
   const fixture = html`
     <x-tabs style="width: 200px; height: 100px;">

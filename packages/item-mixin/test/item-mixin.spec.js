@@ -1,6 +1,5 @@
 import { LitElement, html } from '@polymer/lit-element';
 import { render } from 'lit-html';
-import { ItemMixin } from '@lit/item-mixin';
 import {
   enter,
   spaceDown,
@@ -11,6 +10,7 @@ import {
   mousedown,
   mouseup
 } from '@lit/test-helpers';
+import { ItemMixin } from '../lit-item-mixin.js';
 
 describe('item-mixin', () => {
   customElements.define(

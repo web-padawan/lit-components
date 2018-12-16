@@ -1,5 +1,5 @@
 import { ItemBase } from '@lit/item-base';
-import { ListBoxBase } from '@lit/list-box-base';
+import { ListBoxBase } from '../lit-list-box-base.js';
 
 describe('list-box', () => {
   customElements.define('list-box', class extends ListBoxBase {});

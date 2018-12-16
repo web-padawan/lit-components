@@ -65,9 +65,9 @@ export const ItemMixin = superClass =>
         this.value = attrValue;
       }
 
-      this.addEventListener('focus', e => this._setFocused(true), true);
-      this.addEventListener('blur', e => this._setFocused(false), true);
-      this.addEventListener('mousedown', e => {
+      this.addEventListener('focus', () => this._setFocused(true), true);
+      this.addEventListener('blur', () => this._setFocused(false), true);
+      this.addEventListener('mousedown', () => {
         this._setActive((this._mousedown = true));
         const mouseUpListener = () => {
           this._setActive((this._mousedown = false));

@@ -92,6 +92,10 @@ export class TabsBase extends ListMixin(StyledLitElement) {
 
     let overflow = scrollPosition > 0 ? 'start' : '';
     overflow += scrollPosition + this._scrollOffset < scrollSize ? ' end' : '';
-    overflow ? this.setAttribute('overflow', overflow.trim()) : this.removeAttribute('overflow');
+    if (overflow) {
+      this.setAttribute('overflow', overflow.trim());
+    } else {
+      this.removeAttribute('overflow');
+    }
   }
 }

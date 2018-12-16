@@ -5,7 +5,7 @@
   "license": "Apache-2.0",
   "main": "control-state-mixin.js",
   "devDependencies": {
-    "@lit/test-helpers": "0.1.0",
+    "@lit/test-helpers": "^0.1.0",
     "@polymer/lit-element": "^0.6.5"
   },
   "scripts": {

@@ -1,5 +1,9 @@
 import { FlattenedNodesObserver } from '@polymer/polymer/lib/utils/flattened-nodes-observer.js';
 
+function filterItems(array) {
+  return array.filter(e => e.constructor.hasLitItemMixin);
+}
+
 /**
  * @polymerMixin
  */
@@ -75,7 +79,7 @@ export const ListMixin = superClass =>
       this.addEventListener('click', e => this._onClick(e));
 
       this._observer = new FlattenedNodesObserver(this, () => {
-        this._setItems(this._filterItems(Array.from(this.children)));
+        this._setItems(filterItems(Array.from(this.children)));
       });
     }
 
@@ -87,9 +91,11 @@ export const ListMixin = superClass =>
       if (items) {
         this.setAttribute('aria-orientation', orientation || 'vertical');
         this.items.forEach(item => {
-          orientation
-            ? item.setAttribute('orientation', orientation)
-            : item.removeAttribute('orientation');
+          if (orientation) {
+            item.setAttribute('orientation', orientation);
+          } else {
+            item.removeAttribute('orientation');
+          }
           // TODO: uncomment if needed
           // item.updateStyles();
         });
@@ -97,15 +103,13 @@ export const ListMixin = superClass =>
         this._setFocusable(selected);
 
         const itemToSelect = items[selected];
-        items.forEach(item => (item.selected = item === itemToSelect));
+        items.forEach(item => {
+          item.selected = item === itemToSelect;
+        });
         if (itemToSelect && !itemToSelect.disabled) {
           this._scrollToItem(selected);
         }
       }
-    }
-
-    _filterItems(array) {
-      return array.filter(e => e.constructor.hasLitItemMixin);
     }
 
     _onClick(event) {
@@ -113,9 +117,12 @@ export const ListMixin = superClass =>
         return;
       }
 
-      const item = this._filterItems(event.composedPath())[0];
-      let idx;
-      if (item && !item.disabled && (idx = this.items.indexOf(item)) >= 0) {
+      const item = filterItems(event.composedPath())[0];
+      if (!item) {
+        return;
+      }
+      const idx = this.items.indexOf(item);
+      if (!item.disabled && idx > -1) {
         this.selected = idx;
       }
     }
@@ -130,7 +137,8 @@ export const ListMixin = superClass =>
 
       const currentIdx = this.items.indexOf(this.focused);
       let condition = item => !item.disabled;
-      let idx, increment;
+      let idx;
+      let increment;
 
       if ((this._vertical && key === 'Up') || (!this._vertical && key === 'Left')) {
         increment = -1;
@@ -144,7 +152,7 @@ export const ListMixin = superClass =>
       } else if (key === 'End') {
         increment = -1;
         idx = this.items.length - 1;
-      } else if (key.length == 1) {
+      } else if (key.length === 1) {
         increment = 1;
         idx = currentIdx + 1;
         condition = item =>
@@ -162,9 +170,10 @@ export const ListMixin = superClass =>
       }
     }
 
-    _getAvailableIndex(idx, increment, condition) {
+    _getAvailableIndex(index, increment, condition) {
       const totalItems = this.items.length;
-      for (let i = 0; typeof idx == 'number' && i < totalItems; i++, idx += increment || 1) {
+      let idx = index;
+      for (let i = 0; typeof idx === 'number' && i < totalItems; i++, idx += increment || 1) {
         if (idx < 0) {
           idx = totalItems - 1;
         } else if (idx >= totalItems) {
@@ -179,18 +188,23 @@ export const ListMixin = superClass =>
       return -1;
     }
 
-    _setFocusable(idx) {
+    _setFocusable(index) {
+      let idx = index;
       idx = this._getAvailableIndex(idx, 1, item => !item.disabled);
-      const item = this.items[idx] || this.items[0];
-      this.items.forEach(e => (e.tabIndex = e === item ? 0 : -1));
+      const itemToFocus = this.items[idx] || this.items[0];
+      this.items.forEach(item => {
+        item.tabIndex = item === itemToFocus ? 0 : -1;
+      });
     }
 
     _focus(idx) {
-      const item = this.items[idx];
-      this.items.forEach(e => (e.focused = e === item));
+      const itemToFocus = this.items[idx];
+      this.items.forEach(item => {
+        item.focused = item === itemToFocus;
+      });
       this._setFocusable(idx);
       this._scrollToItem(idx);
-      item.focus();
+      itemToFocus.focus();
     }
 
     focus() {
@@ -227,6 +241,6 @@ export const ListMixin = superClass =>
     }
 
     _scroll(pixels) {
-      this._scrollerElement['scroll' + (this._vertical ? 'Top' : 'Left')] += pixels;
+      this._scrollerElement[`scroll${this._vertical ? 'Top' : 'Left'}`] += pixels;
     }
   };

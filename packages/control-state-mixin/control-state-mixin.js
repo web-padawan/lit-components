@@ -85,7 +85,7 @@ export const ControlStateMixin = superClass =>
         }
       });
 
-      this.addEventListener('focusout', e => this._setFocused(false));
+      this.addEventListener('focusout', () => this._setFocused(false));
 
       this.addEventListener('keydown', e => {
         if (!e.defaultPrevented && e.shiftKey && e.keyCode === 9) {
@@ -94,7 +94,9 @@ export const ControlStateMixin = superClass =>
           HTMLElement.prototype.focus.apply(this);
           this._setFocused(false);
           // Event handling in IE is asynchronous and the flag is removed asynchronously as well
-          setTimeout(() => (this._isShiftTabbing = false), 0);
+          setTimeout(() => {
+            this._isShiftTabbing = false;
+          }, 0);
         }
       });
 
@@ -127,7 +129,9 @@ export const ControlStateMixin = superClass =>
 
       if (props.has('disabled')) {
         this.focusElement.disabled = this.disabled;
-        this.disabled && this.blur();
+        if (this.disabled) {
+          this.blur();
+        }
       }
 
       if (props.has('tabIndex') && this.__tabIndexValue !== undefined) {

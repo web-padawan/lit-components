@@ -7,6 +7,10 @@ import styles from './lit-radio-group-styles.js';
 
 let uniqueId = 0;
 
+function filterRadioButtons(nodes) {
+  return Array.from(nodes).filter(child => child instanceof RadioButtonBase);
+}
+
 export class RadioGroupBase extends StyledLitElement {
   static get style() {
     return css`
@@ -119,7 +123,7 @@ export class RadioGroupBase extends StyledLitElement {
       };
 
       // reverse() is used to set the last checked radio button value to radio group value
-      this._filterRadioButtons(info.addedNodes)
+      filterRadioButtons(info.addedNodes)
         .reverse()
         .forEach(button => {
           button.addEventListener('checked-changed', checkedChangedListener);
@@ -131,7 +135,7 @@ export class RadioGroupBase extends StyledLitElement {
           }
         });
 
-      this._filterRadioButtons(info.removedNodes).forEach(button => {
+      filterRadioButtons(info.removedNodes).forEach(button => {
         button.removeEventListener('checked-changed', checkedChangedListener);
         if (button.checked) {
           this.value = undefined;
@@ -166,13 +170,13 @@ export class RadioGroupBase extends StyledLitElement {
   }
 
   get _radioButtons() {
-    return this._filterRadioButtons(this.querySelectorAll('*'));
+    return filterRadioButtons(this.querySelectorAll('*'));
   }
 
   _addActiveListeners() {
     this.addEventListener('keydown', e => {
       // if e.target is vaadin-radio-group then assign to checkedRadioButton currently checked radio button
-      var checkedRadioButton = e.target == this ? this._checkedButton : e.target;
+      const checkedRadioButton = e.target === this ? this._checkedButton : e.target;
 
       // LEFT, UP - select previous radio button
       if (e.keyCode === 37 || e.keyCode === 38) {
@@ -186,10 +190,6 @@ export class RadioGroupBase extends StyledLitElement {
         this._selectNextButton(checkedRadioButton);
       }
     });
-  }
-
-  _filterRadioButtons(nodes) {
-    return Array.from(nodes).filter(child => child instanceof RadioButtonBase);
   }
 
   _disabledChanged(disabled) {
@@ -265,15 +265,21 @@ export class RadioGroupBase extends StyledLitElement {
 
   _changeSelectedButton(checked) {
     this._checkedButton = checked;
-    this.readonly && this._updateDisableButtons();
-    checked && this._setFocusable(this._radioButtons.indexOf(checked));
-    this._radioButtons.forEach(radio => (radio.checked = radio === checked));
+    if (this.readonly) {
+      this._updateDisableButtons();
+    }
+    if (checked) {
+      this._setFocusable(this._radioButtons.indexOf(checked));
+    }
+    this._radioButtons.forEach(radio => {
+      radio.checked = radio === checked;
+    });
     this.value = checked && checked.value;
     this.validate();
   }
 
   _valueChanged(value) {
-    if (!this._checkedButton || value != this._checkedButton.value) {
+    if (!this._checkedButton || value == null || value !== this._checkedButton.value) {
       const newCheckedButton = this._radioButtons.filter(button => button.value === value)[0];
 
       if (newCheckedButton) {
@@ -299,7 +305,8 @@ export class RadioGroupBase extends StyledLitElement {
    * @return {boolean} True if the value is valid.
    */
   validate() {
-    return !(this.invalid = !this.checkValidity());
+    this.invalid = !this.checkValidity();
+    return !this.invalid;
   }
 
   /**
@@ -311,8 +318,9 @@ export class RadioGroupBase extends StyledLitElement {
   }
 
   _setFocusable(idx) {
-    const items = this._radioButtons;
-    items.forEach(e => (e.tabIndex = e === items[idx] ? 0 : -1));
+    for (let i = 0; i < this._radioButtons.length; i++) {
+      this._radioButtons[i].tabIndex = i === idx ? 0 : -1;
+    }
   }
 
   _labelChanged(label) {

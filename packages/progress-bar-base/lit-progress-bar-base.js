@@ -91,7 +91,7 @@ export class ProgressBarBase extends StyledLitElement {
   }
 
   _normalizedValueChanged(value, min, max) {
-    const newValue = this._normalizeValue(value, min, max);
+    const newValue = this.constructor._normalizeValue(value, min, max);
     const prop = '--vaadin-progress-value';
 
     if (window.ShadyCSS && window.ShadyCSS.nativeCss === false) {
@@ -118,10 +118,10 @@ export class ProgressBarBase extends StyledLitElement {
   /**
    * Percent of current progress relative to whole progress bar (max - min)
    */
-  _normalizeValue(value, min, max) {
+  static _normalizeValue(value, min, max) {
     let nV;
 
-    if (!value && value != 0) {
+    if (!value && value !== 0) {
       nV = 0;
     } else if (min >= max) {
       nV = 1;

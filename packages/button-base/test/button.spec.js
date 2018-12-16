@@ -1,7 +1,6 @@
 import { html } from '@polymer/lit-element';
 import { render } from 'lit-html';
 import { FlattenedNodesObserver } from '@polymer/polymer/lib/utils/flattened-nodes-observer.js';
-import { ButtonBase } from '@lit/button-base';
 import {
   blur,
   down,
@@ -12,6 +11,7 @@ import {
   spaceDown,
   spaceUp
 } from '@lit/test-helpers';
+import { ButtonBase } from '../lit-button-base.js';
 
 customElements.define('lit-button', class extends ButtonBase {});
 
@@ -20,7 +20,9 @@ describe('button', () => {
     <lit-button>Lit <i>Button</i></lit-button>
   `;
 
-  let button, nativeButton, label;
+  let button;
+  let nativeButton;
+  let label;
 
   beforeEach(async () => {
     const div = document.createElement('div');

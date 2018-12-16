@@ -1,12 +1,31 @@
 {
   "extends": [
-    "vaadin",
+    "airbnb-base",
     "prettier"
   ],
   "env": {
     "browser": true,
     "node": true,
     "es6": true
+  },
+  "rules": {
+    "class-methods-use-this": [
+      "error",
+      {
+        "exceptMethods": [ "render" ]
+      }
+    ],
+    "import/extensions": "off",
+    "import/prefer-default-export": "off",
+    "no-console": [
+      "error",
+      {
+        "allow": [ "warn", "error"]
+      }
+    ],
+    "no-param-reassign": "off",
+    "no-plusplus": "off",
+    "no-underscore-dangle": "off"
   },
   "overrides": [
     {
@@ -17,6 +36,9 @@
       "globals": {
         "expect": false,
         "sinon": false
+      },
+      "rules": {
+        "no-unused-expressions": "off"
       }
     }
   ],

@@ -2,8 +2,8 @@ import { html } from '@polymer/lit-element';
 import { render } from 'lit-html';
 import { FlattenedNodesObserver } from '@polymer/polymer/lib/utils/flattened-nodes-observer.js';
 import '@polymer/iron-form/iron-form.js';
-import { SwitchBase } from '@lit/switch-base';
 import { change } from '@lit/test-helpers';
+import { SwitchBase } from '../lit-switch-base.js';
 
 customElements.define('lit-switch', class extends SwitchBase {});
 
@@ -12,7 +12,9 @@ describe('switch', () => {
     <lit-switch>Lit <i>switch</i> with <a href="#">Terms &amp; Conditions</a></lit-switch>
   `;
 
-  let element, nativeCheckbox, label;
+  let element;
+  let nativeCheckbox;
+  let label;
 
   beforeEach(async () => {
     const div = document.createElement('div');

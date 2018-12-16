@@ -1,8 +1,8 @@
 import { html } from '@polymer/lit-element';
 import { render } from 'lit-html';
 import { RadioButtonBase } from '@lit/radio-button-base';
-import { RadioGroupBase } from '@lit/radio-group-base';
 import { arrowDown, arrowLeft, arrowRight, arrowUp, focusout } from '@lit/test-helpers';
+import { RadioGroupBase } from '../lit-radio-group-base.js';
 
 customElements.define('lit-radio-button', class extends RadioButtonBase {});
 customElements.define('lit-radio-group', class extends RadioGroupBase {});
@@ -16,7 +16,8 @@ describe('radio-group', () => {
     </lit-radio-group>
   `;
 
-  let radioGroup, radioList, errorElement;
+  let radioGroup;
+  let radioList;
 
   beforeEach(async () => {
     const div = document.createElement('div');
@@ -25,7 +26,6 @@ describe('radio-group', () => {
     document.body.appendChild(radioGroup);
     await radioGroup.updateComplete;
     radioList = radioGroup.querySelectorAll('lit-radio-button');
-    errorElement = radioGroup.shadowRoot.querySelector('[part="error-message"]');
     radioGroup._observer.flush();
   });
 
@@ -166,7 +166,9 @@ describe('radio-group', () => {
   });
 
   it('should not have enabled buttons', async () => {
-    Array.from(radioList).map(btn => (btn.disabled = true));
+    for (let i = 0; i < radioList.length; i++) {
+      radioList[i].disabled = true;
+    }
     await radioGroup.updateComplete;
     expect(radioGroup._hasEnabledButtons()).to.be.false;
 
@@ -196,8 +198,9 @@ describe('radio-group', () => {
   });
 
   it('should warn when setting value if there are no radio-buttons', async () => {
-    const warn = console.warn;
-    const spy = (console.warn = sinon.spy());
+    const warn = { console };
+    const spy = sinon.spy();
+    console.warn = spy;
     radioGroup.value = 'nothing';
     await radioGroup.updateComplete;
     console.warn = warn;
@@ -304,12 +307,14 @@ describe('radio-group', () => {
   });
 
   it('should set appropriate aria attributes and id on the error part', () => {
+    const errorElement = radioGroup.shadowRoot.querySelector('[part="error-message"]');
     expect(errorElement.getAttribute('aria-live')).to.be.equal('assertive');
     expect(errorElement.getAttribute('aria-hidden')).to.be.equal('true');
     expect(/^lit-radio-group-error-\d+$/.test(errorElement.id)).to.be.true;
   });
 
   it('should remove aria-hidden when error is shown', async () => {
+    const errorElement = radioGroup.shadowRoot.querySelector('[part="error-message"]');
     radioGroup.errorMessage = 'Bad input!';
     radioGroup.invalid = true;
     await radioGroup.updateComplete;
@@ -317,12 +322,14 @@ describe('radio-group', () => {
   });
 
   it('should hide error message by default', async () => {
+    const errorElement = radioGroup.shadowRoot.querySelector('[part="error-message"]');
     radioGroup.errorMessage = 'Bad input!';
     await radioGroup.updateComplete;
     expect(errorElement.offsetHeight).to.equal(0);
   });
 
   it('should show error message on invalid', async () => {
+    const errorElement = radioGroup.shadowRoot.querySelector('[part="error-message"]');
     radioGroup.required = true;
     radioGroup.errorMessage = 'Bad input!';
     focusout(radioGroup);
@@ -341,7 +348,8 @@ describe('radio-group with disabled button', () => {
     </lit-radio-group>
   `;
 
-  let radioGroup, radioList;
+  let radioGroup;
+  let radioList;
 
   beforeEach(async () => {
     const div = document.createElement('div');
@@ -384,7 +392,8 @@ describe('radio-group with initial checked button', () => {
     </lit-radio-group>
   `;
 
-  let radioGroup, radioList;
+  let radioGroup;
+  let radioList;
 
   beforeEach(async () => {
     const div = document.createElement('div');
