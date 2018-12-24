@@ -7,6 +7,9 @@ import '../packages/checkbox-material/lit-checkbox-material.js';
 import '../packages/checkbox-group-lumo/lit-checkbox-group-lumo.js';
 import '../packages/checkbox-group-material/lit-checkbox-group-material.js';
 
+import '../packages/details-lumo/lit-details-lumo.js';
+import '../packages/details-material/lit-details-material.js';
+
 import '../packages/item-lumo/lit-item-lumo.js';
 import '../packages/item-material/lit-item-material.js';
 
