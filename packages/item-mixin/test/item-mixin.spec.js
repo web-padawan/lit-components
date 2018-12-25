@@ -100,7 +100,8 @@ describe('item-mixin', () => {
     });
 
     it('should not have focus-ring attribute when not focused with keyboard', () => {
-      item.click();
+      mousedown(item);
+      focus(item);
       expect(item.hasAttribute('focus-ring')).to.be.false;
     });
 
