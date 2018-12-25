@@ -43,6 +43,12 @@ describe('checkbox-mixin active', () => {
     expect(checkbox.hasAttribute('active')).to.be.false;
   });
 
+  it('should not have active attribute on down when disabled', () => {
+    checkbox.disabled = true;
+    down(checkbox);
+    expect(checkbox.hasAttribute('active')).to.be.false;
+  });
+
   it('should have active attribute on space', () => {
     spaceDown(checkbox);
     expect(checkbox.hasAttribute('active')).to.be.true;
@@ -51,6 +57,12 @@ describe('checkbox-mixin active', () => {
   it('should not have active attribute after space', () => {
     spaceDown(checkbox);
     spaceUp(checkbox);
+    expect(checkbox.hasAttribute('active')).to.be.false;
+  });
+
+  it('should not have active attribute on space when disabled', () => {
+    checkbox.disabled = true;
+    spaceDown(checkbox);
     expect(checkbox.hasAttribute('active')).to.be.false;
   });
 });
