@@ -74,6 +74,18 @@ export class DetailsBase extends ControlStateMixin(StyledLitElement) {
     super.firstUpdated();
   }
 
+  updated(props) {
+    super.updated(props);
+
+    if (props.has('expanded')) {
+      this.dispatchEvent(
+        new CustomEvent('expanded-changed', {
+          detail: { value: this.expanded }
+        })
+      );
+    }
+  }
+
   _onToggleClick() {
     this.expanded = !this.expanded;
   }

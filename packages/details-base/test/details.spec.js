@@ -75,6 +75,16 @@ describe('details', () => {
     expect(style.maxHeight).to.equal('none');
   });
 
+  it('should dispatch `expanded-changed` event when `expanded changes', async () => {
+    const spy = sinon.spy();
+    details.addEventListener('expanded-changed', spy);
+    toggle.click();
+    await details.updateComplete;
+    expect(spy).to.be.calledOnce;
+    expect(spy.firstCall.args[0].detail).to.be.an('object');
+    expect(spy.firstCall.args[0].detail.value).to.equal(true);
+  });
+
   it('should update aria-expanded on toggle button when `expanded` changes', async () => {
     expect(toggle.getAttribute('aria-expanded')).to.equal('false');
     details.expanded = true;
