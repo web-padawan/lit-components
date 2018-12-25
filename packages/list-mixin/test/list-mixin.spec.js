@@ -171,6 +171,18 @@ describe('list-mixin', () => {
       click(list.items[3], 'meta');
       expect(list.items[3].selected).to.be.false;
     });
+
+    it('should not select disabled item', () => {
+      list.items[5].disabled = true;
+      list.items[5].click();
+      expect(list.items[3].selected).to.be.false;
+    });
+
+    it('should do nothing on not item click', () => {
+      const value = list.selected;
+      list.querySelector('hr').click();
+      expect(list.selected).to.equal(value);
+    });
   });
 
   describe('tabIndex', () => {
@@ -192,6 +204,11 @@ describe('list-mixin', () => {
       list._setFocusable(3);
       list.items[3].focus = () => done();
       list.focus();
+    });
+
+    it('should not throw when calling `focus()` before items are set', () => {
+      const focus = () => document.createElement('x-list').focus();
+      expect(focus()).to.not.throw;
     });
   });
 

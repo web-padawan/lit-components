@@ -212,7 +212,8 @@ export const ListMixin = superClass =>
       if (this._observer) {
         this._observer.flush();
       }
-      const focusable = this.querySelector('[tabindex="0"]') || this.items[0];
+      const focusable =
+        this.querySelector('[tabindex="0"]') || (Array.isArray(this.items) && this.items[0]);
       if (focusable) {
         focusable.focus();
       }
