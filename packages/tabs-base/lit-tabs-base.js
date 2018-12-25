@@ -39,9 +39,7 @@ export class TabsBase extends ListMixin(StyledLitElement) {
   }
 
   disconnectedCallback() {
-    if (super.disconnectedCallback) {
-      super.disconnectedCallback();
-    }
+    super.disconnectedCallback();
     window.removeEventListener('resize', this.__boundOnResize);
   }
 

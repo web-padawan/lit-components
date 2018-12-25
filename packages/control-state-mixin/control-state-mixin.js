@@ -62,9 +62,7 @@ export const ControlStateMixin = superClass =>
      * @protected
      */
     disconnectedCallback() {
-      if (super.disconnectedCallback) {
-        super.disconnectedCallback();
-      }
+      super.disconnectedCallback();
 
       document.body.removeEventListener('keydown', this._boundKeydownListener, true);
       document.body.removeEventListener('keyup', this._boundKeyupListener, true);

@@ -83,9 +83,7 @@ export const ItemMixin = superClass =>
      * @protected
      */
     disconnectedCallback() {
-      if (super.disconnectedCallback) {
-        super.disconnectedCallback();
-      }
+      super.disconnectedCallback();
 
       // in Firefox and Safari, blur does not fire on the element when it is removed,
       // especially between keydown and keyup events, being active at the same time.
