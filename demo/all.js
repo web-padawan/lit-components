@@ -1,3 +1,6 @@
+import '../packages/accordion-lumo/lit-accordion-lumo.js';
+import '../packages/accordion-material/lit-accordion-material.js';
+
 import '../packages/button-lumo/lit-button-lumo.js';
 import '../packages/button-material/lit-button-material.js';
 

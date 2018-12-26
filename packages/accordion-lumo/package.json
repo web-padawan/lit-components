@@ -1,0 +1,16 @@
+{
+  "name": "@lit/accordion-lumo",
+  "version": "0.1.0",
+  "author": "Vaadin Ltd",
+  "license": "Apache-2.0",
+  "main": "lit-accordion-lumo.js",
+  "dependencies": {
+    "@lit/accordion-base": "^0.1.0",
+    "@lit/details-lumo": "^0.1.0",
+    "@vaadin/vaadin-lumo-styles": "^1.2.0",
+    "lit-css": "^0.1.3"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  }
+}
