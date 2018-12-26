@@ -18,6 +18,7 @@ export default css`
     outline: none;
     box-shadow: none;
     min-height: 48px;
+    margin: 0;
     padding: 0 24px;
     box-sizing: border-box;
     font-weight: 500;

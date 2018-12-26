@@ -19,6 +19,7 @@ export default css`
     border: none;
     box-shadow: none;
     height: var(--lumo-size-m);
+    margin: 0;
     padding: 0;
     box-sizing: border-box;
     font-size: var(--lumo-font-size-m);
