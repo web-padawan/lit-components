@@ -36,10 +36,6 @@ export default css`
     box-shadow: 0 0 0 2px var(--lumo-primary-color-50pct);
   }
 
-  :host([disabled]) [part='header'] {
-    color: var(--lumo-disabled-text-color);
-  }
-
   [part='summary'] {
     padding-left: var(--lumo-size-m);
   }
@@ -57,8 +53,13 @@ export default css`
     transform: translateY(-50%);
   }
 
+  :host([disabled]) [part='header'],
+  :host([disabled]) [part='toggle'] {
+    color: var(--lumo-disabled-text-color);
+  }
+
   @media (hover: hover) {
-    :host(:hover) [part='toggle'] {
+    :host(:not([disabled]):hover) [part='toggle'] {
       color: var(--lumo-contrast-80pct);
     }
   }

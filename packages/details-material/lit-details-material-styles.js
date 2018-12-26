@@ -32,6 +32,7 @@ export default css`
 
   :host([disabled]) [part='header'] {
     color: var(--material-disabled-text-color);
+    background: var(--material-disabled-color);
   }
 
   :host([focus-ring]) [part='header'] {
@@ -79,6 +80,10 @@ export default css`
     opacity: 0;
     transition: transform 0s 0.8s, opacity 0.8s;
     will-change: transform, opacity;
+  }
+
+  :host([disabled]) [part='toggle'] {
+    color: var(--material-disabled-color);
   }
 
   :host(:not([disabled])) [part='header']:active [part='toggle']::after {
