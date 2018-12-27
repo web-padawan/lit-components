@@ -3,8 +3,8 @@ import '@vaadin/vaadin-lumo-styles/color.js';
 import '@vaadin/vaadin-lumo-styles/spacing.js';
 
 export default css`
-  [part='header'] {
-    margin: var(--lumo-space-xs) 0;
+  :host {
+    margin: var(--lumo-space-s) 0;
   }
 
   :host(:first-child) [part='header'] {
