@@ -6,7 +6,7 @@ import { AccordionBase, AccordionPanelBase } from '../lit-accordion-base.js';
 customElements.define('lit-accordion', class extends AccordionBase {});
 customElements.define('lit-accordion-panel', class extends AccordionPanelBase {});
 
-describe('details', () => {
+describe('accordion', () => {
   const fixture = html`
     <lit-accordion>
       <lit-accordion-panel summary="Panel 1"><input /></lit-accordion-panel>
