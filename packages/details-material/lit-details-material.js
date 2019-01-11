@@ -1,4 +1,3 @@
-import { css } from 'lit-css';
 import { DetailsBase } from '@lit/details-base';
 import styles from './lit-details-material-styles.js';
 
@@ -11,11 +10,8 @@ export class LitDetailsMaterial extends DetailsBase {
     return '0.1.0';
   }
 
-  static get style() {
-    return css`
-      ${super.style}
-      ${styles}
-    `;
+  static get styles() {
+    return [...super.styles, styles];
   }
 }
 

@@ -1,4 +1,4 @@
-import { html } from '@polymer/lit-element';
+import { html } from 'lit-element';
 import { render } from 'lit-html';
 import { RadioButtonBase } from '@lit/radio-button-base';
 import { arrowDown, arrowLeft, arrowRight, arrowUp, focusout } from '@lit/test-helpers';

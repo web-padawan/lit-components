@@ -1,4 +1,4 @@
-import { html } from '@polymer/lit-element';
+import { html } from 'lit-element';
 import { render } from 'lit-html';
 import { TabBase } from '@lit/tab-base';
 import { arrowDown, arrowLeft, arrowRight, arrowUp } from '@lit/test-helpers';
@@ -144,6 +144,8 @@ describe('scrollable tabs', () => {
   let tabs;
   let scroller;
 
+  const nextFrame = () => new Promise(resolve => requestAnimationFrame(resolve));
+
   const fixture = html`
     <x-tabs style="width: 200px; height: 100px;">
       <x-tab>Foo</x-tab>
@@ -165,6 +167,7 @@ describe('scrollable tabs', () => {
     await tabs.updateComplete;
     tabs._observer.flush();
     scroller = tabs._scrollerElement;
+    await nextFrame();
   });
 
   afterEach(() => {

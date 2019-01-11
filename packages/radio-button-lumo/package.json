@@ -8,8 +8,7 @@
     "@lit/radio-button-base": "^0.1.0",
     "@lit/polymer-style-module": "^0.1.0",
     "@vaadin/vaadin-radio-button": "^1.1.2",
-    "@vaadin/vaadin-lumo-styles": "^1.2.0",
-    "lit-css": "^0.1.3"
+    "@vaadin/vaadin-lumo-styles": "^1.3.3"
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"

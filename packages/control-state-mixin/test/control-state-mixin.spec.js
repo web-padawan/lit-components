@@ -1,4 +1,4 @@
-import { html, LitElement } from '@polymer/lit-element';
+import { LitElement, html } from 'lit-element';
 import {
   focusin,
   focusout,

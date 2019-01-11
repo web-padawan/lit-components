@@ -6,7 +6,6 @@ module.exports = {
           '@babel/preset-env',
           {
             modules: false,
-            exclude: ['transform-async-to-generator', 'transform-regenerator'],
             targets: {
               ie: 11
             }
@@ -15,9 +14,12 @@ module.exports = {
       ],
       plugins: [
         [
-          'module:fast-async',
+          '@babel/plugin-transform-runtime',
           {
-            spec: true
+            corejs: false,
+            helpers: false,
+            regenerator: true,
+            useESModules: false
           }
         ]
       ]

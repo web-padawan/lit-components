@@ -1,4 +1,4 @@
-import { html } from '@polymer/lit-element';
+import { html } from 'lit-element';
 import { render } from 'lit-html';
 import { shiftTabDown } from '@lit/test-helpers';
 import { DetailsBase } from '../lit-details-base.js';

@@ -1,6 +1,4 @@
-import { html } from '@polymer/lit-element';
-import { css } from 'lit-css';
-import { StyledLitElement } from 'styled-lit-element';
+import { LitElement, html } from 'lit-element';
 import { FlattenedNodesObserver } from '@polymer/polymer/lib/utils/flattened-nodes-observer.js';
 import { CheckboxBase } from '@lit/checkbox-base';
 import styles from './lit-checkbox-group-styles.js';
@@ -9,11 +7,9 @@ function filterCheckboxes(nodes) {
   return Array.from(nodes).filter(child => child instanceof CheckboxBase);
 }
 
-export class CheckboxGroupBase extends StyledLitElement {
+export class CheckboxGroupBase extends LitElement {
   static get style() {
-    return css`
-      ${styles}
-    `;
+    return [styles];
   }
 
   static get properties() {
@@ -30,10 +26,7 @@ export class CheckboxGroupBase extends StyledLitElement {
        * String used for the label element.
        */
       label: {
-        type: {
-          fromAttribute: String,
-          toAttribute: value => (value == null ? null : value.toString())
-        },
+        type: String,
         reflect: true
       },
 
@@ -43,6 +36,7 @@ export class CheckboxGroupBase extends StyledLitElement {
        * by creating new array instance each time.
        */
       value: {
+        type: Array,
         hasChanged: () => true
       },
 
@@ -155,6 +149,12 @@ export class CheckboxGroupBase extends StyledLitElement {
     }
 
     super.update(props);
+  }
+
+  get updateComplete() {
+    return super.updateComplete.then(() =>
+      Promise.all(this._checkboxes.map(cb => cb.updateComplete))
+    );
   }
 
   get _checkboxes() {

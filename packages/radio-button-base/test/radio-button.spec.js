@@ -1,4 +1,4 @@
-import { LitElement, html } from '@polymer/lit-element';
+import { LitElement, html } from 'lit-element';
 import { render } from 'lit-html';
 import '@polymer/iron-form/iron-form.js';
 import { change, down, up, spaceDown, spaceUp } from '@lit/test-helpers';

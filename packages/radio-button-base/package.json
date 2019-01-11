@@ -6,10 +6,8 @@
   "main": "lit-radio-button-base.js",
   "dependencies": {
     "@lit/control-state-mixin": "^0.1.0",
-    "@polymer/lit-element": "^0.6.5",
     "@polymer/polymer": "^3.0.0",
-    "lit-css": "^0.1.3",
-    "styled-lit-element": "^0.1.0"
+    "lit-element": "^2.0.0-rc.2"
   },
   "devDependencies": {
     "@lit/test-helpers": "^0.1.0",

@@ -1,14 +1,10 @@
-import { html } from '@polymer/lit-element';
-import { css } from 'lit-css';
-import { StyledLitElement } from 'styled-lit-element';
+import { LitElement, html } from 'lit-element';
 import { CheckboxMixin } from '@lit/checkbox-mixin';
 import styles from './lit-checkbox-styles.js';
 
-export class CheckboxBase extends CheckboxMixin(StyledLitElement) {
-  static get style() {
-    return css`
-      ${styles}
-    `;
+export class CheckboxBase extends CheckboxMixin(LitElement) {
+  static get styles() {
+    return [styles];
   }
 
   static get properties() {

@@ -1,4 +1,3 @@
-import { css } from 'lit-css';
 import { CheckboxGroupBase } from '@lit/checkbox-group-base';
 import '@vaadin/vaadin-checkbox/theme/lumo/vaadin-checkbox-group-styles.js';
 import { getStyleModule } from '@lit/polymer-style-module';
@@ -12,11 +11,8 @@ class LitCheckboxGroupLumo extends CheckboxGroupBase {
     return '0.1.0';
   }
 
-  static get style() {
-    return css`
-      ${super.style}
-      ${getStyleModule('lumo-checkbox-group')}
-    `;
+  static get styles() {
+    return [...super.styles, getStyleModule('lumo-checkbox-group')];
   }
 }
 

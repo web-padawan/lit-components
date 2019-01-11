@@ -1,4 +1,4 @@
-import { LitElement, html } from '@polymer/lit-element';
+import { LitElement, html } from 'lit-element';
 import { down, up, spaceDown, spaceUp } from '@lit/test-helpers';
 import { CheckboxMixin } from '../lit-checkbox-mixin.js';
 

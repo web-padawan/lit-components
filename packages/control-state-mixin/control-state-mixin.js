@@ -1,3 +1,5 @@
+const $$tabindex = Symbol('tabindex');
+
 /**
  * @polymerMixin
  */
@@ -14,10 +16,11 @@ export const ControlStateMixin = superClass =>
         },
 
         tabIndex: {
-          type: {
+          converter: {
             fromAttribute: Number,
             toAttribute: value => (value == null ? null : value.toString())
           },
+          noAccessor: true,
           reflect: true
         },
 
@@ -46,6 +49,16 @@ export const ControlStateMixin = superClass =>
       if (!this.hasAttribute('tabindex')) {
         this.tabIndex = 0;
       }
+    }
+
+    get tabIndex() {
+      return this[$$tabindex];
+    }
+
+    set tabIndex(value) {
+      const oldValue = this[$$tabindex];
+      this[$$tabindex] = value;
+      this.requestUpdate('tabIndex', oldValue);
     }
 
     /**

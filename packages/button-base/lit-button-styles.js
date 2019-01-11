@@ -1,4 +1,4 @@
-import { css } from 'lit-css';
+import { css } from 'lit-element';
 
 export default css`
   :host {

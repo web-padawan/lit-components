@@ -1,4 +1,3 @@
-import { css } from 'lit-css';
 import { AccordionBase } from '@lit/accordion-base';
 import './lit-accordion-panel-material.js';
 
@@ -9,12 +8,6 @@ export class LitAccordionMaterial extends AccordionBase {
 
   static get version() {
     return '0.1.0';
-  }
-
-  static get style() {
-    return css`
-      ${super.style}
-    `;
   }
 }
 

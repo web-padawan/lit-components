@@ -1,15 +1,11 @@
-import { html } from '@polymer/lit-element';
-import { css } from 'lit-css';
-import { StyledLitElement } from 'styled-lit-element';
+import { LitElement, html } from 'lit-element';
 import { GestureEventListeners } from '@polymer/polymer/lib/mixins/gesture-event-listeners.js';
 import { ControlStateMixin } from '@lit/control-state-mixin';
 import styles from './lit-radio-button-styles.js';
 
-export class RadioButtonBase extends ControlStateMixin(GestureEventListeners(StyledLitElement)) {
-  static get style() {
-    return css`
-      ${styles}
-    `;
+export class RadioButtonBase extends ControlStateMixin(GestureEventListeners(LitElement)) {
+  static get styles() {
+    return [styles];
   }
 
   static get properties() {

@@ -9,7 +9,7 @@
     "@polymer/polymer": "^3.0.0"
   },
   "devDependencies": {
-    "@polymer/lit-element": "^0.6.5",
+    "lit-element": "^2.0.0-rc.2",
     "@lit/test-helpers": "^0.1.0"
   },
   "scripts": {

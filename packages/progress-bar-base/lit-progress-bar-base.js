@@ -1,13 +1,9 @@
-import { html } from '@polymer/lit-element';
-import { css } from 'lit-css';
-import { StyledLitElement } from 'styled-lit-element';
+import { LitElement, html } from 'lit-element';
 import styles from './lit-progress-bar-styles.js';
 
-export class ProgressBarBase extends StyledLitElement {
-  static get style() {
-    return css`
-      ${styles}
-    `;
+export class ProgressBarBase extends LitElement {
+  static get styles() {
+    return [styles];
   }
 
   constructor() {

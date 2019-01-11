@@ -1,4 +1,3 @@
-import { css } from 'lit-css';
 import { SwitchBase } from '@lit/switch-base';
 import styles from './lit-switch-lumo-styles.js';
 
@@ -11,11 +10,8 @@ class LitSwitchLumo extends SwitchBase {
     return '0.1.0';
   }
 
-  static get style() {
-    return css`
-      ${super.style}
-      ${styles}
-    `;
+  static get styles() {
+    return [...super.styles, styles];
   }
 }
 

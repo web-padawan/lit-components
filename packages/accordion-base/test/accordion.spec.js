@@ -1,4 +1,4 @@
-import { html } from '@polymer/lit-element';
+import { html } from 'lit-element';
 import { render } from 'lit-html';
 import { arrowDown, arrowDownIE, arrowUp, home, end } from '@lit/test-helpers';
 import { AccordionBase, AccordionPanelBase } from '../lit-accordion-base.js';

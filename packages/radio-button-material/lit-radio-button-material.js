@@ -1,4 +1,3 @@
-import { css } from 'lit-css';
 import { RadioButtonBase } from '@lit/radio-button-base';
 import '@vaadin/vaadin-radio-button/theme/material/vaadin-radio-button-styles.js';
 import { getStyleModule } from '@lit/polymer-style-module';
@@ -12,11 +11,8 @@ class LitRadioButtonMaterial extends RadioButtonBase {
     return '0.1.0';
   }
 
-  static get style() {
-    return css`
-      ${super.style}
-      ${getStyleModule('material-radio-button')}
-    `;
+  static get styles() {
+    return [...super.styles, getStyleModule('material-radio-button')];
   }
 }
 

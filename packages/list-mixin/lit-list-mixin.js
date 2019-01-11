@@ -22,10 +22,7 @@ export const ListMixin = superClass =>
          * The index of the item selected in the items array
          */
         selected: {
-          type: {
-            fromAttribute: Number,
-            toAttribute: value => (value == null ? null : value.toString())
-          },
+          type: Number,
           reflect: true
         },
 

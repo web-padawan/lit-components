@@ -1,4 +1,3 @@
-import { css } from 'lit-css';
 import { CheckboxBase } from '@lit/checkbox-base';
 import '@vaadin/vaadin-checkbox/theme/material/vaadin-checkbox-styles.js';
 import { getStyleModule } from '@lit/polymer-style-module';
@@ -12,11 +11,8 @@ class LitCheckboxMaterial extends CheckboxBase {
     return '0.1.0';
   }
 
-  static get style() {
-    return css`
-      ${super.style}
-      ${getStyleModule('material-checkbox')}
-    `;
+  static get styles() {
+    return [...super.styles, getStyleModule('material-checkbox')];
   }
 }
 

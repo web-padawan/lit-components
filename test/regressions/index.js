@@ -2,7 +2,7 @@ import vrtest from 'vrtest/client';
 import { render } from 'lit-html';
 
 // Get all the tests specifically written for preventing regressions.
-const requireSuite = require.context('./tests', true, /js$/);
+const requireSuite = require.context('../../packages', true, /\.vrtest\.js$/);
 const tests = requireSuite.keys().reduce((res, path) => {
   const [suite, name] = path
     .replace('./', '')

@@ -1,4 +1,3 @@
-import { css } from 'lit-css';
 import { TabsBase } from '@lit/tabs-base';
 import '@vaadin/vaadin-tabs/theme/material/vaadin-tabs-styles.js';
 import { getStyleModule } from '@lit/polymer-style-module';
@@ -12,11 +11,8 @@ class LitTabsMaterial extends TabsBase {
     return '0.1.0';
   }
 
-  static get style() {
-    return css`
-      ${super.style}
-      ${getStyleModule('material-tabs')}
-    `;
+  static get styles() {
+    return [...super.styles, getStyleModule('material-tabs')];
   }
 }
 

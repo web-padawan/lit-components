@@ -1,5 +1,5 @@
-import { html } from '@polymer/lit-element';
-import '@lit/button-lumo';
+import { html } from 'lit-element';
+import '../lit-button-lumo.js';
 
 export default html`
   <lit-button-lumo theme="primary">Primary</lit-button-lumo>

@@ -1,11 +1,9 @@
-import { html } from '@polymer/lit-element';
+import { LitElement, html } from 'lit-element';
 import { styleMap } from 'lit-html/directives/style-map.js';
-import { css } from 'lit-css';
-import { StyledLitElement } from 'styled-lit-element';
 import { ControlStateMixin } from '@lit/control-state-mixin';
 import styles from './lit-details-styles.js';
 
-export class DetailsBase extends ControlStateMixin(StyledLitElement) {
+export class DetailsBase extends ControlStateMixin(LitElement) {
   constructor() {
     super();
 
@@ -14,10 +12,8 @@ export class DetailsBase extends ControlStateMixin(StyledLitElement) {
     }
   }
 
-  static get style() {
-    return css`
-      ${styles}
-    `;
+  static get styles() {
+    return [styles];
   }
 
   static get properties() {

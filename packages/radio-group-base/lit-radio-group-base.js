@@ -1,6 +1,4 @@
-import { html } from '@polymer/lit-element';
-import { css } from 'lit-css';
-import { StyledLitElement } from 'styled-lit-element';
+import { LitElement, html } from 'lit-element';
 import { FlattenedNodesObserver } from '@polymer/polymer/lib/utils/flattened-nodes-observer.js';
 import { RadioButtonBase } from '@lit/radio-button-base';
 import styles from './lit-radio-group-styles.js';
@@ -11,11 +9,9 @@ function filterRadioButtons(nodes) {
   return Array.from(nodes).filter(child => child instanceof RadioButtonBase);
 }
 
-export class RadioGroupBase extends StyledLitElement {
-  static get style() {
-    return css`
-      ${styles}
-    `;
+export class RadioGroupBase extends LitElement {
+  static get styles() {
+    return [styles];
   }
 
   constructor() {
@@ -94,10 +90,7 @@ export class RadioGroupBase extends StyledLitElement {
        * String used for the label element.
        */
       label: {
-        type: {
-          fromAttribute: String,
-          toAttribute: value => (value == null ? null : value.toString())
-        },
+        type: String,
         reflect: true
       },
 
@@ -167,6 +160,12 @@ export class RadioGroupBase extends StyledLitElement {
       this.dispatchEvent(new CustomEvent('invalid-changed', { detail: { value: this.invalid } }));
     }
     super.update(props);
+  }
+
+  get updateComplete() {
+    return super.updateComplete.then(() =>
+      Promise.all(this._radioButtons.map(radio => radio.updateComplete))
+    );
   }
 
   get _radioButtons() {

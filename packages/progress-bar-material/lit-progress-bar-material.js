@@ -1,4 +1,3 @@
-import { css } from 'lit-css';
 import { ProgressBarBase } from '@lit/progress-bar-base';
 import '@vaadin/vaadin-progress-bar/theme/material/vaadin-progress-bar-styles.js';
 import { getStyleModule } from '@lit/polymer-style-module';
@@ -12,11 +11,8 @@ class LitProgressBarMaterial extends ProgressBarBase {
     return '0.1.0';
   }
 
-  static get style() {
-    return css`
-      ${super.style}
-      ${getStyleModule('material-progress-bar')}
-    `;
+  static get styles() {
+    return [...super.styles, getStyleModule('material-progress-bar')];
   }
 }
 

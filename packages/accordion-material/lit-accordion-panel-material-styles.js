@@ -1,4 +1,4 @@
-import { css } from 'lit-css';
+import { css } from 'lit-element';
 import '@vaadin/vaadin-material-styles/color.js';
 
 export default css`

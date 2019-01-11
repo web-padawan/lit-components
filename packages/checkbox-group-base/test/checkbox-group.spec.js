@@ -1,4 +1,4 @@
-import { html } from '@polymer/lit-element';
+import { html } from 'lit-element';
 import { render } from 'lit-html';
 import '@polymer/iron-form/iron-form.js';
 import { CheckboxBase } from '@lit/checkbox-base';
@@ -57,22 +57,19 @@ describe('checkbox group', () => {
   });
 
   it('should warn if dynamically added checkbox does not have value attribute', async () => {
-    const warn = { console };
-    const spy = sinon.spy();
-    console.warn = spy;
+    const stub = sinon.stub(console, 'warn');
     const checkbox = document.createElement('lit-checkbox');
     checkboxGroup.appendChild(checkbox);
     checkboxGroup._observer.flush();
+    await checkbox.updateComplete;
     await checkboxGroup.updateComplete;
-    console.warn = warn;
-    expect(spy.called).to.be.true;
+    expect(stub.called).to.be.true;
   });
 
   it('should add dynamically added checked checkbox value to checkbox group value', async () => {
     const checkbox = document.createElement('lit-checkbox');
-    // TODO: only works when setting as attributes
-    checkbox.setAttribute('value', '4');
-    checkbox.setAttribute('checked', '');
+    checkbox.value = '4';
+    checkbox.checked = true;
     checkboxGroup.appendChild(checkbox);
     await checkbox.updateComplete;
     await checkboxGroup.updateComplete;

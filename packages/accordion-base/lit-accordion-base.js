@@ -1,6 +1,4 @@
-import { html } from '@polymer/lit-element';
-import { css } from 'lit-css';
-import { StyledLitElement } from 'styled-lit-element';
+import { LitElement, html } from 'lit-element';
 import { FlattenedNodesObserver } from '@polymer/polymer/lib/utils/flattened-nodes-observer.js';
 import { AccordionPanelBase } from './lit-accordion-panel-base.js';
 import styles from './lit-accordion-styles.js';
@@ -9,7 +7,7 @@ function filterItems(arr) {
   return arr.filter(el => el instanceof AccordionPanelBase);
 }
 
-export class AccordionBase extends StyledLitElement {
+export class AccordionBase extends LitElement {
   constructor() {
     super();
 
@@ -18,10 +16,8 @@ export class AccordionBase extends StyledLitElement {
     }
   }
 
-  static get style() {
-    return css`
-      ${styles}
-    `;
+  static get styles() {
+    return [styles];
   }
 
   static get properties() {
@@ -30,14 +26,12 @@ export class AccordionBase extends StyledLitElement {
        * The index of the item expanded in the items array
        */
       expanded: {
-        type: {
-          fromAttribute: Number,
-          toAttribute: value => (value == null ? null : value.toString())
-        },
+        type: Number,
         reflect: true
       },
 
       _items: {
+        type: Array,
         hasChanged: () => true
       }
     };
