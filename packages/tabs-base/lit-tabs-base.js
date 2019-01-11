@@ -12,13 +12,8 @@ export class TabsBase extends ListMixin(LitElement) {
 
     this.__boundOnResize = this._onResize.bind(this);
 
-    if (!this.hasAttribute('orientation')) {
-      this.orientation = 'horizontal';
-    }
-
-    if (!this.hasAttribute('selected')) {
-      this.selected = 0;
-    }
+    this.orientation = 'horizontal';
+    this.selected = 0;
   }
 
   render() {

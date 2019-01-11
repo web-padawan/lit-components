@@ -32,10 +32,7 @@ export const ItemMixin = superClass =>
 
     constructor() {
       super();
-
-      if (!this.hasAttribute('selected')) {
-        this.selected = false;
-      }
+      this.selected = false;
     }
 
     get value() {

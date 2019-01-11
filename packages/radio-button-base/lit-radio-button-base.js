@@ -29,12 +29,8 @@ export class RadioButtonBase extends ControlStateMixin(GestureEventListeners(Lit
 
   constructor() {
     super();
-    if (!this.hasAttribute('checked')) {
-      this.checked = false;
-    }
-    if (!this.hasAttribute('value')) {
-      this.value = 'on';
-    }
+    this.checked = false;
+    this.value = 'on';
   }
 
   render() {

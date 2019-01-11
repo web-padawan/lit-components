@@ -30,12 +30,8 @@ export class CheckboxBase extends CheckboxMixin(LitElement) {
 
   constructor() {
     super();
-    if (!this.hasAttribute('checked')) {
-      this.checked = false;
-    }
-    if (!this.hasAttribute('value')) {
-      this.value = 'on';
-    }
+    this.checked = false;
+    this.value = 'on';
   }
 
   render() {

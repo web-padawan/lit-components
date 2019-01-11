@@ -10,10 +10,7 @@ function filterItems(arr) {
 export class AccordionBase extends LitElement {
   constructor() {
     super();
-
-    if (!this.hasAttribute('expanded')) {
-      this.expanded = 0;
-    }
+    this.expanded = 0;
   }
 
   static get styles() {

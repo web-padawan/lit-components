@@ -8,15 +8,9 @@ export class ProgressBarBase extends LitElement {
 
   constructor() {
     super();
-    if (!this.hasAttribute('indeterminate')) {
-      this.indeterminate = false;
-    }
-    if (!this.hasAttribute('min')) {
-      this.min = 0;
-    }
-    if (!this.hasAttribute('max')) {
-      this.max = 1;
-    }
+    this.indeterminate = false;
+    this.min = 0;
+    this.max = 1;
   }
 
   static get properties() {

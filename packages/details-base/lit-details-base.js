@@ -6,10 +6,7 @@ import styles from './lit-details-styles.js';
 export class DetailsBase extends ControlStateMixin(LitElement) {
   constructor() {
     super();
-
-    if (!this.hasAttribute('expanded')) {
-      this.expanded = false;
-    }
+    this.expanded = false;
   }
 
   static get styles() {

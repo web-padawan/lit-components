@@ -9,9 +9,7 @@ export class SwitchBase extends CheckboxMixin(LitElement) {
 
   constructor() {
     super();
-    if (!this.hasAttribute('checked')) {
-      this.checked = false;
-    }
+    this.checked = false;
   }
 
   render() {
