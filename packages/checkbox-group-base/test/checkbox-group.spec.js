@@ -4,8 +4,21 @@ import { CheckboxBase } from '@lit/checkbox-base';
 import { focusout } from '@lit/test-helpers';
 import { CheckboxGroupBase } from '../lit-checkbox-group-base.js';
 
-const Checkbox = defineCE(class extends CheckboxBase {});
-const CheckboxGroup = defineCE(class extends CheckboxGroupBase {});
+const Checkbox = defineCE(
+  class extends CheckboxBase {
+    static get styles() {
+      return super.styles;
+    }
+  }
+);
+
+const CheckboxGroup = defineCE(
+  class extends CheckboxGroupBase {
+    static get styles() {
+      return super.styles;
+    }
+  }
+);
 
 describe('checkbox group', () => {
   let checkboxGroup;

@@ -3,8 +3,21 @@ import { RadioButtonBase } from '@lit/radio-button-base';
 import { arrowDown, arrowLeft, arrowRight, arrowUp, focusout } from '@lit/test-helpers';
 import { RadioGroupBase } from '../lit-radio-group-base.js';
 
-const Radio = defineCE(class extends RadioButtonBase {});
-const RadioGroup = defineCE(class extends RadioGroupBase {});
+const Radio = defineCE(
+  class extends RadioButtonBase {
+    static get styles() {
+      return super.styles;
+    }
+  }
+);
+
+const RadioGroup = defineCE(
+  class extends RadioGroupBase {
+    static get styles() {
+      return super.styles;
+    }
+  }
+);
 
 describe('radio-group', () => {
   let radioGroup;

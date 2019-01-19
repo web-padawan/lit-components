@@ -12,7 +12,7 @@ class LitRadioGroupMaterial extends RadioGroupBase {
   }
 
   static get styles() {
-    return [...super.styles, getStyleModule('material-radio-group')];
+    return [super.styles, getStyleModule('material-radio-group')];
   }
 }
 

@@ -11,7 +11,7 @@ function filterRadioButtons(nodes) {
 
 export class RadioGroupBase extends LitElement {
   static get styles() {
-    return [styles];
+    return styles;
   }
 
   constructor() {

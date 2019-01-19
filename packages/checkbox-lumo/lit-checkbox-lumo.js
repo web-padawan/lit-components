@@ -13,7 +13,7 @@ class LitCheckboxLumo extends CheckboxBase {
 
   static get styles() {
     return [
-      ...super.styles,
+      super.styles,
       getStyleModule('lumo-checkbox-style'),
       getStyleModule('lumo-checkbox-effects'),
       getStyleModule('lumo-checkbox')

@@ -12,7 +12,7 @@ class LitProgressBarMaterial extends ProgressBarBase {
   }
 
   static get styles() {
-    return [...super.styles, getStyleModule('material-progress-bar')];
+    return [super.styles, getStyleModule('material-progress-bar')];
   }
 }
 

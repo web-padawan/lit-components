@@ -6,7 +6,7 @@
   "main": "lit-tab-base.js",
   "dependencies": {
     "@lit/item-mixin": "^0.1.0",
-    "lit-element": "^2.0.0-rc.2"
+    "lit-element": "^2.0.0-rc.3"
   },
   "devDependencies": {
     "@lit/test-helpers": "^0.1.0",

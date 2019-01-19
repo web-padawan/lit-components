@@ -6,7 +6,7 @@ import styles from './lit-button-styles.js';
 
 export class ButtonBase extends ControlStateMixin(GestureEventListeners(LitElement)) {
   static get styles() {
-    return [styles];
+    return styles;
   }
 
   render() {

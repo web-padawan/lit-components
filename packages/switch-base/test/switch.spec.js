@@ -5,7 +5,13 @@ import { change } from '@lit/test-helpers';
 import { SwitchBase } from '../lit-switch-base.js';
 
 describe('switch', () => {
-  const Switch = defineCE(class extends SwitchBase {});
+  const Switch = defineCE(
+    class extends SwitchBase {
+      static get styles() {
+        return super.styles;
+      }
+    }
+  );
 
   let element;
   let nativeCheckbox;

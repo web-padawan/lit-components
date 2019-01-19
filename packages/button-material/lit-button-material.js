@@ -12,7 +12,7 @@ class LitButtonMaterial extends ButtonBase {
   }
 
   static get styles() {
-    return [...super.styles, getStyleModule('material-button')];
+    return [super.styles, getStyleModule('material-button')];
   }
 }
 

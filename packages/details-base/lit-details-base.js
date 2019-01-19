@@ -10,7 +10,7 @@ export class DetailsBase extends ControlStateMixin(LitElement) {
   }
 
   static get styles() {
-    return [styles];
+    return styles;
   }
 
   static get properties() {

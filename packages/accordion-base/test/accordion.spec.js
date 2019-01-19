@@ -3,8 +3,21 @@ import { arrowDown, arrowDownIE, arrowUp, home, end } from '@lit/test-helpers';
 import { AccordionBase, AccordionPanelBase } from '../lit-accordion-base.js';
 
 describe('accordion', () => {
-  const Accordion = defineCE(class extends AccordionBase {});
-  const AccordionPanel = defineCE(class extends AccordionPanelBase {});
+  const Accordion = defineCE(
+    class extends AccordionBase {
+      static get styles() {
+        return super.styles;
+      }
+    }
+  );
+
+  const AccordionPanel = defineCE(
+    class extends AccordionPanelBase {
+      static get styles() {
+        return super.styles;
+      }
+    }
+  );
 
   let accordion;
   let heading;

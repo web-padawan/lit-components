@@ -12,7 +12,7 @@ class LitCheckboxMaterial extends CheckboxBase {
   }
 
   static get styles() {
-    return [...super.styles, getStyleModule('material-checkbox')];
+    return [super.styles, getStyleModule('material-checkbox')];
   }
 }
 

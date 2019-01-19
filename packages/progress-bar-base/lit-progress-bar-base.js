@@ -3,7 +3,7 @@ import styles from './lit-progress-bar-styles.js';
 
 export class ProgressBarBase extends LitElement {
   static get styles() {
-    return [styles];
+    return styles;
   }
 
   constructor() {

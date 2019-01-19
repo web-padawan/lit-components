@@ -12,7 +12,7 @@ class LitButtonLumo extends ButtonBase {
   }
 
   static get styles() {
-    return [...super.styles, getStyleModule('lumo-button')];
+    return [super.styles, getStyleModule('lumo-button')];
   }
 }
 

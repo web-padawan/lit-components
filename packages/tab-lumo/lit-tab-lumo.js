@@ -12,7 +12,7 @@ class LitTabLumo extends TabBase {
   }
 
   static get styles() {
-    return [...super.styles, getStyleModule('lumo-tab')];
+    return [super.styles, getStyleModule('lumo-tab')];
   }
 }
 

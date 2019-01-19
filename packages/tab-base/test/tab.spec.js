@@ -2,7 +2,13 @@ import { defineCE, fixture } from '@open-wc/testing-helpers';
 import { TabBase } from '../lit-tab-base.js';
 
 describe('tab', () => {
-  const Tab = defineCE(class extends TabBase {});
+  const Tab = defineCE(
+    class extends TabBase {
+      static get styles() {
+        return super.styles;
+      }
+    }
+  );
 
   let tab;
 

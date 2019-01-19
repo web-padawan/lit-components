@@ -12,7 +12,7 @@ class LitRadioButtonLumo extends RadioButtonBase {
   }
 
   static get styles() {
-    return [...super.styles, getStyleModule('lumo-radio-button')];
+    return [super.styles, getStyleModule('lumo-radio-button')];
   }
 }
 

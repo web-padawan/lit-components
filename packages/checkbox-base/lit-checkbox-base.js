@@ -4,7 +4,7 @@ import styles from './lit-checkbox-styles.js';
 
 export class CheckboxBase extends CheckboxMixin(LitElement) {
   static get styles() {
-    return [styles];
+    return styles;
   }
 
   static get properties() {

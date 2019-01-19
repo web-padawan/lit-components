@@ -4,7 +4,7 @@ import styles from './lit-switch-styles.js';
 
 export class SwitchBase extends CheckboxMixin(LitElement) {
   static get styles() {
-    return [styles];
+    return styles;
   }
 
   constructor() {

@@ -11,7 +11,7 @@ export class LitDetailsLumo extends DetailsBase {
   }
 
   static get styles() {
-    return [...super.styles, styles];
+    return [super.styles, styles];
   }
 }
 

@@ -12,7 +12,7 @@ class LitProgressBarLumo extends ProgressBarBase {
   }
 
   static get styles() {
-    return [...super.styles, getStyleModule('lumo-progress-bar')];
+    return [super.styles, getStyleModule('lumo-progress-bar')];
   }
 }
 

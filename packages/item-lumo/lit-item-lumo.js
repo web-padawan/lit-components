@@ -12,7 +12,7 @@ class LitItemLumo extends ItemBase {
   }
 
   static get styles() {
-    return [...super.styles, getStyleModule('lumo-item')];
+    return [super.styles, getStyleModule('lumo-item')];
   }
 }
 

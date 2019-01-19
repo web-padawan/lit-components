@@ -12,7 +12,7 @@ class LitTabsMaterial extends TabsBase {
   }
 
   static get styles() {
-    return [...super.styles, getStyleModule('material-tabs')];
+    return [super.styles, getStyleModule('material-tabs')];
   }
 }
 

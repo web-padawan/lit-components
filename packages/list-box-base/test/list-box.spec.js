@@ -3,8 +3,21 @@ import { ItemBase } from '@lit/item-base';
 import { ListBoxBase } from '../lit-list-box-base.js';
 
 describe('list-box', () => {
-  const ListBox = defineCE(class extends ListBoxBase {});
-  const Item = defineCE(class extends ItemBase {});
+  const ListBox = defineCE(
+    class extends ListBoxBase {
+      static get styles() {
+        return super.styles;
+      }
+    }
+  );
+
+  const Item = defineCE(
+    class extends ItemBase {
+      static get styles() {
+        return super.styles;
+      }
+    }
+  );
 
   let list;
 

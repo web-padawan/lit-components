@@ -12,7 +12,7 @@ class LitItemMaterial extends ItemBase {
   }
 
   static get styles() {
-    return [...super.styles, getStyleModule('material-item')];
+    return [super.styles, getStyleModule('material-item')];
   }
 }
 

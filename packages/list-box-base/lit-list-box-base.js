@@ -4,7 +4,7 @@ import styles from './lit-list-box-styles.js';
 
 export class ListBoxBase extends ListMixin(LitElement) {
   static get styles() {
-    return [styles];
+    return styles;
   }
 
   render() {

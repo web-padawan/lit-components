@@ -4,7 +4,7 @@ import styles from './lit-tab-styles.js';
 
 export class TabBase extends ItemMixin(LitElement) {
   static get styles() {
-    return [styles];
+    return styles;
   }
 
   render() {

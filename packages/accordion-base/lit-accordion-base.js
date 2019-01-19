@@ -14,7 +14,7 @@ export class AccordionBase extends LitElement {
   }
 
   static get styles() {
-    return [styles];
+    return styles;
   }
 
   static get properties() {

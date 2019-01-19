@@ -5,7 +5,7 @@ import styles from './lit-radio-button-styles.js';
 
 export class RadioButtonBase extends ControlStateMixin(GestureEventListeners(LitElement)) {
   static get styles() {
-    return [styles];
+    return styles;
   }
 
   static get properties() {

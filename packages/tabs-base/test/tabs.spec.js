@@ -3,8 +3,21 @@ import { TabBase } from '@lit/tab-base';
 import { arrowDown, arrowLeft, arrowRight, arrowUp } from '@lit/test-helpers';
 import { TabsBase } from '../lit-tabs-base.js';
 
-const Tabs = defineCE(class extends TabsBase {});
-const Tab = defineCE(class extends TabBase {});
+const Tabs = defineCE(
+  class extends TabsBase {
+    static get styles() {
+      return super.styles;
+    }
+  }
+);
+
+const Tab = defineCE(
+  class extends TabBase {
+    static get styles() {
+      return super.styles;
+    }
+  }
+);
 
 describe('tabs', () => {
   let tabs;

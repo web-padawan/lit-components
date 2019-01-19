@@ -12,7 +12,7 @@ class LitCheckboxGroupLumo extends CheckboxGroupBase {
   }
 
   static get styles() {
-    return [...super.styles, getStyleModule('lumo-checkbox-group')];
+    return [super.styles, getStyleModule('lumo-checkbox-group')];
   }
 }
 

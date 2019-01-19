@@ -13,7 +13,7 @@ class LitListBoxLumo extends ListBoxBase {
 
   static get styles() {
     return [
-      ...super.styles,
+      super.styles,
       getStyleModule('lumo-list-box', css => css.replace(/vaadin-item/g, 'lit-item-lumo'))
     ];
   }

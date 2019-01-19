@@ -12,7 +12,7 @@ class LitRadioGroupLumo extends RadioGroupBase {
   }
 
   static get styles() {
-    return [...super.styles, getStyleModule('lumo-radio-group')];
+    return [super.styles, getStyleModule('lumo-radio-group')];
   }
 }
 

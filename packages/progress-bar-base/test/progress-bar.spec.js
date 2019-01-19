@@ -1,7 +1,13 @@
 import { defineCE, fixture } from '@open-wc/testing-helpers';
 import { ProgressBarBase } from '../lit-progress-bar-base.js';
 
-const Progress = defineCE(class extends ProgressBarBase {});
+const Progress = defineCE(
+  class extends ProgressBarBase {
+    static get styles() {
+      return super.styles;
+    }
+  }
+);
 
 describe('progress-bar', () => {
   let progress;

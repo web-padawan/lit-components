@@ -5,7 +5,13 @@ import '@polymer/iron-form/iron-form.js';
 import { change, downAndUp, spaceDown, spaceUp } from '@lit/test-helpers';
 import { CheckboxBase } from '../lit-checkbox-base.js';
 
-const Checkbox = defineCE(class extends CheckboxBase {});
+const Checkbox = defineCE(
+  class extends CheckboxBase {
+    static get styles() {
+      return super.styles;
+    }
+  }
+);
 
 describe('checkbox', () => {
   let checkbox;

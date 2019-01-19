@@ -2,7 +2,13 @@ import { defineCE, fixture } from '@open-wc/testing-helpers';
 import { ItemBase } from '../lit-item-base.js';
 
 describe('item', () => {
-  const Item = defineCE(class extends ItemBase {});
+  const Item = defineCE(
+    class extends ItemBase {
+      static get styles() {
+        return super.styles;
+      }
+    }
+  );
 
   let item;
 

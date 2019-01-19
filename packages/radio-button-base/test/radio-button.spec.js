@@ -4,7 +4,13 @@ import '@polymer/iron-form/iron-form.js';
 import { change, down, up, spaceDown, spaceUp } from '@lit/test-helpers';
 import { RadioButtonBase } from '../lit-radio-button-base.js';
 
-const Radio = defineCE(class extends RadioButtonBase {});
+const Radio = defineCE(
+  class extends RadioButtonBase {
+    static get styles() {
+      return super.styles;
+    }
+  }
+);
 
 describe('radio-button', () => {
   let radio;

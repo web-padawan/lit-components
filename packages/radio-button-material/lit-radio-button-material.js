@@ -12,7 +12,7 @@ class LitRadioButtonMaterial extends RadioButtonBase {
   }
 
   static get styles() {
-    return [...super.styles, getStyleModule('material-radio-button')];
+    return [super.styles, getStyleModule('material-radio-button')];
   }
 }
 

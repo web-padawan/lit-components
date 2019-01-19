@@ -13,7 +13,13 @@ import {
 import { ButtonBase } from '../lit-button-base.js';
 
 describe('button', () => {
-  const Button = defineCE(class extends ButtonBase {});
+  const Button = defineCE(
+    class extends ButtonBase {
+      static get styles() {
+        return super.styles;
+      }
+    }
+  );
 
   let button;
   let nativeButton;

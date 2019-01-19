@@ -3,7 +3,13 @@ import { shiftTabDown } from '@lit/test-helpers';
 import { DetailsBase } from '../lit-details-base.js';
 
 describe('details', () => {
-  const Details = defineCE(class extends DetailsBase {});
+  const Details = defineCE(
+    class extends DetailsBase {
+      static get styles() {
+        return super.styles;
+      }
+    }
+  );
 
   let details;
   let toggle;

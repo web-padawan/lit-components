@@ -12,7 +12,7 @@ export class LitAccordionPanelMaterial extends AccordionPanelBase {
   }
 
   static get styles() {
-    return [...super.styles, basicStyles, panelStyles];
+    return [super.styles, basicStyles, panelStyles];
   }
 }
 
