@@ -1,14 +1,14 @@
 import { LitElement, html } from 'lit-element';
 import { down, up, spaceDown, spaceUp } from '@lit/test-helpers';
+import { defineCE, fixture } from '@open-wc/testing-helpers';
 import { CheckboxMixin } from '../lit-checkbox-mixin.js';
 
-customElements.define(
-  'check-box',
+const Checkbox = defineCE(
   class extends CheckboxMixin(LitElement) {
     render() {
       return html`
         <label>
-          <span part="label"> <slot></slot> </span> <input type="checkbox" />
+          <span part="label"><slot></slot></span><input type="checkbox" />
         </label>
       `;
     }
@@ -23,13 +23,7 @@ describe('checkbox-mixin active', () => {
   let checkbox;
 
   beforeEach(async () => {
-    checkbox = document.createElement('check-box');
-    document.body.appendChild(checkbox);
-    await checkbox.updateComplete;
-  });
-
-  afterEach(() => {
-    checkbox.parentNode.removeChild(checkbox);
+    checkbox = await fixture(`<${Checkbox}></${Checkbox}>`);
   });
 
   it('should have active attribute on down', () => {
@@ -72,14 +66,8 @@ describe('checkbox-mixin label', () => {
   let label;
 
   beforeEach(async () => {
-    checkbox = document.createElement('check-box');
-    document.body.appendChild(checkbox);
-    await checkbox.updateComplete;
+    checkbox = await fixture(`<${Checkbox}></${Checkbox}>`);
     label = checkbox._labelPart;
-  });
-
-  afterEach(() => {
-    checkbox.parentNode.removeChild(checkbox);
   });
 
   it('should exist in the shadow DOM on the component', () => {

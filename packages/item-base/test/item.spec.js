@@ -1,19 +1,13 @@
+import { defineCE, fixture } from '@open-wc/testing-helpers';
 import { ItemBase } from '../lit-item-base.js';
 
 describe('item', () => {
-  customElements.define('test-item', class extends ItemBase {});
+  const Item = defineCE(class extends ItemBase {});
 
   let item;
 
   beforeEach(async () => {
-    item = document.createElement('test-item');
-    item.textContent = 'label';
-    document.body.appendChild(item);
-    await item.updateComplete;
-  });
-
-  afterEach(() => {
-    item.parentNode.removeChild(item);
+    item = await fixture(`<${Item}>label</${Item}>`);
   });
 
   it('should extend item-mixin', () => {

@@ -1,34 +1,23 @@
-import { html } from 'lit-element';
-import { render } from 'lit-html';
+import { defineCE, fixture } from '@open-wc/testing-helpers';
 import { TabBase } from '@lit/tab-base';
 import { arrowDown, arrowLeft, arrowRight, arrowUp } from '@lit/test-helpers';
 import { TabsBase } from '../lit-tabs-base.js';
 
-customElements.define('x-tabs', class extends TabsBase {});
-customElements.define('x-tab', class extends TabBase {});
+const Tabs = defineCE(class extends TabsBase {});
+const Tab = defineCE(class extends TabBase {});
 
 describe('tabs', () => {
   let tabs;
 
-  const fixture = html`
-    <x-tabs style="width: 400px; height: 400px;">
-      <x-tab>Tab one</x-tab>
-      <x-tab>Tab two</x-tab>
-      <x-tab disabled>Tab three</x-tab>
-      <x-tab>Tab four</x-tab>
-    </x-tabs>
-  `;
-
   beforeEach(async () => {
-    const div = document.createElement('div');
-    render(fixture, div);
-    tabs = div.firstElementChild;
-    document.body.appendChild(tabs);
-    await tabs.updateComplete;
-  });
-
-  afterEach(() => {
-    tabs.parentNode.removeChild(tabs);
+    tabs = await fixture(`
+      <${Tabs} style="width: 400px; height: 400px;">
+        <${Tab}>Tab one</${Tab}>
+        <${Tab}>Tab two</${Tab}>
+        <${Tab} disabled>Tab three</${Tab}>
+        <${Tab}>Tab four</${Tab}>
+      </${Tabs}>
+    `);
   });
 
   it('should have role="tablist"', () => {
@@ -108,26 +97,16 @@ describe('tabs in flex container', () => {
   let wrapper;
   let tabs;
 
-  const fixture = html`
-    <div style="display: flex; width: 400px;">
-      <x-tabs>
-        <x-tab>Foo</x-tab>
-        <x-tab>Bar</x-tab>
-      </x-tabs>
-    </div>
-  `;
-
   beforeEach(async () => {
-    const div = document.createElement('div');
-    render(fixture, div);
-    wrapper = div.firstElementChild;
-    document.body.appendChild(wrapper);
+    wrapper = await fixture(`
+      <div style="display: flex; width: 400px;">
+        <${Tabs}>
+          <${Tab}>Foo</${Tab}>
+          <${Tab}>Bar</${Tab}>
+        </${Tabs}>
+      </div>
+    `);
     tabs = wrapper.firstElementChild;
-    await tabs.updateComplete;
-  });
-
-  afterEach(() => {
-    wrapper.parentNode.removeChild(wrapper);
   });
 
   it('should have width above zero', () => {
@@ -144,34 +123,21 @@ describe('scrollable tabs', () => {
   let tabs;
   let scroller;
 
-  const nextFrame = () => new Promise(resolve => requestAnimationFrame(resolve));
-
-  const fixture = html`
-    <x-tabs style="width: 200px; height: 100px;">
-      <x-tab>Foo</x-tab>
-      <x-tab>Bar</x-tab>
-      <x-tab disabled>Baz</x-tab>
-      <x-tab>Foo1</x-tab>
-      <x-tab>Bar1</x-tab>
-      <x-tab>Baz1</x-tab>
-      <x-tab>Foo2</x-tab>
-      <x-tab>Bar2</x-tab>
-    </x-tabs>
-  `;
-
   beforeEach(async () => {
-    const div = document.createElement('div');
-    render(fixture, div);
-    tabs = div.firstElementChild;
-    document.body.appendChild(tabs);
-    await tabs.updateComplete;
+    tabs = await fixture(`
+      <${Tabs} style="width: 200px; height: 100px;">
+        <${Tab}>Foo</${Tab}>
+        <${Tab}>Bar</${Tab}>
+        <${Tab} disabled>Baz</${Tab}>
+        <${Tab}>Foo1</${Tab}>
+        <${Tab}>Bar1</${Tab}>
+        <${Tab}>Baz1</${Tab}>
+        <${Tab}>Foo2</${Tab}>
+        <${Tab}>Bar2</${Tab}>
+      </${Tabs}>
+    `);
     tabs._observer.flush();
     scroller = tabs._scrollerElement;
-    await nextFrame();
-  });
-
-  afterEach(() => {
-    tabs.parentNode.removeChild(tabs);
   });
 
   it('should have overflow', () => {

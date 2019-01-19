@@ -1,20 +1,15 @@
+import { defineCE, fixture } from '@open-wc/testing-helpers';
 import { ProgressBarBase } from '../lit-progress-bar-base.js';
 
-customElements.define('lit-progress', class extends ProgressBarBase {});
+const Progress = defineCE(class extends ProgressBarBase {});
 
 describe('progress-bar', () => {
   let progress;
   let value;
 
   beforeEach(async () => {
-    progress = document.createElement('lit-progress');
-    document.body.appendChild(progress);
-    await progress.updateComplete;
+    progress = await fixture(`<${Progress}></${Progress}>`);
     value = progress.shadowRoot.querySelector('[part="value"]');
-  });
-
-  afterEach(() => {
-    progress.parentNode.removeChild(progress);
   });
 
   function getProgressValue(element) {
@@ -110,16 +105,12 @@ describe('progress-bar in column flex layout', () => {
   let progress;
 
   beforeEach(async () => {
-    layout = document.createElement('div');
-    layout.setAttribute('style', 'display: flex; flex-direction: column; align-items: flex-start');
-    progress = document.createElement('lit-progress');
-    layout.appendChild(progress);
-    document.body.appendChild(layout);
-    await progress.updateComplete;
-  });
-
-  afterEach(() => {
-    layout.parentNode.removeChild(layout);
+    layout = await fixture(`
+      <div style="display: flex; flex-direction: column; align-items: flex-start">
+        <${Progress}></${Progress}>
+      </div>
+    `);
+    progress = layout.firstElementChild;
   });
 
   it('should have width of the parent', () => {

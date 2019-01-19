@@ -1,4 +1,4 @@
-import { LitElement, html } from 'lit-element';
+import { LitElement } from 'lit-element';
 import {
   focusin,
   focusout,
@@ -10,51 +10,30 @@ import {
   tabDown,
   tabUp
 } from '@lit/test-helpers';
+import { defineCE, fixture, html, nextFrame, unsafeStatic } from '@open-wc/testing-helpers';
 import { ControlStateMixin } from '../control-state-mixin.js';
 
-class TestWrapper extends ControlStateMixin(LitElement) {
-  render() {
-    return html`
-      <test-element id="testElement"></test-element>
-    `;
+const TestElement = defineCE(
+  class extends ControlStateMixin(LitElement) {
+    render() {
+      return html`
+        <input id="input" /><input id="secondInput" />
+      `;
+    }
+
+    get focusElement() {
+      return this.shadowRoot.querySelector('#input');
+    }
   }
-
-  get focusElement() {
-    return this.shadowRoot.querySelector('#testElement');
-  }
-}
-
-customElements.define('test-wrapper', TestWrapper);
-
-class TestElement extends ControlStateMixin(LitElement) {
-  render() {
-    return html`
-      <input id="input" /> <input id="secondInput" />
-    `;
-  }
-
-  get focusElement() {
-    return this.shadowRoot.querySelector('#input');
-  }
-}
-
-customElements.define('test-element', TestElement);
+);
 
 describe('control-state-mixin', () => {
   let customElement;
   let focusable;
 
   beforeEach(async () => {
-    customElement = document.createElement('test-element');
-    document.body.appendChild(customElement);
-    await customElement.updateComplete;
+    customElement = await fixture(`<${TestElement}></${TestElement}>`);
     focusable = customElement.focusElement;
-  });
-
-  afterEach(() => {
-    if (customElement && customElement.parentNode) {
-      customElement.parentNode.removeChild(customElement);
-    }
   });
 
   describe('tabindex', () => {
@@ -254,43 +233,40 @@ describe('autofocus', () => {
   let customElement;
 
   beforeEach(async () => {
-    customElement = document.createElement('test-element');
-    customElement.setAttribute('autofocus', '');
-    document.body.appendChild(customElement);
-    await customElement.updateComplete;
+    customElement = await fixture(`<${TestElement} autofocus></${TestElement}>`);
   });
 
-  afterEach(() => {
-    if (customElement && customElement.parentNode) {
-      customElement.parentNode.removeChild(customElement);
-    }
-  });
-
-  it('should have focused and focus-ring set', done => {
-    window.requestAnimationFrame(() => {
-      expect(customElement.hasAttribute('focused')).to.be.true;
-      expect(customElement.hasAttribute('focus-ring')).to.be.true;
-      done();
-    });
+  it('should have focused and focus-ring set', async () => {
+    await nextFrame();
+    expect(customElement.hasAttribute('focused')).to.be.true;
+    expect(customElement.hasAttribute('focus-ring')).to.be.true;
   });
 });
 
 describe('focused with nested focusable elements', () => {
+  const tagName = unsafeStatic(TestElement);
+  const Wrapper = defineCE(
+    class extends ControlStateMixin(LitElement) {
+      render() {
+        return html`
+          <${tagName} id="testElement"></${tagName}>
+        `;
+      }
+
+      get focusElement() {
+        return this.shadowRoot.querySelector('#testElement');
+      }
+    }
+  );
+
   let wrapper;
   let customElement;
   let focusable;
 
   beforeEach(async () => {
-    wrapper = document.createElement('test-wrapper');
-    document.body.appendChild(wrapper);
-    await wrapper.updateComplete;
+    wrapper = await fixture(`<${Wrapper}></${Wrapper}>`);
     customElement = wrapper.focusElement;
-    await customElement.updateComplete;
     focusable = customElement.focusElement;
-  });
-
-  afterEach(() => {
-    document.body.removeChild(wrapper);
   });
 
   it('should set focused attribute on focusin event dispatched from an element inside focusElement', () => {

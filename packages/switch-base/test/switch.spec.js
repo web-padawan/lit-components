@@ -1,33 +1,22 @@
-import { html } from 'lit-element';
-import { render } from 'lit-html';
+import { defineCE, fixture } from '@open-wc/testing-helpers';
 import { FlattenedNodesObserver } from '@polymer/polymer/lib/utils/flattened-nodes-observer.js';
 import '@polymer/iron-form/iron-form.js';
 import { change } from '@lit/test-helpers';
 import { SwitchBase } from '../lit-switch-base.js';
 
-customElements.define('lit-switch', class extends SwitchBase {});
-
 describe('switch', () => {
-  const fixture = html`
-    <lit-switch>Lit <i>switch</i> with <a href="#">Terms &amp; Conditions</a></lit-switch>
-  `;
+  const Switch = defineCE(class extends SwitchBase {});
 
   let element;
   let nativeCheckbox;
   let label;
 
   beforeEach(async () => {
-    const div = document.createElement('div');
-    render(fixture, div);
-    element = div.firstElementChild;
-    document.body.appendChild(element);
-    await element.updateComplete;
+    element = await fixture(
+      `<${Switch}>Lit <i>switch</i> with <a href="#">Terms &amp; Conditions</a></${Switch}>`
+    );
     nativeCheckbox = element._nativeCheckbox;
     label = element._labelPart;
-  });
-
-  afterEach(() => {
-    element.parentNode.removeChild(element);
   });
 
   it('should define label using light DOM', () => {

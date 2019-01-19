@@ -9,8 +9,9 @@
     "@polymer/polymer": "^3.0.0"
   },
   "devDependencies": {
-    "lit-element": "^2.0.0-rc.2",
-    "@lit/test-helpers": "^0.1.0"
+    "@lit/test-helpers": "^0.1.0",
+    "@open-wc/testing-helpers": "^0.7.3",
+    "lit-element": "^2.0.0-rc.2"
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"

@@ -1,19 +1,10 @@
-import { html } from 'lit-element';
-import { render } from 'lit-html';
+import { defineCE, fixture } from '@open-wc/testing-helpers';
 import { arrowDown, arrowDownIE, arrowUp, home, end } from '@lit/test-helpers';
 import { AccordionBase, AccordionPanelBase } from '../lit-accordion-base.js';
 
-customElements.define('lit-accordion', class extends AccordionBase {});
-customElements.define('lit-accordion-panel', class extends AccordionPanelBase {});
-
 describe('accordion', () => {
-  const fixture = html`
-    <lit-accordion>
-      <lit-accordion-panel summary="Panel 1"><input /></lit-accordion-panel>
-      <lit-accordion-panel summary="Panel 2">Content 2</lit-accordion-panel>
-      <lit-accordion-panel summary="Panel 3">Content 3</lit-accordion-panel>
-    </lit-accordion>
-  `;
+  const Accordion = defineCE(class extends AccordionBase {});
+  const AccordionPanel = defineCE(class extends AccordionPanelBase {});
 
   let accordion;
   let heading;
@@ -23,17 +14,13 @@ describe('accordion', () => {
   }
 
   beforeEach(async () => {
-    const div = document.createElement('div');
-    render(fixture, div);
-    accordion = div.firstElementChild;
-    document.body.appendChild(accordion);
-    await accordion.updateComplete;
-  });
-
-  afterEach(() => {
-    if (accordion.parentNode) {
-      accordion.parentNode.removeChild(accordion);
-    }
+    accordion = await fixture(`
+      <${Accordion}>
+        <${AccordionPanel} summary="Panel 1"><input /></${AccordionPanel}>
+        <${AccordionPanel} summary="Panel 2">Content 2</${AccordionPanel}>
+        <${AccordionPanel} summary="Panel 3">Content 3</${AccordionPanel}>
+      </${Accordion}>
+    `);
   });
 
   describe('items', () => {
@@ -49,7 +36,7 @@ describe('accordion', () => {
     });
 
     it('should update `items` value when adding nodes', async () => {
-      const panel = document.createElement('lit-accordion-panel');
+      const panel = document.createElement(AccordionPanel);
       accordion.appendChild(panel);
       await panel.updateComplete;
       await accordion.updateComplete;
@@ -140,7 +127,7 @@ describe('accordion', () => {
     });
 
     it('should not throw when calling `focus()` before items are set', () => {
-      const focus = () => document.createElement('lit-accordion').focus();
+      const focus = () => document.createElement(Accordion).focus();
       expect(focus()).to.not.throw;
     });
   });

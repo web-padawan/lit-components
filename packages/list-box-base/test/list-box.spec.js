@@ -1,20 +1,15 @@
+import { defineCE, fixture } from '@open-wc/testing-helpers';
 import { ItemBase } from '@lit/item-base';
 import { ListBoxBase } from '../lit-list-box-base.js';
 
 describe('list-box', () => {
-  customElements.define('list-box', class extends ListBoxBase {});
-  customElements.define('list-box-item', class extends ItemBase {});
+  const ListBox = defineCE(class extends ListBoxBase {});
+  const Item = defineCE(class extends ItemBase {});
 
   let list;
 
   beforeEach(async () => {
-    list = document.createElement('list-box');
-    document.body.appendChild(list);
-    await list.updateComplete;
-  });
-
-  afterEach(() => {
-    list.parentNode.removeChild(list);
+    list = await fixture(`<${ListBox}></${ListBox}>`);
   });
 
   it('should have a role attribute', () => {
@@ -32,7 +27,7 @@ describe('list-box', () => {
   });
 
   it('should have an unnamed slot for content', async () => {
-    const item = document.createElement('list-box-item');
+    const item = document.createElement(Item);
     list.appendChild(item);
     await item.updateComplete;
     const slot = list.shadowRoot.querySelector('slot:not([name])');

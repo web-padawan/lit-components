@@ -1,40 +1,30 @@
-import { LitElement, html } from 'lit-element';
-import { render } from 'lit-html';
+import { LitElement } from 'lit-element';
+import { defineCE, fixture, html, unsafeStatic } from '@open-wc/testing-helpers';
 import { FlattenedNodesObserver } from '@polymer/polymer/lib/utils/flattened-nodes-observer.js';
 import '@polymer/iron-form/iron-form.js';
 import { change, downAndUp, spaceDown, spaceUp } from '@lit/test-helpers';
 import { CheckboxBase } from '../lit-checkbox-base.js';
 
-customElements.define('lit-check', class extends CheckboxBase {});
+const Checkbox = defineCE(class extends CheckboxBase {});
 
 describe('checkbox', () => {
-  const fixture = html`
-    <lit-check name="name"
-      >Lit <i>Checkbox</i> with <a href="#">Terms &amp; Conditions</a></lit-check
-    >
-  `;
-
   let checkbox;
   let nativeCheckbox;
   let label;
 
   beforeEach(async () => {
-    const div = document.createElement('div');
-    render(fixture, div);
-    checkbox = div.firstElementChild;
-    document.body.appendChild(checkbox);
-    await checkbox.updateComplete;
+    checkbox = await fixture(`
+      <${Checkbox} name="name">
+        Lit <i>Checkbox</i> with <a href="#">Terms &amp; Conditions</a>
+      </${Checkbox}>
+    `);
     nativeCheckbox = checkbox._nativeCheckbox;
     label = checkbox._labelPart;
   });
 
-  afterEach(() => {
-    checkbox.parentNode.removeChild(checkbox);
-  });
-
   it('should define checkbox label using light DOM', () => {
     const children = FlattenedNodesObserver.getFlattenedNodes(label);
-    expect(children[0].textContent).to.be.equal('Lit ');
+    expect(children[0].textContent.trim()).to.be.equal('Lit');
     expect(children[1].outerHTML).to.be.equal('<i>Checkbox</i>');
   });
 
@@ -207,50 +197,44 @@ describe('checkbox', () => {
     await checkbox.updateComplete;
     expect(spy).to.be.calledOnce;
   });
-});
 
-describe('checkbox change event', () => {
-  let checkbox;
-
-  beforeEach(async () => {
-    checkbox = document.createElement('lit-check');
-    document.body.appendChild(checkbox);
+  it('should not dispatch `change` event when checked changed programmatically', async () => {
+    const spy = sinon.spy();
+    checkbox.addEventListener('change', spy);
+    checkbox.checked = true;
     await checkbox.updateComplete;
+    expect(spy).to.not.be.called;
   });
 
-  afterEach(() => {
-    checkbox.parentNode.removeChild(checkbox);
-  });
-
-  it('should not be dispatched when changing checked value programmatically', () => {
-    checkbox.addEventListener('change', () => {
-      throw new Error('Should not come here!');
-    });
-    checkbox.checked = true;
-  });
-
-  it('should be dispatched when user checks the element', done => {
-    checkbox.addEventListener('change', () => done());
+  it('should dispatch `change` event when user checks the element', async () => {
+    const spy = sinon.spy();
+    checkbox.addEventListener('change', spy);
     checkbox.click();
+    await checkbox.updateComplete;
+    expect(spy).to.be.calledOnce;
   });
 
-  it('should be dispatched when user unchecks the element', done => {
+  it('should dispatch `change event when user un-checks the element', async () => {
     checkbox.checked = true;
-    checkbox.addEventListener('change', () => done());
+    await checkbox.updateComplete;
+    const spy = sinon.spy();
+    checkbox.addEventListener('change', spy);
     checkbox.click();
+    await checkbox.updateComplete;
+    expect(spy).to.be.calledOnce;
   });
 });
 
 describe('iron-form checkbox', () => {
-  customElements.define(
-    'x-checkbox',
-    class XCheckbox extends LitElement {
+  const checkboxTag = unsafeStatic(Checkbox);
+  const Wrapper = defineCE(
+    class extends LitElement {
       render() {
         return html`
-          <iron-form id="form">
+          <iron-form>
             <form>
-              <lit-check id="boundname" name="${this.checkboxName}"></lit-check>
-              <lit-check id="attrname" name="attrcheckbox"></lit-check>
+              <${checkboxTag} id="boundname" name="${this.checkboxName}"></${checkboxTag}>
+              <${checkboxTag} id="attrname" name="attrcheckbox"></${checkboxTag}>
             </form>
           </iron-form>
         `;
@@ -276,14 +260,8 @@ describe('iron-form checkbox', () => {
   let form;
 
   beforeEach(async () => {
-    wrapper = document.createElement('x-checkbox');
-    document.body.appendChild(wrapper);
-    await wrapper.updateComplete;
+    wrapper = await fixture(`<${Wrapper}></${Wrapper}>`);
     form = wrapper.shadowRoot.querySelector('iron-form');
-  });
-
-  afterEach(() => {
-    wrapper.parentNode.removeChild(wrapper);
   });
 
   it('should serialize', () => {

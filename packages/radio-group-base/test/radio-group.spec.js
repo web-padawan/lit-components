@@ -1,36 +1,26 @@
-import { html } from 'lit-element';
-import { render } from 'lit-html';
+import { defineCE, fixture } from '@open-wc/testing-helpers';
 import { RadioButtonBase } from '@lit/radio-button-base';
 import { arrowDown, arrowLeft, arrowRight, arrowUp, focusout } from '@lit/test-helpers';
 import { RadioGroupBase } from '../lit-radio-group-base.js';
 
-customElements.define('lit-radio-button', class extends RadioButtonBase {});
-customElements.define('lit-radio-group', class extends RadioGroupBase {});
+const Radio = defineCE(class extends RadioButtonBase {});
+const RadioGroup = defineCE(class extends RadioGroupBase {});
 
 describe('radio-group', () => {
-  const fixture = html`
-    <lit-radio-group>
-      <lit-radio-button>Button <b>1</b></lit-radio-button>
-      <lit-radio-button value="2">Button <b>2</b></lit-radio-button>
-      <lit-radio-button>Button <b>3</b></lit-radio-button>
-    </lit-radio-group>
-  `;
-
   let radioGroup;
   let radioList;
 
   beforeEach(async () => {
-    const div = document.createElement('div');
-    render(fixture, div);
-    radioGroup = div.firstElementChild;
-    document.body.appendChild(radioGroup);
+    radioGroup = await fixture(`
+      <${RadioGroup}>
+        <${Radio}>Button <b>1</b></${Radio}>
+        <${Radio} value="2">Button <b>2</b></${Radio}>
+        <${Radio}>Button <b>3</b></${Radio}>
+      </${RadioGroup}>
+    `);
     await radioGroup.updateComplete;
-    radioList = radioGroup.querySelectorAll('lit-radio-button');
+    radioList = radioGroup.querySelectorAll(`${Radio}`);
     radioGroup._observer.flush();
-  });
-
-  afterEach(() => {
-    radioGroup.parentNode.removeChild(radioGroup);
   });
 
   it('should set focus to the first element by default', () => {
@@ -58,7 +48,7 @@ describe('radio-group', () => {
 
   it('should set disabled property to dynamically added radio-button', async () => {
     radioGroup.disabled = true;
-    const radio = document.createElement('lit-radio-button');
+    const radio = document.createElement(Radio);
     radio.setAttribute('value', '5');
     radioGroup.appendChild(radio);
     radioGroup._observer.flush();
@@ -339,30 +329,21 @@ describe('radio-group', () => {
 });
 
 describe('radio-group with disabled button', () => {
-  const fixture = html`
-    <lit-radio-group>
-      <lit-radio-button>Button <b>1</b></lit-radio-button>
-      <lit-radio-button>Button <b>2</b></lit-radio-button>
-      <lit-radio-button disabled>Button <b>3</b></lit-radio-button>
-      <lit-radio-button>Button <b>4</b></lit-radio-button>
-    </lit-radio-group>
-  `;
-
   let radioGroup;
   let radioList;
 
   beforeEach(async () => {
-    const div = document.createElement('div');
-    render(fixture, div);
-    radioGroup = div.firstElementChild;
-    document.body.appendChild(radioGroup);
+    radioGroup = await fixture(`
+      <${RadioGroup}>
+        <${Radio}>Button <b>1</b></${Radio}>
+        <${Radio} value="2">Button <b>2</b></${Radio}>
+        <${Radio} disabled>Button <b>3</b></${Radio}>
+        <${Radio}>Button <b>4</b></${Radio}>
+      </${RadioGroup}>
+    `);
     await radioGroup.updateComplete;
-    radioList = radioGroup.querySelectorAll('lit-radio-button');
+    radioList = radioGroup.querySelectorAll(`${Radio}`);
     radioGroup._observer.flush();
-  });
-
-  afterEach(() => {
-    radioGroup.parentNode.removeChild(radioGroup);
   });
 
   it('should miss disabled button after right/down', async () => {
@@ -383,30 +364,21 @@ describe('radio-group with disabled button', () => {
 });
 
 describe('radio-group with initial checked button', () => {
-  const fixture = html`
-    <lit-radio-group>
-      <lit-radio-button>Button <b>1</b></lit-radio-button>
-      <lit-radio-button value="1" checked>Button <b>2</b></lit-radio-button>
-      <lit-radio-button value="2" checked>Button <b>3</b></lit-radio-button>
-      <lit-radio-button>Button <b>4</b></lit-radio-button>
-    </lit-radio-group>
-  `;
-
   let radioGroup;
   let radioList;
 
   beforeEach(async () => {
-    const div = document.createElement('div');
-    render(fixture, div);
-    radioGroup = div.firstElementChild;
-    document.body.appendChild(radioGroup);
+    radioGroup = await fixture(`
+      <${RadioGroup}>
+        <${Radio}>Button <b>1</b></${Radio}>
+        <${Radio} value="1" checked>Button <b>2</b></${Radio}>
+        <${Radio} value="2" checked>Button <b>3</b></${Radio}>
+        <${Radio}>Button <b>4</b></${Radio}>
+      </${RadioGroup}>
+    `);
     await radioGroup.updateComplete;
-    radioList = radioGroup.querySelectorAll('lit-radio-button');
+    radioList = radioGroup.querySelectorAll(`${Radio}`);
     radioGroup._observer.flush();
-  });
-
-  afterEach(() => {
-    radioGroup.parentNode.removeChild(radioGroup);
   });
 
   it('should reflect the value of initially checked radio button in radio group value', () => {

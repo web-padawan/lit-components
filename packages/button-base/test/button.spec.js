@@ -1,5 +1,4 @@
-import { html } from 'lit-element';
-import { render } from 'lit-html';
+import { defineCE, fixture } from '@open-wc/testing-helpers';
 import { FlattenedNodesObserver } from '@polymer/polymer/lib/utils/flattened-nodes-observer.js';
 import {
   blur,
@@ -13,31 +12,17 @@ import {
 } from '@lit/test-helpers';
 import { ButtonBase } from '../lit-button-base.js';
 
-customElements.define('lit-button', class extends ButtonBase {});
-
 describe('button', () => {
-  const fixture = html`
-    <lit-button>Lit <i>Button</i></lit-button>
-  `;
+  const Button = defineCE(class extends ButtonBase {});
 
   let button;
   let nativeButton;
   let label;
 
   beforeEach(async () => {
-    const div = document.createElement('div');
-    render(fixture, div);
-    button = div.firstElementChild;
-    document.body.appendChild(button);
-    await button.updateComplete;
+    button = await fixture(`<${Button}>Lit <i>Button</i></${Button}>`);
     nativeButton = button.shadowRoot.querySelector('button');
     label = button.shadowRoot.querySelector('[part="label"]');
-  });
-
-  afterEach(() => {
-    if (button.parentNode) {
-      button.parentNode.removeChild(button);
-    }
   });
 
   it('should define button label using light DOM', () => {

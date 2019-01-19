@@ -1,5 +1,5 @@
 import { LitElement, html } from 'lit-element';
-import { render } from 'lit-html';
+import { defineCE, fixture } from '@open-wc/testing-helpers';
 import {
   enter,
   spaceDown,
@@ -13,8 +13,7 @@ import {
 import { ItemMixin } from '../lit-item-mixin.js';
 
 describe('item-mixin', () => {
-  customElements.define(
-    'x-item',
+  const Item = defineCE(
     class extends ItemMixin(LitElement) {
       render() {
         return html`
@@ -24,25 +23,11 @@ describe('item-mixin', () => {
     }
   );
 
-  let item;
-
   describe('with value', () => {
-    const fixture = html`
-      <x-item value="foo">text-content</x-item>
-    `;
+    let item;
 
     beforeEach(async () => {
-      const div = document.createElement('div');
-      render(fixture, div);
-      item = div.firstElementChild;
-      document.body.appendChild(item);
-      await item.updateComplete;
-    });
-
-    afterEach(() => {
-      if (item.parentNode) {
-        item.parentNode.removeChild(item);
-      }
+      item = await fixture(`<${Item} value="foo">text-content</${Item}>`);
     });
 
     it('should have value property', () => {
@@ -168,20 +153,10 @@ describe('item-mixin', () => {
   });
 
   describe('without value', () => {
-    const fixture = html`
-      <x-item>text-content</x-item>
-    `;
+    let item;
 
     beforeEach(async () => {
-      const div = document.createElement('div');
-      render(fixture, div);
-      item = div.firstElementChild;
-      document.body.appendChild(item);
-      await item.updateComplete;
-    });
-
-    afterEach(() => {
-      item.parentNode.removeChild(item);
+      item = await fixture(`<${Item}>text-content</${Item}>`);
     });
 
     it('should use trimmed textContent', () => {
@@ -195,20 +170,10 @@ describe('item-mixin', () => {
   });
 
   describe('with clickable child', () => {
-    const fixture = html`
-      <x-item> <button>text-content</button> </x-item>
-    `;
+    let item;
 
     beforeEach(async () => {
-      const div = document.createElement('div');
-      render(fixture, div);
-      item = div.firstElementChild;
-      document.body.appendChild(item);
-      await item.updateComplete;
-    });
-
-    afterEach(() => {
-      item.parentNode.removeChild(item);
+      item = await fixture(`<${Item}><button>text-content</button></${Item}>`);
     });
 
     it('should not set active attribute if keydown was prevented', () => {

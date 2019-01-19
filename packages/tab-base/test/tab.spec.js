@@ -1,19 +1,13 @@
+import { defineCE, fixture } from '@open-wc/testing-helpers';
 import { TabBase } from '../lit-tab-base.js';
 
 describe('tab', () => {
-  customElements.define('test-tab', class extends TabBase {});
+  const Tab = defineCE(class extends TabBase {});
 
   let tab;
 
   beforeEach(async () => {
-    tab = document.createElement('test-tab');
-    tab.textContent = 'content';
-    document.body.appendChild(tab);
-    await tab.updateComplete;
-  });
-
-  afterEach(() => {
-    tab.parentNode.removeChild(tab);
+    tab = await fixture(`<${Tab}>content</${Tab}>`);
   });
 
   it('should extend item-mixin', () => {

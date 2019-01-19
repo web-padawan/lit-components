@@ -1,37 +1,27 @@
-import { html } from 'lit-element';
-import { render } from 'lit-html';
+import { defineCE, fixture } from '@open-wc/testing-helpers';
 import '@polymer/iron-form/iron-form.js';
 import { CheckboxBase } from '@lit/checkbox-base';
 import { focusout } from '@lit/test-helpers';
 import { CheckboxGroupBase } from '../lit-checkbox-group-base.js';
 
-customElements.define('lit-checkbox', class extends CheckboxBase {});
-customElements.define('lit-checkbox-group', class extends CheckboxGroupBase {});
+const Checkbox = defineCE(class extends CheckboxBase {});
+const CheckboxGroup = defineCE(class extends CheckboxGroupBase {});
 
 describe('checkbox group', () => {
-  const fixture = html`
-    <lit-checkbox-group>
-      <lit-checkbox value="1">Checkbox <b>1</b></lit-checkbox>
-      <lit-checkbox value="2">Checkbox <b>2</b></lit-checkbox>
-      <lit-checkbox value="3">Checkbox <b>3</b></lit-checkbox>
-    </lit-checkbox-group>
-  `;
-
   let checkboxGroup;
   let checkboxList;
 
   beforeEach(async () => {
-    const div = document.createElement('div');
-    render(fixture, div);
-    checkboxGroup = div.firstElementChild;
-    document.body.appendChild(checkboxGroup);
+    checkboxGroup = await fixture(`
+      <${CheckboxGroup}>
+        <${Checkbox} value="1">Checkbox <b>1</b></${Checkbox}>
+        <${Checkbox} value="2">Checkbox <b>2</b></${Checkbox}>
+        <${Checkbox} value="3">Checkbox <b>3</b></${Checkbox}>
+      </${CheckboxGroup}>
+    `);
     await checkboxGroup.updateComplete;
     checkboxGroup._observer.flush();
-    checkboxList = checkboxGroup.querySelectorAll('lit-checkbox');
-  });
-
-  afterEach(() => {
-    checkboxGroup.parentNode.removeChild(checkboxGroup);
+    checkboxList = checkboxGroup.querySelectorAll(`${Checkbox}`);
   });
 
   it('should change aria-disabled on disabled change', async () => {
@@ -49,7 +39,7 @@ describe('checkbox group', () => {
 
   it('should set disabled property to dynamically added checkboxes', async () => {
     checkboxGroup.disabled = true;
-    const checkbox = document.createElement('lit-checkbox');
+    const checkbox = document.createElement(Checkbox);
     checkbox.setAttribute('value', '4');
     checkboxGroup.appendChild(checkbox);
     await checkboxGroup.updateComplete;
@@ -58,7 +48,7 @@ describe('checkbox group', () => {
 
   it('should warn if dynamically added checkbox does not have value attribute', async () => {
     const stub = sinon.stub(console, 'warn');
-    const checkbox = document.createElement('lit-checkbox');
+    const checkbox = document.createElement(Checkbox);
     checkboxGroup.appendChild(checkbox);
     checkboxGroup._observer.flush();
     await checkbox.updateComplete;
@@ -67,7 +57,7 @@ describe('checkbox group', () => {
   });
 
   it('should add dynamically added checked checkbox value to checkbox group value', async () => {
-    const checkbox = document.createElement('lit-checkbox');
+    const checkbox = document.createElement(Checkbox);
     checkbox.value = '4';
     checkbox.checked = true;
     checkboxGroup.appendChild(checkbox);
@@ -87,7 +77,7 @@ describe('checkbox group', () => {
 
   it('should create new array instance for checkbox group value when checkbox is added', async () => {
     const value = { checkboxGroup };
-    const checkbox = document.createElement('lit-checkbox');
+    const checkbox = document.createElement(Checkbox);
     checkbox.setAttribute('value', 'new');
     checkbox.setAttribute('checked', '');
     checkboxGroup.appendChild(checkbox);
@@ -230,31 +220,22 @@ describe('checkbox group validation', () => {
   let checkboxList;
   let ironForm;
 
-  const fixture = html`
-    <iron-form>
-      <form>
-        <lit-checkbox-group>
-          <lit-checkbox name="language" value="en">English</lit-checkbox>
-          <lit-checkbox name="language" value="fr">Français</lit-checkbox>
-          <lit-checkbox name="language" value="de">Deutsch</lit-checkbox>
-        </lit-checkbox-group>
-      </form>
-    </iron-form>
-  `;
-
   beforeEach(async () => {
-    const div = document.createElement('div');
-    render(fixture, div);
-    ironForm = div.firstElementChild;
-    document.body.appendChild(ironForm);
-    checkboxGroup = ironForm.querySelector('lit-checkbox-group');
+    ironForm = await fixture(`
+      <iron-form>
+        <form>
+          <${CheckboxGroup}>
+            <${Checkbox} name="language" value="en">English</${Checkbox}>
+            <${Checkbox} name="language" value="fr">Français</${Checkbox}>
+            <${Checkbox} name="language" value="de">Deutsch</${Checkbox}>
+          </${CheckboxGroup}>
+        </form>
+      </iron-form>
+    `);
+    checkboxGroup = ironForm.querySelector(CheckboxGroup);
     await checkboxGroup.updateComplete;
     checkboxGroup._observer.flush();
-    checkboxList = checkboxGroup.querySelectorAll('lit-checkbox');
-  });
-
-  afterEach(() => {
-    ironForm.parentNode.removeChild(ironForm);
+    checkboxList = checkboxGroup.querySelectorAll(Checkbox);
   });
 
   it('should not have invalid attribute initially', () => {

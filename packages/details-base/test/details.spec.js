@@ -1,33 +1,18 @@
-import { html } from 'lit-element';
-import { render } from 'lit-html';
+import { defineCE, fixture } from '@open-wc/testing-helpers';
 import { shiftTabDown } from '@lit/test-helpers';
 import { DetailsBase } from '../lit-details-base.js';
 
-customElements.define('lit-details', class extends DetailsBase {});
-
 describe('details', () => {
-  const fixture = html`
-    <lit-details summary="Summary">Content</lit-details>
-  `;
+  const Details = defineCE(class extends DetailsBase {});
 
   let details;
   let toggle;
   let content;
 
   beforeEach(async () => {
-    const div = document.createElement('div');
-    render(fixture, div);
-    details = div.firstElementChild;
-    document.body.appendChild(details);
-    await details.updateComplete;
+    details = await fixture(`<${Details} summary="Summary">Content</${Details}>`);
     toggle = details.focusElement;
     content = details.collapsible;
-  });
-
-  afterEach(() => {
-    if (details.parentNode) {
-      details.parentNode.removeChild(details);
-    }
   });
 
   it('should disable toggle button when `disabled` is true', async () => {

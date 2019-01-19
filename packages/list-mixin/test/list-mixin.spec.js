@@ -1,5 +1,5 @@
 import { LitElement, html } from 'lit-element';
-import { render } from 'lit-html';
+import { defineCE, fixture } from '@open-wc/testing-helpers';
 import { ItemMixin } from '@lit/item-mixin';
 import {
   arrowDown,
@@ -24,8 +24,7 @@ describe('list-mixin', () => {
     target.dispatchEvent(event);
   }
 
-  customElements.define(
-    'list-item',
+  const Item = defineCE(
     class extends ItemMixin(LitElement) {
       render() {
         return html`
@@ -35,8 +34,7 @@ describe('list-mixin', () => {
     }
   );
 
-  customElements.define(
-    'x-list',
+  const List = defineCE(
     class extends ListMixin(LitElement) {
       render() {
         return html`
@@ -65,35 +63,23 @@ describe('list-mixin', () => {
     }
   );
 
-  const fixture = html`
-    <x-list style="width: 400px; height: 400px;">
-      <list-item>Foo</list-item>
-      <list-item>Bar</list-item>
-      <hr />
-      <list-item disabled>Bay</list-item>
-      <list-item><span>Baz</span></list-item>
-      <hr />
-      <list-item disabled>Qux</list-item>
-      <list-item>
-        <img src="data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=" /> <span>Xyzzy</span>
-      </list-item>
-    </x-list>
-  `;
-
   let list;
 
   beforeEach(async () => {
-    const div = document.createElement('div');
-    render(fixture, div);
-    list = div.firstElementChild;
-    document.body.appendChild(list);
-    await list.updateComplete;
-  });
-
-  afterEach(() => {
-    if (list.parentNode) {
-      list.parentNode.removeChild(list);
-    }
+    list = await fixture(`
+      <${List} style="width: 400px; height: 400px;">
+        <${Item}>Foo</${Item}>
+        <${Item}>Bar</${Item}>
+        <hr />
+        <${Item} disabled>Bay</${Item}>
+        <${Item}><span>Baz</span></${Item}>
+        <hr />
+        <${Item} disabled>Qux</${Item}>
+        <${Item}>
+          <img src="data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=" /> <span>Xyzzy</span>
+        </${Item}>
+      </${List}>
+    `);
   });
 
   it('should have a list of valid items after the DOM `_observer` has been run', () => {
@@ -112,7 +98,7 @@ describe('list-mixin', () => {
     });
 
     it('should update items list when adding nodes', async () => {
-      const item = document.createElement('list-item');
+      const item = document.createElement(Item);
       list.appendChild(item);
       await item.updateComplete;
       await list.updateComplete;
@@ -207,7 +193,7 @@ describe('list-mixin', () => {
     });
 
     it('should not throw when calling `focus()` before items are set', () => {
-      const focus = () => document.createElement('x-list').focus();
+      const focus = () => document.createElement(List).focus();
       expect(focus()).to.not.throw;
     });
   });
@@ -362,7 +348,7 @@ describe('list-mixin', () => {
       list.orientation = 'vertical';
       await list.updateComplete;
 
-      const item = document.createElement('list-item');
+      const item = document.createElement(Item);
       item.textContent = 'foo';
       list.appendChild(item);
       await item.updateComplete;

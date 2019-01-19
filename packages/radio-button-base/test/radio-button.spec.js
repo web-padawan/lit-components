@@ -1,32 +1,20 @@
-import { LitElement, html } from 'lit-element';
-import { render } from 'lit-html';
+import { LitElement } from 'lit-element';
+import { defineCE, fixture, html, unsafeStatic } from '@open-wc/testing-helpers';
 import '@polymer/iron-form/iron-form.js';
 import { change, down, up, spaceDown, spaceUp } from '@lit/test-helpers';
 import { RadioButtonBase } from '../lit-radio-button-base.js';
 
-customElements.define('lit-radio', class extends RadioButtonBase {});
+const Radio = defineCE(class extends RadioButtonBase {});
 
 describe('radio-button', () => {
-  const fixture = html`
-    <lit-radio name="test-radio">Radio <b>Button</b></lit-radio>
-  `;
-
   let radio;
   let nativeRadio;
   let label;
 
   beforeEach(async () => {
-    const div = document.createElement('div');
-    render(fixture, div);
-    radio = div.firstElementChild;
-    document.body.appendChild(radio);
-    await radio.updateComplete;
+    radio = await fixture(`<${Radio} name="test-radio">Radio <b>Button</b></${Radio}>`);
     nativeRadio = radio.shadowRoot.querySelector('input');
     label = radio.shadowRoot.querySelector('[part="label"]');
-  });
-
-  afterEach(() => {
-    radio.parentNode.removeChild(radio);
   });
 
   it('should have proper role', () => {
@@ -108,15 +96,15 @@ describe('radio-button', () => {
 });
 
 describe('iron-form radio-button', () => {
-  customElements.define(
-    'x-radio',
-    class XRadio extends LitElement {
+  const radioTag = unsafeStatic(Radio);
+  const Wrapper = defineCE(
+    class extends LitElement {
       render() {
         return html`
-          <iron-form id="form">
+          <iron-form>
             <form>
-              <lit-radio id="boundname" name="${this.radioButtonName}"></lit-radio>
-              <lit-radio id="attrname" name="attrradiobutton"></lit-radio>
+              <${radioTag} id="boundname" name="${this.radioButtonName}"></${radioTag}>
+              <${radioTag} id="attrname" name="attrradiobutton"></${radioTag}>
             </form>
           </iron-form>
         `;
@@ -142,14 +130,8 @@ describe('iron-form radio-button', () => {
   let form;
 
   beforeEach(async () => {
-    wrapper = document.createElement('x-radio');
-    document.body.appendChild(wrapper);
-    await wrapper.updateComplete;
+    wrapper = await fixture(`<${Wrapper}></${Wrapper}>`);
     form = wrapper.shadowRoot.querySelector('iron-form');
-  });
-
-  afterEach(() => {
-    wrapper.parentNode.removeChild(wrapper);
   });
 
   it('should serialize', () => {
