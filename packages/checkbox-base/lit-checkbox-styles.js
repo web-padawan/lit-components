@@ -5,6 +5,10 @@ export default css`
     display: inline-block;
   }
 
+  :host([hidden]) {
+    display: none !important;
+  }
+
   label {
     display: inline-flex;
     align-items: baseline;
