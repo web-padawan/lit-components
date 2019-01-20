@@ -6,7 +6,7 @@
   "main": "control-state-mixin.js",
   "devDependencies": {
     "@lit/test-helpers": "^0.1.0",
-    "@open-wc/testing-helpers": "^0.7.3",
+    "@open-wc/testing-helpers": "^0.7.5",
     "lit-element": "^2.0.0-rc.3"
   },
   "scripts": {
