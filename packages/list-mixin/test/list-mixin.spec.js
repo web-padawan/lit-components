@@ -82,12 +82,12 @@ describe('list-mixin', () => {
     `);
   });
 
-  it('should have a list of valid items after the DOM `_observer` has been run', () => {
-    expect(list.items.length).to.be.equal(6);
-  });
-
   describe('items', () => {
     beforeEach(() => list._observer.flush());
+
+    it('should have a list of valid items after the DOM `_observer` has been run', () => {
+      expect(list.items.length).to.be.equal(6);
+    });
 
     it('should update items list when removing nodes', () => {
       expect(list.items.length).to.be.equal(6);
