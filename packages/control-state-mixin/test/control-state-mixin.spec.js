@@ -266,6 +266,7 @@ describe('focused with nested focusable elements', () => {
   beforeEach(async () => {
     wrapper = await fixture(`<${Wrapper}></${Wrapper}>`);
     customElement = wrapper.focusElement;
+    await customElement.updateComplete;
     focusable = customElement.focusElement;
   });
 

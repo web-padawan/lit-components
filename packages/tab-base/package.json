@@ -6,11 +6,11 @@
   "main": "lit-tab-base.js",
   "dependencies": {
     "@lit/item-mixin": "^0.1.0",
-    "lit-element": "^2.0.0-rc.3"
+    "lit-element": "^2.0.0-rc.5"
   },
   "devDependencies": {
     "@lit/test-helpers": "^0.1.0",
-    "@open-wc/testing-helpers": "^0.7.5"
+    "@open-wc/testing-helpers": "^0.7.9"
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"

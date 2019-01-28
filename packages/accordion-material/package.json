@@ -8,7 +8,7 @@
     "@lit/accordion-base": "^0.1.0",
     "@lit/details-material": "^0.1.0",
     "@vaadin/vaadin-material-styles": "^1.2.0",
-    "lit-element": "^2.0.0-rc.3"
+    "lit-element": "^2.0.0-rc.5"
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
