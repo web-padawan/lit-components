@@ -4,3 +4,4 @@ lerna-debug.log
 build
 tmp
 test/regressions/screenshots
+.cache
