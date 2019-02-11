@@ -1,6 +1,6 @@
 import { DomModule } from '@polymer/polymer/lib/elements/dom-module.js';
 import { stylesFromTemplate } from '@polymer/polymer/lib/utils/style-gather.js';
-import { unsafeCss } from 'lit-element';
+import { unsafeCSS } from 'lit-element';
 
 export const getStyleModule = (id, cb) => {
   const template = DomModule.import(id, 'template');
@@ -12,5 +12,5 @@ export const getStyleModule = (id, cb) => {
   if (cb) {
     cssText = cb(cssText);
   }
-  return unsafeCss(cssText);
+  return unsafeCSS(cssText);
 };

@@ -7,7 +7,7 @@
   "dependencies": {
     "@lit/checkbox-base": "^0.1.0",
     "@polymer/polymer": "^3.0.0",
-    "lit-element": "^2.0.0-rc.5"
+    "lit-element": "^2.0.1"
   },
   "devDependencies": {
     "@lit/test-helpers": "^0.1.0",

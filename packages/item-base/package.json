@@ -6,7 +6,7 @@
   "main": "lit-item-base.js",
   "dependencies": {
     "@lit/item-mixin": "^0.1.0",
-    "lit-element": "^2.0.0-rc.5"
+    "lit-element": "^2.0.1"
   },
   "devDependencies": {
     "@lit/test-helpers": "^0.1.0",
